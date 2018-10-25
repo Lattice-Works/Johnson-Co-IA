@@ -1,6 +1,0 @@
-[submodule "IowaCity_PD"]
-	path = IowaCity_PD
-	url = https://github.com/Lattice-Works/IowaCity_PD.git
-[submodule "JohnsonCo_IA_Jail"]
-	path = JohnsonCo_IA_Jail
-	url = https://github.com/Lattice-Works/JohnsonCo_IA_Jail.git
