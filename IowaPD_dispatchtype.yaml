@@ -1,0 +1,348 @@
+entityDefinitions:
+  JohnsonCounty_IowaCity_Dispatch:
+    fqn: 'ol.dispatch'
+    entitySetName: 'JohnsonCounty_IowaCity_Dispatch'
+    propertyDefinitions:
+      ol.id:
+        type: 'ol.id'
+        column: 'Dis_ID'
+      ol.type:
+        type: "ol.type"
+        column: "Dispatch_Type_ID"
+      ol.priority:
+        type: "ol.priority"
+        column: "Type_Priority"
+      datetime.alerted:
+        type: 'datetime.alerted'
+        transforms:
+        - !<transforms.CombineDateTimeTransform>
+          dateColumn: CFS_DateTimeJanet
+          datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
+          timeColumn: TimeDisp
+          timePattern: ['yyyy-MM-dd HH:mm:ss.S']
+      datetime.enroute:
+        type: 'datetime.enroute'
+        transforms:
+        - !<transforms.CombineDateTimeTransform>
+          dateColumn: CFS_DateTimeJanet
+          datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
+          timeColumn: 'TimeEnroute'
+          timePattern: ['yyyy-MM-dd HH:mm:ss.S']
+      datetime.arrived:
+        type: 'datetime.arrived'
+        transforms:
+        - !<transforms.CombineDateTimeTransform>
+          dateColumn: CFS_DateTimeJanet
+          datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
+          timeColumn: 'TimeArr'
+          timePattern: ['yyyy-MM-dd HH:mm:ss.S']
+      date.completeddatetime:
+        type: 'date.completeddatetime'
+        transforms:
+        - !<transforms.CombineDateTimeTransform>
+          dateColumn: CFS_DateTimeJanet
+          datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
+          timeColumn: 'TimeComp'
+          timePattern: ['yyyy-MM-dd HH:mm:ss.S']
+      ol.notes:
+        type: ol.notes
+        column: Type_ID
+        transforms:
+        - !<transforms.PrefixTransform>
+          prefix: ' type_id: '
+      ol.notes2:
+        type: ol.notes
+        column: TripNumber
+        transforms:
+        - !<transforms.PrefixTransform>
+          prefix: ' dispatch trip number: '
+      ol.notes3:
+        type: ol.notes
+        column: Case_ID
+        transforms:
+        - !<transforms.PrefixTransform>
+          prefix: '| Case_ID: '
+      ol.notes4:
+        type: ol.notes
+        column: Case_Num
+        transforms:
+        - !<transforms.PrefixTransform>
+          prefix: '| Case_Num: '
+  JohnsonCounty_IowaCity_Disposition:
+    fqn: 'ol.disposition'
+    entitySetName: 'JohnsonCounty_IowaCity_Disposition'
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: 'Disposition'
+      criminaljustice.disposition:
+        type: 'criminaljustice.disposition'
+        column: 'Disposition'
+  Personnel:
+    fqn: 'o.employee'
+    entitySetName: 'JohnsonCounty_IowaCity_JCJIPersonnel'
+    name: "Personnel"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.GetPrefixDigitsTransform>
+            separator: ' '
+            column: "Unit"
+          - !<transforms.ColumnTransform>
+            column: "OfficerID"
+      publicsafety.employeeid:
+        type: "publicsafety.employeeid"
+        column: "OfficerID"
+    conditions:
+    - !<conditions.ConditionalOr> {}
+    - !<conditions.BooleanRegexCondition>
+      column: 'Unit'
+      pattern: "\\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: 'Unit'
+      reverse: true
+  People:
+    fqn: 'general.person'
+    entitySetName: "JohnsonCounty_IowaCity_People1"
+    name: "People"
+    propertyDefinitions:
+      nc.PersonGivenName:
+        type: 'nc.PersonGivenName'
+        transforms:
+        - !<transforms.BooleanContainsTransform>
+          column: "Unit"
+          string: ","
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: 'Unit'
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ','
+            index: 1
+          - !<transforms.SplitTransform>
+            separator: ' '
+            index: 0
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: 'Unit'
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ' '
+            index: 0
+      nc.PersonSurName:
+        type: 'nc.PersonSurName'
+        transforms:
+        - !<transforms.BooleanContainsTransform>
+          column: "Unit"
+          string: ","
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: 'Unit'
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ','
+            index: 0
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: 'Unit'
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ' '
+            index: 'last'
+            ifMoreThan: 1
+      nc.PersonMiddleName:
+        type: 'nc.PersonMiddleName'
+        transforms:
+        - !<transforms.BooleanContainsTransform>
+          column: "Unit"
+          string: ","
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: 'Unit'
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ','
+            index: 1
+          - !<transforms.SplitTransform>
+            separator: ' '
+            index: 1
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: 'Unit'
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ' '
+            index: 1
+            ifMoreThan: 2
+      nc.SubjectIdentification:
+        type: "nc.SubjectIdentification"
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.GetPrefixDigitsTransform>
+            separator: ' '
+            column: "Unit"
+          - !<transforms.ColumnTransform>
+            column: "OfficerID"
+    conditions:
+    - !<conditions.ConditionalOr> {}
+    - !<conditions.BooleanRegexCondition>
+      column: 'Unit'
+      pattern: "\\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: 'Unit'
+      reverse: false
+  JohnsonCounty_IowaCity_EMS_Unit:
+    fqn: 'ol.emsunit'
+    name: 'JohnsonCounty_IowaCity_EMS_Unit'
+    entitySetName: 'JohnsonCounty_IowaCity_EMS_Unit'
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "Unit"
+      ol.name:
+        type: "ol.name"
+        column: "Unit"
+    conditions:
+    - !<conditions.BooleanRegexCondition>
+      column: 'Unit'
+      pattern: "\\b(?i)(EMS)\\b"
+  JohnsonCounty_IowaCity_Fire_Unit:
+    fqn: 'ol.fireunit'
+    name: 'JohnsonCounty_IowaCity_Fire_Unit'
+    entitySetName: 'JohnsonCounty_IowaCity_Fire_Unit'
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "Unit"
+      ol.name:
+        type: "ol.name"
+        column: "Unit"
+    conditions:
+    - !<conditions.BooleanRegexCondition>
+      column: 'Unit'
+      pattern: "\\b(?i)(FIRE)\\b"
+  JohnsonCounty_IowaCity_Unit:
+    fqn: 'ol.unit'
+    entitySetName: 'JohnsonCounty_IowaCity_Unit'
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "Unit"
+      ol.name:
+        type: "ol.name"
+        column: "Unit"
+    conditions:
+    - !<conditions.BooleanRegexCondition>
+      column: 'Unit'
+      pattern: "\\b(?i)(UNIVERSITY|ENGINE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b"
+associationDefinitions:
+  PersonIsPersonnel:
+    fqn: 'ol.is'
+    entitySetName: 'JohnsonCounty_IowaCity_Is'
+    propertyDefinitions:
+      general.stringid:
+        type: "general.stringid"
+        column: "Unit"
+    src: "People"
+    dst: "Personnel"
+  PeopleInvolvedInDispatch:
+    fqn: "ol.involvedin"
+    entitySetName: "JohnsonCounty_IowaCity_CFSInvolvedIn"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.GetPrefixDigitsTransform>
+            separator: ' '
+            column: "Unit"
+          - !<transforms.ColumnTransform>
+            column: "OfficerID"
+          - !<transforms.ColumnTransform>
+            column: "Dis_ID"
+      ol.datetimestart:
+        type: ol.datetimestart
+        column: 'TimeArr'
+        transforms:
+        - !<transforms.DateTimeTransform>
+          pattern: ['yyyy-MM-dd HH:mm:ss.S']
+      ol.datetimeend:
+        type: ol.datetimeend
+        column: 'TimeComp'
+        transforms:
+        - !<transforms.DateTimeTransform>
+          pattern: ['yyyy-MM-dd HH:mm:ss.S']
+      ol.role:
+        type: ol.role
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Officer"
+    src: "People"
+    dst: "JohnsonCounty_IowaCity_Dispatch"
+  EMSUnitAppearsinDispatch:
+    fqn: "ol.involvedin"
+    entitySetName: "JohnsonCounty_IowaCity_CFSInvolvedIn"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Dispatch_Type_ID
+      ol.datetimestart:
+        type: ol.datetimestart
+        column: 'TimeArr'
+        transforms:
+        - !<transforms.DateTimeTransform>
+          pattern: ['yyyy-MM-dd HH:mm:ss.S']
+      ol.datetimeend:
+        type: ol.datetimeend
+        column: 'TimeComp'
+        transforms:
+        - !<transforms.DateTimeTransform>
+          pattern: ['yyyy-MM-dd HH:mm:ss.S']
+    src: "JohnsonCounty_IowaCity_EMS_Unit"
+    dst: "JohnsonCounty_IowaCity_Dispatch"
+  UnitAppearsinDispatch:
+    fqn: "ol.involvedin"
+    entitySetName: "JohnsonCounty_IowaCity_CFSInvolvedIn"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Dispatch_Type_ID
+      ol.datetimestart:
+        type: ol.datetimestart
+        column: 'TimeArr'
+        transforms:
+        - !<transforms.DateTimeTransform>
+          pattern: ['yyyy-MM-dd HH:mm:ss.S']
+      ol.datetimeend:
+        type: ol.datetimeend
+        column: 'TimeComp'
+        transforms:
+        - !<transforms.DateTimeTransform>
+          pattern: ['yyyy-MM-dd HH:mm:ss.S']
+    src: "JohnsonCounty_IowaCity_Unit"
+    dst: "JohnsonCounty_IowaCity_Dispatch"
+  FireUnitAppearsinDispatch:
+    fqn: "ol.involvedin"
+    entitySetName: "JohnsonCounty_IowaCity_CFSInvolvedIn"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Dispatch_Type_ID
+    src: "JohnsonCounty_IowaCity_Fire_Unit"
+    dst: "JohnsonCounty_IowaCity_Dispatch"
+  DispatchResultsInDisposition:
+    fqn: 'ol.clearedby'
+    entitySetName: 'JohnsonCounty_IowaCity_ClearedBy'
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Dispatch_ID
+    src: 'JohnsonCounty_IowaCity_Dispatch'
+    dst: 'JohnsonCounty_IowaCity_Disposition'

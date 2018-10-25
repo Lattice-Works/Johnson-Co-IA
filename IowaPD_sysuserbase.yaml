@@ -1,0 +1,95 @@
+entityDefinitions:
+  Personnel:
+    name: 'Personnel'
+    fqn: "o.employee"
+    entitySetName: "JohnsonCounty_IowaCity_JCJIPersonnel"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "OfficerId"
+      person.title:
+        type: "person.title"
+        column: "Title"
+      ol.status:
+        type: "ol.status"
+        transforms:
+        - !<transforms.BooleanPrefixTransform>
+          column: "EmployeeId"
+          prefix: 'x_'
+          transformsIfTrue:
+          - !<transforms.ValueTransform>
+            value: "inactive"
+          transformsIfFalse:
+          - !<transforms.ValueTransform>
+             value: 'active'
+      publicsafety.employeeid:
+        type: "publicsafety.employeeid"
+        transforms:
+        - !<transforms.BooleanPrefixTransform>
+          column: "EmployeeId"
+          prefix: 'x_'
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: 'EmployeeId'
+          - !<transforms.SubstringTransform>
+            index: 2
+  Person:
+    name: 'Person'
+    fqn: "general.person"
+    entitySetName: "JohnsonCounty_IowaCity_People1"
+    propertyDefinitions:
+      nc.PersonGivenName:
+        type: "nc.PersonGivenName"
+        column: "FirstName"
+      nc.PersonSurName:
+        type: "nc.PersonSurName"
+        column: "LastName"
+      nc.SubjectIdentification:
+        type: "nc.SubjectIdentification"
+        column: "SystemUserId"
+    conditions:
+    - !<conditions.ConditionalAnd> {}
+    - !<conditions.BooleanRegexCondition>
+      column: 'FirstName'
+      pattern: "\\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b"
+      reverse: true
+    - !<conditions.BooleanRegexCondition>
+      column: 'LastName'
+      pattern: "\\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b"
+      reverse: true
+  JohnsonCounty_IowaCity_DispatchAgency:
+    fqn: 'ol.agency'
+    entitySetName: 'JohnsonCounty_IowaCity_DispatchAgency'
+    propertyDefinitions:
+      ol.id:
+        type: 'ol.id'
+        column: 'ORI'
+associationDefinitions:
+  CityIs:
+    fqn: "ol.is"
+    entitySetName: "JohnsonCounty_IowaCity_Is"
+    propertyDefinitions:
+      general.stringid:
+        type: "general.stringid"
+        column: "OfficerId"
+    src: 'Person'
+    dst: 'Personnel'
+    conditions:
+    - !<conditions.ConditionalAnd> {}
+    - !<conditions.BooleanRegexCondition>
+      column: 'FirstName'
+      pattern: "\\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b"
+      reverse: true
+    - !<conditions.BooleanRegexCondition>
+      column: 'LastName'
+      pattern: "\\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b"
+      reverse: true
+  JohnsonCounty_IowaCity_JCWorksAt:
+    fqn: "ol.worksat"
+    dst: "JohnsonCounty_IowaCity_DispatchAgency"
+    src: "Personnel"
+    entitySetName: "JohnsonCounty_IowaCity_JCWorksAt"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: ORI

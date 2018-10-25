@@ -1,0 +1,1343 @@
+#       ....           ....           ....           ....
+#      ||             ||             ||             ||
+#  /"""l|\        /"""l|\        /"""l|\        /"""l|\
+# /_______\      /_______\      /_______\      /_______\
+# |  .-.  |------|  .-.  |------|  .-.  |------|  .-.  |------
+#  __|L|__| .--. |__|L|__| .--. |__|L|__| .--. |__|L|__| .--.
+# _\  \\p__`o-o'__\  \\p__`o-o'__\  \\p__`o-o'__\  \\p__`o-o'_
+# ------------------------------------------------------------
+# ------------------------------------------------------------
+#
+#           ENTITIES FOR JOHNSON COUNTY JAIL
+#
+##############################################################
+
+entityDefinitions:
+
+  ############
+  ## PEOPLE ##
+  ############
+
+  JohnsonCounty_IowaCity_BondPerson:
+    fqn: general.person
+    entitySetName: JohnsonCounty_IowaCity_People2
+    name: JohnsonCounty_IowaCity_BondPerson
+    propertyDefinitions:
+      nc.SubjectIdentification:
+        type: nc.SubjectIdentification
+        column: Person_Post
+      nc.PersonGivenName:
+        type: 'nc.PersonGivenName'
+        column: "Person_Post"
+        transforms:
+        - !<transforms.SplitTransform>
+            separator: ','
+            index: 1
+        - !<transforms.SplitTransform>
+          separator: ' '
+          index: 0
+      nc.PersonSurName:
+        type: 'nc.PersonSurName'
+        column: "Person_Post"
+        transforms:
+        - !<transforms.SplitTransform>
+            separator: ','
+            index: 0
+      ol.datasource:
+        type: ol.datasource
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Johnson County: jail"
+    conditions:                                   # officers
+    - !<conditions.BooleanRegexCondition>
+      column: 'Person_Post'
+      pattern: "\\b(?i)(WIFE|MOM|GRANDMA|PARENTS|DAD|BAILBOND|LEDERMAN|IMCC|BOND|BAIL)\\b"
+      reverse: true
+  JohnsonCounty_IowaCity_BondRelative:
+    fqn: ol.relative
+    entitySetName: JohnsonCounty_IowaCity_BondRelative
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Person_Post
+      ol.name:
+        type: ol.name
+        column: Person_Post
+    conditions:                                   # officers
+    - !<conditions.BooleanRegexCondition>
+      column: 'Person_Post'
+      pattern: "\\b(?i)(WIFE|MOM|GRANDMA|PARENTS|DAD)\\b"
+  JohnsonCounty_IowaCity_JCInmates:
+    fqn: 'general.person'
+    entitySetName: 'JohnsonCounty_IowaCity_People2'
+    name: "JohnsonCounty_IowaCity_JCInmates"
+    propertyDefinitions:
+      nc.SubjectIdentification:
+        type: "nc.SubjectIdentification"
+        column: "MNI_No"
+      nc.PersonGivenName:
+        type: 'nc.PersonGivenName'
+        column: "JName"
+        transforms:
+        - !<transforms.SplitTransform>
+            separator: ','
+            index: 1
+        - !<transforms.SplitTransform>
+          separator: ' '
+          index: 0
+      nc.PersonMiddleName:
+        type: "nc.PersonMiddleName"
+        column: "JName"
+        transforms:
+        - !<transforms.SplitTransform>
+            separator: ','
+            index: 1
+        - !<transforms.SplitTransform>
+          separator: ' '
+          index: 1
+      nc.PersonSurName:
+        type: 'nc.PersonSurName'
+        column: "JName"
+        transforms:
+        - !<transforms.SplitTransform>
+            separator: ','
+            index: 0
+      nc.PersonBirthDate:
+        type: "nc.PersonBirthDate"
+        column: "DOB"
+        transforms:
+        - !<transforms.DateTransform>
+          pattern: ['M/d/yyyy','d-MMM-yy','MM/dd/yyy', 'M/dd/yyyy', 'MM/d/yyyy', 'dd-MMM-yy', 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm:ss.S']
+      im.PersonNickName:
+        type: "im.PersonNickName"
+        column: "Alias"
+      nc.PersonSex:
+        type: "nc.PersonSex"
+        column: "Sex"
+      nc.PersonRace:
+        type: "nc.PersonRace"
+        column: "Race"
+        transforms:
+        - !<transforms.ReplaceTransform>
+          target: ['A', 'W', 'B', 'I']
+          goal: ['asian', 'white', 'black', 'amindian']
+      ol.datasource:
+        type: ol.datasource
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Johnson County: jail"
+  Aofficerperson:
+    name: "Aofficerperson"
+    fqn: 'general.person'
+    entitySetName: "JohnsonCounty_IowaCity_JCOfficers"
+    propertyDefinitions:
+      nc.PersonGivenName:
+        type: 'nc.PersonGivenName'
+        column: "AO"
+        transforms:
+        - !<transforms.SplitTransform>
+            separator: ','
+            index: 1
+        - !<transforms.SplitTransform>
+          separator: ' '
+          index: 0
+      nc.PersonSurName:
+        type: 'nc.PersonSurName'
+        column: "AO"
+        transforms:
+        - !<transforms.SplitTransform>
+            separator: ','
+            index: 0
+      nc.SubjectIdentification:
+        type: "nc.SubjectIdentification"
+        transforms:
+        - !<transforms.BooleanIsNullTransform>
+          column: "AO_ID"
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: "ArrestOfficerID"
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: "AO_ID"
+      ol.datasource:
+        type: ol.datasource
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Johnson County: jail"
+  Rofficerperson:
+    name: "Rofficerperson"
+    entitySetName: "JohnsonCounty_IowaCity_JCOfficers"
+    fqn: "general.person"
+    propertyDefinitions:
+      nc.PersonGivenName:
+        type: 'nc.PersonGivenName'
+        column: "Rel_Officer"
+        transforms:
+        - !<transforms.SplitTransform>
+            separator: ','
+            index: 1
+        - !<transforms.SplitTransform>
+          separator: ' '
+          index: 0
+      nc.PersonSurName:
+        type: 'nc.PersonSurName'
+        column: "Rel_Officer"
+        transforms:
+        - !<transforms.SplitTransform>
+            separator: ','
+            index: 0
+      nc.SubjectIdentification:
+        type: "nc.SubjectIdentification"
+        column: 'Rel_Officer_ID'
+      ol.datasource:
+        type: ol.datasource
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Johnson County: jail"
+  Sofficerperson:
+    name: "Sofficerperson"
+    entitySetName: "JohnsonCounty_IowaCity_JCOfficers"
+    fqn: "general.person"
+    propertyDefinitions:
+      nc.PersonGivenName:
+        type: 'nc.PersonGivenName'
+        column: "Search_Officer"
+        transforms:
+        - !<transforms.SplitTransform>
+            separator: ','
+            index: 1
+        - !<transforms.SplitTransform>
+          separator: ' '
+          index: 0
+      nc.PersonSurName:
+        type: 'nc.PersonSurName'
+        column: "Search_Officer"
+        transforms:
+        - !<transforms.SplitTransform>
+            separator: ','
+            index: 0
+      nc.SubjectIdentification:
+        type: "nc.SubjectIdentification"
+        column: 'Search_Officer_ID'
+      ol.datasource:
+        type: ol.datasource
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Johnson County: jail"
+  Tofficerperson:
+    name: "Tofficerperson"
+    entitySetName: "JohnsonCounty_IowaCity_JCOfficers"
+    fqn: "general.person"
+    propertyDefinitions:
+      nc.PersonGivenName:
+        type: 'nc.PersonGivenName'
+        column: "Transp_Officer"
+        transforms:
+        - !<transforms.SplitTransform>
+            separator: ','
+            index: 1
+        - !<transforms.SplitTransform>
+          separator: ' '
+          index: 0
+      nc.PersonSurName:
+        type: 'nc.PersonSurName'
+        column: "Transp_Officer"
+        transforms:
+        - !<transforms.SplitTransform>
+            separator: ','
+            index: 0
+      nc.SubjectIdentification:
+        type: "nc.SubjectIdentification"
+        transforms:
+        - !<transforms.BooleanIsNullTransform>
+          column: "Transp_Officer_ID"
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: "Transp_Officer_ID"
+          transformsIfTrue:
+          - !<transforms.BooleanIsNullTransform>
+            column: "Transp_Agency"
+            transformsIfFalse:
+            - !<transforms.BooleanIsNullTransform>
+              column: "Transp_Officer"
+              transformsIfFalse:
+              - !<transforms.ConcatTransform>
+                columns: ['Transp_Agency', 'Transp_Officer']
+                separator: "_"
+      ol.datasource:
+        type: ol.datasource
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Johnson County: jail"
+
+  ###################
+  ## PERSONDETAILS ##
+  ###################
+
+  Persondetails:
+    name: "Persondetails"
+    entitySetName: "JohnsonCounty_IowaCity_JCJIPersondetails"
+    fqn: "ol.persondetails"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "MNI_No"
+      nc.PersonWeightMeasure:
+        type: "nc.PersonWeightMeasure"
+        column: "OWeight"
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+      nc.PersonHeightMeasure:
+        type: "nc.PersonHeightMeasure"
+        column: "OHeight"
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+      nc.PersonEyeColorText:
+        type: "nc.PersonEyeColorText"
+        column: "OEyes"
+      nc.PersonHairColorText:
+        type: "nc.PersonHairColorText"
+        column: "OHair"
+  Aofficers:
+    name: "Aofficers"
+    entitySetName: "JohnsonCounty_IowaCity_JCOfficerInfo"
+    fqn: "o.employee"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.BooleanIsNullTransform>
+          column: "AO_ID"
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: "ArrestOfficerID"
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: "AO_ID"
+  Rofficers:
+    name: "Rofficers"
+    entitySetName: "JohnsonCounty_IowaCity_JCOfficerInfo"
+    fqn: "o.employee"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "Rel_Officer_ID"
+  Sofficers:
+    name: "Sofficers"
+    entitySetName: "JohnsonCounty_IowaCity_JCOfficerInfo"
+    fqn: "o.employee"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "Search_OFficer_ID"
+  Tofficers:
+    name: "Tofficers"
+    entitySetName: "JohnsonCounty_IowaCity_JCOfficerInfo"
+    fqn: "o.employee"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.BooleanIsNullTransform>
+          column: "Transp_Officer_ID"
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: "Transp_Officer_ID"
+          transformsIfTrue:
+          - !<transforms.BooleanIsNullTransform>
+            column: "Transp_Agency"
+            transformsIfFalse:
+            - !<transforms.BooleanIsNullTransform>
+              column: "Transp_Officer"
+              transformsIfFalse:
+              - !<transforms.ConcatTransform>
+                columns: ['Transp_Agency', 'Transp_Officer']
+                separator: "_"
+  PersondetailsCJ:
+    name: "PersondetailsCJ"
+    entitySetName: "JohnsonCounty_IowaCity_JCPersondetailsCJ"
+    fqn: "ol.persondetailscriminaljustice"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "MNI_No"
+      criminaljustice.cautioninformation:
+        type: "criminaljustice.cautioninformation"
+        column: "Caution"
+      ol.sexoffender:
+        type: "ol.sexoffender"
+        column: "SexOff"
+        transforms:
+        - !<transforms.ReplaceTransform>
+          target: [-1]
+          goal: [1]
+        - !<transforms.ParseBoolTransform> {}
+      criminaljustice.treatasadult:
+        type: "criminaljustice.treatasadult"
+        column: "Adult_Juv_Waive"
+
+  ##############
+  ## AGENCIES ##
+  ##############
+
+  ArrestingAgency:
+    entitySetName: "JohnsonCounty_IowaCity_JCAgencies"
+    name: ArrestingAgency
+    fqn: 'ol.agency'
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "Arresting_Agency"
+      ol.name:
+        type: "ol.name"
+        column: "Arrest_Agency"
+      ol.name:
+        type: "ol.name"
+        column: "Arresting_Agency"
+  JohnsonCounty_IowaCity_BondAgency:
+    fqn: ol.agency
+    entitySetName: JohnsonCounty_IowaCity_BondAgency
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: "Person_Post"
+      ol.name:
+        type: ol.name
+        column: Person_Post
+    conditions:                                   # officers
+    - !<conditions.BooleanRegexCondition>
+      column: 'Person_Post'
+      pattern: "\\b(?i)(BAILBOND|LEDERMAN|IMCC|BOND|BAIL)\\b"
+  ReleasingAgency:
+    entitySetName: "JohnsonCounty_IowaCity_JCAgencies"
+    name: ReleasingAgency
+    fqn: 'ol.agency'
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "Released_To"
+      ol.name:
+        type: "ol.name"
+        column: "Released_To"
+  ChargingAgency:
+    entitySetName: "JohnsonCounty_IowaCity_JCAgencies"
+    name: ChargingAgency
+    fqn: 'ol.agency'
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "Charging_Agency"
+      ol.name:
+        type: "ol.name"
+        column: "Charging_Agency"
+  TransportingAgency:
+    entitySetName: JohnsonCounty_IowaCity_JCAgencies
+    name: TransportingAgency
+    fqn: "ol.agency"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "ORI"
+      ol.name:
+        type: "ol.name"
+        column: "ORI"
+  CommittingAuthority:
+    entitySetName: "JohnsonCounty_IowaCity_JCAgencies"
+    name: CommittingAuthority
+    fqn: "ol.agency"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "Comit_Auth"
+      ol.name:
+        type: "ol.name"
+        column: "Comit_Auth"
+
+  ###############
+  ## JAILSTUFF ##
+  ###############
+
+  JohnsonCounty_IowaCity_JCBond:
+    entitySetName: "JohnsonCounty_IowaCity_JCBond"
+    fqn: "ol.bond"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "Bond"
+      criminaljustice.bailbondamount:
+        type: "criminaljustice.bailbondamount"
+        column: "Bond"
+  JohnsonCounty_IowaCity_JCJailStay:
+    entitySetName: "JohnsonCounty_IowaCity_JCJailStay"
+    fqn: "ol.jailstay"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ['Jail_ID','JailRecordId']
+      ol.juvenileholdauth:
+        type: "ol.juvenileholdauth"
+        column: "Juv_Hold_Auth"
+      criminaljustice.releasetype:
+        type: "criminaljustice.releasetype"
+        column: "How_Rel"
+      criminaljustice.releasetype:
+        type: "criminaljustice.releasetype"
+        column: "How_Rel2"
+      criminaljustice.releasenotes:
+        type: "criminaljustice.releasenotes"
+        column: "ReleaseNotes"
+        transforms:
+        - !<transforms.PrefixTransform>
+          prefix: "Release notes: "
+      ol.reasoncode:
+        type: "ol.reasoncode"
+        column: "ReasonCode"
+      publicsafety.SSA:
+        type: "publicsafety.SSA"
+        column: "SSA"
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+      publicsafety.ssaconviction:
+          type: "publicsafety.ssaconviction"
+          column: "SSA_Conviction"
+          transforms:
+          - !<transforms.DateAsDateTimeTransform>
+            pattern: ['M/d/yyyy','d-MMM-yy','MM/dd/yyy', 'M/dd/yyyy', 'MM/d/yyyy', 'dd-MMM-yy', 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm:ss.S']
+      incident.startdatetime:
+        type: "incident.startdatetime"
+        transforms:
+        - !<transforms.BooleanIsNullTransform>
+          column: 'Date_In'
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: 'Date_In'
+          - !<transforms.DateAsDateTimeTransform>
+            pattern: ['M/d/yyyy','d-MMM-yy','MM/dd/yyy', 'M/dd/yyyy', 'MM/d/yyyy', 'dd-MMM-yy', 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm:ss.S']
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: 'Start_Date'
+          - !<transforms.DateAsDateTimeTransform>
+            pattern: ['M/d/yyyy','d-MMM-yy','MM/dd/yyy', 'M/dd/yyyy', 'MM/d/yyyy', 'dd-MMM-yy', 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm:ss.S']
+      ol.alternatestartdate:
+        type: "ol.alternatestartdate"
+        column: "Alt_Start_Date"
+        transforms:
+        - !<transforms.DateAsDateTimeTransform>
+          pattern: ['M/d/yyyy','d-MMM-yy','MM/dd/yyy', 'M/dd/yyyy', 'MM/d/yyyy', 'dd-MMM-yy', 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm:ss.S']
+      ol.releasedatetime:
+        type: "ol.releasedatetime"
+        transforms:
+        - !<transforms.BooleanIsNullTransform>
+          column: 'Date_Out'
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: 'Date_Out'
+          - !<transforms.DateAsDateTimeTransform>
+            pattern: ['M/d/yyyy','d-MMM-yy','MM/dd/yyy', 'M/dd/yyyy', 'MM/d/yyyy', 'dd-MMM-yy', 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm:ss.S']
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: 'Release_Date'
+          - !<transforms.DateAsDateTimeTransform>
+            pattern: ['M/d/yyyy','d-MMM-yy','MM/dd/yyy', 'M/dd/yyyy', 'MM/d/yyyy', 'dd-MMM-yy', 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm:ss.S']
+      ol.projectedreleasedatetime:
+        type: "ol.projectedreleasedatetime"
+        transforms:
+        - !<transforms.BooleanIsNullTransform>
+          column: 'Est_Rel_Date'
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: 'Est_Rel_Date'
+          - !<transforms.DateAsDateTimeTransform>
+            pattern: ['M/d/yyyy','d-MMM-yy','MM/dd/yyy', 'M/dd/yyyy', 'MM/d/yyyy', 'dd-MMM-yy', 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm:ss.S']
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: 'Exp_Release_Date'
+          - !<transforms.DateAsDateTimeTransform>
+            pattern: ['M/d/yyyy','d-MMM-yy','MM/dd/yyy', 'M/dd/yyyy', 'MM/d/yyyy', 'dd-MMM-yy', 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm:ss.S']
+      general.status:
+        type: "general.status"
+        column: "Status"
+      ol.notes:
+        type: 'ol.notes'
+        column: "Remarks"
+      ol.reasonheld:
+        type: "ol.reasonheld"
+        column: "ReasonHeld"
+  JohnsonCounty_IowaCity_JCCharge:
+    fqn: "ol.charge"
+    entitySetName: "JohnsonCounty_IowaCity_JCCharge"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: Charge
+      ol.name:
+        type: "ol.name"
+        column: Charge
+      ol.numberofcounts:
+        type: "ol.numberofcounts"
+        column: "NoCounts"
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+      ol.levelstate:
+        type: "ol.levelstate"
+        column: "Severity"
+      ol.level:
+        type: "ol.level"
+        transforms:
+        - !<transforms.BooleanRegexTransform>
+          column: "Severity"
+          pattern: "^FEL|F$"
+          transformsIfTrue:
+          - !<transforms.ValueTransform>
+            value: "Felony"
+          transformsIfFalse:
+          - !<transforms.BooleanRegexTransform>
+            column: "Severity"
+            pattern: "MS$|M$"
+            transformsIfTrue:
+            - !<transforms.ValueTransform>
+              value: "Misdemeanor"
+  JohnsonCounty_IowaCity_JCJailStayLength:
+    entitySetName: "JohnsonCounty_IowaCity_JCJailStayLength"
+    fqn: "ol.jailstaylength"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "Jail_ID"
+      criminaljustice.timeserveddays:
+        type: "criminaljustice.timeserveddays"
+        column: "TSrvdDays"
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+      ol.timeservedhours:
+        type: "ol.timeservedhours"
+        column: "TsrvdHrs"
+      ol.timeservedminutes:
+        type: "ol.timeservedminutes"
+        column: "TsrvdMins"
+      ol.goodtimedays:
+        type: "ol.goodtimedays"
+        column: 'GTDays'
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+      ol.goodtimehours:
+          type: "ol.goodtimehours"
+          column: "GTHrs"
+          transforms:
+          - !<transforms.ParseIntTransform> {}
+      ol.goodtimeminutes:
+        type: "ol.goodtimeminutes"
+        column: "GTMins"
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+      ol.goodtimePCT:
+        type: "ol.goodtimePCT"
+        column: GTPct
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+  JohnsonCounty_IowaCity_JCSentences:
+    entitySetName: "JohnsonCounty_IowaCity_JCSentences"
+    fqn: 'ol.sentence'
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["SentenceDays","SencenteHours","Concurrent","Probation","ConsecWith"]
+          separator: "-"
+      ol.sentencedays:
+        type: "ol.sentencedays"
+        column: "SentenceDays"
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+      ol.sentencehours:
+        type: "ol.sentencehours"
+        column: "SencenteHours"
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+      ol.concurrent:
+        type: "ol.concurrent"
+        column: "Concurrent"
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+      ol.probation:
+        type: "ol.probation"
+        column: "Probation"
+        transforms:
+        - !<transforms.ParseBoolTransform> {}
+      ol.consecutive:
+        type: "ol.consecutive"
+        column: "ConsecWith"
+        transforms:
+        - !<transforms.ParseBoolTransform> {}
+  JohnsonCounty_IowaCity_JCOffenses:
+    entitySetName: "JohnsonCounty_IowaCity_JCOffenses"
+    fqn: 'ol.offense'
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "State"
+      criminaljustice.localstatute:
+        type: "criminaljustice.localstatute"
+        column: "Local"
+      ol.statestatute:
+        type: "ol.statestatute"
+        column: State
+      general.date:
+        type: "general.date"
+        column: "Off_Date"
+        transforms:
+        - !<transforms.DateTransform>
+          pattern: ['M/d/yyyy','d-MMM-yy','MM/dd/yyy', 'M/dd/yyyy', 'MM/d/yyyy', 'dd-MMM-yy', 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm:ss.S']
+      criminaljustice.ncic:
+        type: 'criminaljustice.ncic'
+        column: "NCIC"
+      ol.notes:
+        type: "ol.notes"
+        column: "Notes"
+  JohnsonCounty_IowaCity_JCCourt:
+    entitySetName: "JohnsonCounty_IowaCity_JCCourt"
+    fqn: 'ol.location'
+    propertyDefinitions:
+      location.name:
+        type: "location.name"
+        column: "Court"
+  JohnsonCounty_IowaCity_JCFacility:
+    entitySetName: "JohnsonCounty_IowaCity_JCFacility"
+    fqn: 'o.facility'
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "Held_At"
+      ol.name:
+        type: "ol.name"
+        column: "Held_At"
+      ol.type:
+        type: "ol.type"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Jail"
+  JohnsonCounty_IowaCity_JCBooking:
+    fqn: 'ol.booking'
+    entitySetName: 'JohnsonCounty_IowaCity_JCBooking'
+    propertyDefinitions:
+      ol.id:
+        type: 'ol.id'
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["BookedID", "Jail_ID", "MNI_No"]
+      person.ageatevent:
+        type: "person.ageatevent"
+        column: "Age"
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+      j.intoxicationlevel:
+        type: "j.intoxicationlevel"
+        column: "Intox"
+        transforms:
+        - !<transforms.ParseDoubleTransform> {}
+      publicsafety.portablebreathtest:
+        type: "publicsafety.portablebreathtest"
+        column: "PBT"
+        transforms:
+        - !<transforms.ParseDoubleTransform> {}
+      ol.notes:
+        type: "ol.notes"
+        column: "Remarks"
+
+
+#       ....           ....           ....           ....
+#      ||             ||             ||             ||
+#  /"""l|\        /"""l|\        /"""l|\        /"""l|\
+# /_______\      /_______\      /_______\      /_______\
+# |  .-.  |------|  .-.  |------|  .-.  |------|  .-.  |------
+#  __|L|__| .--. |__|L|__| .--. |__|L|__| .--. |__|L|__| .--.
+# _\  \\p__`o-o'__\  \\p__`o-o'__\  \\p__`o-o'__\  \\p__`o-o'_
+# ------------------------------------------------------------
+# ------------------------------------------------------------
+#
+#           ASSOCIATIONS FOR JOHNSON COUNTY JAIL
+#
+##############################################################
+
+associationDefinitions:
+
+  #########################
+  ## PEOPLE HAVE DETAILS ##
+  #########################
+
+  JChas1:
+    name: "JChas1"
+    fqn: "ol.is"
+    src: "JohnsonCounty_IowaCity_JCInmates"
+    dst: "Persondetails"
+    entitySetName: "JohnsonCounty_IowaCity_JCis"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "MNI_No"
+  JChas2:
+    name: "JChas2"
+    fqn: "ol.is"
+    src: "JohnsonCounty_IowaCity_JCInmates"
+    dst: "PersondetailsCJ"
+    entitySetName: "JohnsonCounty_IowaCity_JCis"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "MNI_No"
+
+  #########################
+  ## PEOPLE ARE OFFICERS ##
+  #########################
+
+  JCis2:
+    name: "JCis2"
+    fqn: "ol.is"
+    src: "Aofficerperson"
+    dst: "Aofficers"
+    entitySetName: "JohnsonCounty_IowaCity_JCis"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.BooleanIsNullTransform>
+          column: "AO_ID"
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: "ArrestOfficerID"
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: "AO_ID"
+  JCis3:
+    name: "JCis3"
+    fqn: "ol.is"
+    src: "Rofficerperson"
+    dst: "Rofficers"
+    entitySetName: "JohnsonCounty_IowaCity_JCis"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "Rel_Officer_ID"
+  JCis4:
+    name: "JCis4"
+    fqn: "ol.is"
+    src: "Sofficerperson"
+    dst: "Sofficers"
+    entitySetName: "JohnsonCounty_IowaCity_JCis"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "Search_Officer_ID"
+  JCis5:
+    name: "JCis5"
+    fqn: "ol.is"
+    src: "Tofficerperson"
+    dst: "Tofficers"
+    entitySetName: "JohnsonCounty_IowaCity_JCis"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.BooleanIsNullTransform>
+          column: "Transp_Officer_ID"
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: "Transp_Officer_ID"
+          transformsIfTrue:
+          - !<transforms.BooleanIsNullTransform>
+            column: "Transp_Agency"
+            transformsIfFalse:
+            - !<transforms.BooleanIsNullTransform>
+              column: "Transp_Officer"
+              transformsIfFalse:
+              - !<transforms.ConcatTransform>
+                columns: ['Transp_Agency', 'Transp_Officer']
+                separator: "_"
+
+  ###############################
+  ## OFFICERS WORK AT AGENCIES ##
+  ###############################
+
+  JohnsonCounty_IowaCity_JCWorksAt1:
+    fqn: "ol.worksat"
+    dst: "ArrestingAgency"
+    src: "Aofficerperson"
+    entitySetName: "JohnsonCounty_IowaCity_JCWorksAt"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Jail_ID
+  JohnsonCounty_IowaCity_JCWorksAt2:
+    fqn: "ol.worksat"
+    dst: "TransportingAgency"
+    src: "Tofficerperson"
+    entitySetName: "JohnsonCounty_IowaCity_JCWorksAt"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Jail_ID
+  JohnsonCounty_IowaCity_JCWorksAt3:
+    fqn: "ol.worksat"
+    dst: "ReleasingAgency"
+    src: "Rofficerperson"
+    entitySetName: "JohnsonCounty_IowaCity_JCWorksAt"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Jail_ID
+
+  #########################################################
+  ## PERSON -> OFFENSE -> CHARGE -> SENTENCE -> JAILSTAY ##
+  #########################################################
+
+  JohnsonCounty_IowaCity_JCSubjectOf:
+    fqn: "ol.subjectof"
+    src: "JohnsonCounty_IowaCity_JCInmates"
+    dst: "JohnsonCounty_IowaCity_JCBooking"
+    entitySetName: "JohnsonCounty_IowaCity_JCSubjectOf"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Jail_ID
+  JohnsonCounty_IowaCity_JCSubjectOf2:
+    fqn: "ol.subjectof"
+    src: "JohnsonCounty_IowaCity_JCInmates"
+    dst: "JohnsonCounty_IowaCity_JCBond"
+    entitySetName: "JohnsonCounty_IowaCity_JCSubjectOf"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Jail_ID
+  JohnsonCounty_IowaCity_JCChargedWith:
+    fqn: "ol.chargedwith"
+    src: "JohnsonCounty_IowaCity_JCInmates"
+    dst: "JohnsonCounty_IowaCity_JCOffenses"
+    entitySetName: "JohnsonCounty_IowaCity_JCChargedWith"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Jail_ID
+  JohnsonCounty_IowaCity_JCSentencedWith:
+    fqn: "ol.sentencedwith"
+    src: "JohnsonCounty_IowaCity_JCInmates"
+    dst: "JohnsonCounty_IowaCity_JCSentences"
+    entitySetName: "JohnsonCounty_IowaCity_JCSentencedWith"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Jail_ID
+  JohnsonCounty_IowaCity_JCSubjectOf:
+    fqn: "ol.subjectof"
+    src: "JohnsonCounty_IowaCity_JCInmates"
+    dst: "JohnsonCounty_IowaCity_JCJailStay"
+    entitySetName: "JohnsonCounty_IowaCity_JCSubjectOf"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Jail_ID
+  JohnsonCounty_IowaCity_JCOfLength:
+    fqn: "ol.oflength"
+    dst: "JohnsonCounty_IowaCity_JCJailStayLength"
+    src: "JohnsonCounty_IowaCity_JCJailStay"
+    entitySetName: "JohnsonCounty_IowaCity_JCOfLength"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Jail_ID
+  Resultsin1:
+    fqn: 'ol.resultsin'
+    src: "JohnsonCounty_IowaCity_JCSentences"
+    dst: "JohnsonCounty_IowaCity_JCJailStay"
+    entitySetName: "JohnsonCounty_IowaCity_JCResultsIn"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ['SentenceDays', "SentenceHours", "Concurrent", "Probation", "ConseqWith","AltStart_Date"]
+  Resultsin2:
+    fqn: 'ol.resultsin'
+    src: "JohnsonCounty_IowaCity_JCCharge"
+    dst: "JohnsonCounty_IowaCity_JCSentences"
+    entitySetName: "JohnsonCounty_IowaCity_JCResultsIn"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "State"
+  RelatedTo2:
+    fqn: 'ol.relatedto'
+    src: "JohnsonCounty_IowaCity_JCCharge"
+    dst: "JohnsonCounty_IowaCity_JCBooking"
+    entitySetName: "JohnsonCounty_IowaCity_JCRelatedTo"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "State"
+  RelatedTo3:
+    fqn: 'ol.relatedto'
+    src: "JohnsonCounty_IowaCity_JCCharge"
+    dst: "JohnsonCounty_IowaCity_JCJailStay"
+    entitySetName: "JohnsonCounty_IowaCity_JCRelatedTo"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "State"
+  Resultsin4:
+    fqn: 'ol.resultsin'
+    src: "JohnsonCounty_IowaCity_JCBooking"
+    dst: "JohnsonCounty_IowaCity_JCSentences"
+    entitySetName: "JohnsonCounty_IowaCity_JCResultsIn"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "State"
+  Resultsin3:
+    fqn: 'ol.resultsin'
+    dst: "JohnsonCounty_IowaCity_JCCharge"
+    src: "JohnsonCounty_IowaCity_JCOffenses"
+    entitySetName: "JohnsonCounty_IowaCity_JCResultsIn"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "Charge"
+  JohnsonCounty_IowaCity_JCChargedWith:
+    fqn: "ol.chargedwith"
+    src: "JohnsonCounty_IowaCity_JCInmates"
+    dst: "JohnsonCounty_IowaCity_JCCharge"
+    entitySetName: "JohnsonCounty_IowaCity_JCChargedWith"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Jail_ID
+  RelatedTo:
+    fqn: "ol.relatedto"
+    src: "JohnsonCounty_IowaCity_JCBooking"
+    dst: "JohnsonCounty_IowaCity_JCJailStay"
+    entitySetName: "JohnsonCounty_IowaCity_JCRelatedTo"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Jail_ID
+
+  ##########
+  ## BAIL ##
+  ##########
+
+  JohnsonCounty_IowaCity_JCBondSet:
+    fqn: "ol.bondset"
+    dst: "JohnsonCounty_IowaCity_JCBond"
+    src: "JohnsonCounty_IowaCity_JCJailStay"
+    entitySetName: "JohnsonCounty_IowaCity_JCBondSet"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Jail_ID
+  Postedby1:
+    fqn: 'ol.postedby'
+    entitySetName: "JohnsonCounty_IowaCity_JCPostedBy"
+    src: JohnsonCounty_IowaCity_JCBond
+    dst: JohnsonCounty_IowaCity_BondPerson
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Person_Post
+  Postedby2:
+    fqn: 'ol.postedby'
+    src: JohnsonCounty_IowaCity_JCBond
+    entitySetName: "JohnsonCounty_IowaCity_JCPostedBy"
+    dst: JohnsonCounty_IowaCity_BondAgency
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Person_Post
+  Postedby3:
+    fqn: 'ol.postedby'
+    src: JohnsonCounty_IowaCity_JCBond
+    dst: JohnsonCounty_IowaCity_BondRelative
+    entitySetName: "JohnsonCounty_IowaCity_JCPostedBy"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Person_Post
+  Kinto:
+    fqn: 'ol.kinto'
+    src: JohnsonCounty_IowaCity_JCInmates
+    dst: JohnsonCounty_IowaCity_BondRelative
+    entitySetName: "JohnsonCounty_IowaCity_JCKinTo"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Person_Post
+
+#####################################
+## AGENCIES <- INMATES -> OFFICERS ##
+#####################################
+
+  JohnsonCounty_IowaCity_JCArrestedBy:
+    fqn: "ol.arrestedby"
+    src: "JohnsonCounty_IowaCity_JCInmates"
+    dst: "Aofficerperson"
+    entitySetName: "JohnsonCounty_IowaCity_JCArrestedBy"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.BooleanIsNullTransform>
+          column: "AO_ID"
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: "ArrestOfficerID"
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: "AO_ID"
+      ol.arrestdatetime:
+        type: "ol.arrestdatetime"
+        column: "Arrest_Date"
+        transforms:
+        - !<transforms.DateAsDateTimeTransform>
+          pattern: ['M/d/yyyy','d-MMM-yy','MM/dd/yyy', 'M/dd/yyyy', 'MM/d/yyyy', 'dd-MMM-yy', 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm:ss.S']
+  JohnsonCounty_IowaCity_JCArrestedBy2:
+    fqn: "ol.arrestedby"
+    src: "JohnsonCounty_IowaCity_JCInmates"
+    dst: "ArrestingAgency"
+    entitySetName: "JohnsonCounty_IowaCity_JCArrestedBy"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "Arresting_Agency"
+      ol.arrestdatetime:
+        type: "ol.arrestdatetime"
+        column: "Arrest_Date"
+        transforms:
+        - !<transforms.DateAsDateTimeTransform>
+          pattern: ['M/d/yyyy','d-MMM-yy','MM/dd/yyy', 'M/dd/yyyy', 'MM/d/yyyy', 'dd-MMM-yy', 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm:ss.S']
+  JohnsonCounty_IowaCity_JCCommittedBy:
+    fqn: "ol.committedby"
+    src: "JohnsonCounty_IowaCity_JCInmates"
+    dst: "CommittingAuthority"
+    entitySetName: "JohnsonCounty_IowaCity_JCCommittedBy"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: "Jail_ID"
+  JohnsonCounty_IowaCity_JCChargedBy:
+    fqn: "ol.chargedby"
+    src: "JohnsonCounty_IowaCity_JCInmates"
+    dst: "ChargingAgency"
+    entitySetName: "JohnsonCounty_IowaCity_JCChargedBy"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: "Jail_ID"
+  JohnsonCounty_IowaCity_JCSearchedby:
+    fqn: "ol.searchedby"
+    src: "JohnsonCounty_IowaCity_JCInmates"
+    dst: "Sofficerperson"
+    entitySetName: "JohnsonCounty_IowaCity_JCSearchedBy"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["Search_Officer_ID", "MNI_No"]
+  JohnsonCounty_IowaCity_JCReleasedby:
+    fqn: "ol.releasedby"
+    src: "JohnsonCounty_IowaCity_JCInmates"
+    dst: "ReleasingAgency"
+    entitySetName: "JohnsonCounty_IowaCity_JCReleasedBy"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["Rel_Officer_ID", "MNI_No"]
+  JohnsonCounty_IowaCity_JCReleasedby2:
+    fqn: "ol.releasedby"
+    src: "JohnsonCounty_IowaCity_JCInmates"
+    dst: "Rofficerperson"
+    entitySetName: "JohnsonCounty_IowaCity_JCReleasedBy"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["Rel_Officer_ID", "MNI_No"]
+  JohnsonCounty_IowaCity_JCTransportedby1:
+    fqn: "ol.transportedby"
+    src: "JohnsonCounty_IowaCity_JCInmates"
+    dst: "TransportingAgency"
+    entitySetName: "JohnsonCounty_IowaCity_JCTransportedby"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["Transp_Officer_ID", "Transp_Agency", "Transp_Officer", "MNI_No"]
+  JohnsonCounty_IowaCity_JCTransportedby2:
+    fqn: "ol.transportedby"
+    src: "JohnsonCounty_IowaCity_JCInmates"
+    dst: "Tofficerperson"
+    entitySetName: "JohnsonCounty_IowaCity_JCTransportedby"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["Transp_Officer_ID", "Transp_Agency", "Transp_Officer", "MNI_No"]
+
+##############################################
+## AGENCIES/OFFICERS INVOLVED IN JAILTHINGS ##
+##############################################
+
+  JohnsonCounty_IowaCity_JCInvolvedIn1:
+    fqn: "ol.involvedin"
+    src: "ArrestingAgency"
+    dst: "JohnsonCounty_IowaCity_JCCharge"
+    entitySetName: "JohnsonCounty_IowaCity_JCInvolvedIn"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Jail_ID
+  JohnsonCounty_IowaCity_JCInvolvedIn2:
+    fqn: "ol.involvedin"
+    src: "TransportingAgency"
+    dst: "JohnsonCounty_IowaCity_JCJailStay"
+    entitySetName: "JohnsonCounty_IowaCity_JCInvolvedIn"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Jail_ID
+  JohnsonCounty_IowaCity_JCInvolvedIn4:
+    fqn: "ol.involvedin"
+    src: "ReleasingAgency"
+    dst: "JohnsonCounty_IowaCity_JCJailStay"
+    entitySetName: "JohnsonCounty_IowaCity_JCInvolvedIn"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Jail_ID
+  JohnsonCounty_IowaCity_JCInvolvedIn5:
+    fqn: "ol.involvedin"
+    src: "ChargingAgency"
+    dst: "JohnsonCounty_IowaCity_JCCharge"
+    entitySetName: "JohnsonCounty_IowaCity_JCInvolvedIn"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Jail_ID
+  JohnsonCounty_IowaCity_JCInvolvedIn6:
+    fqn: "ol.involvedin"
+    src: "Aofficerperson"
+    dst: "JohnsonCounty_IowaCity_JCJailStay"
+    entitySetName: "JohnsonCounty_IowaCity_JCInvolvedIn"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Jail_ID
+      ol.role:
+        type: ol.role
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Officer"
+      ol.roledescription:
+        type: ol.roledescription
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Arresting"
+  JohnsonCounty_IowaCity_JCInvolvedIn10:
+    fqn: "ol.involvedin"
+    src: "Aofficerperson"
+    dst: "JohnsonCounty_IowaCity_JCCharge"
+    entitySetName: "JohnsonCounty_IowaCity_JCInvolvedIn"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Jail_ID
+      ol.role:
+        type: ol.role
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Officer"
+      ol.roledescription:
+        type: ol.roledescription
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Arresting"
+  JohnsonCounty_IowaCity_JCInvolvedIn7:
+    fqn: "ol.involvedin"
+    src: "Rofficerperson"
+    dst: "JohnsonCounty_IowaCity_JCJailStay"
+    entitySetName: "JohnsonCounty_IowaCity_JCInvolvedIn"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Jail_ID
+      ol.role:
+        type: ol.role
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Officer"
+      ol.roledescription:
+        type: ol.roledescription
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Releasing"
+  JohnsonCounty_IowaCity_JCInvolvedIn8:
+    fqn: "ol.involvedin"
+    src: "Sofficerperson"
+    dst: "JohnsonCounty_IowaCity_JCJailStay"
+    entitySetName: "JohnsonCounty_IowaCity_JCInvolvedIn"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Jail_ID
+      ol.role:
+        type: ol.role
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Officer"
+      ol.roledescription:
+        type: ol.roledescription
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Searching"
+  JohnsonCounty_IowaCity_JCInvolvedIn3:
+    fqn: "ol.involvedin"
+    src: "Tofficerperson"
+    dst: "JohnsonCounty_IowaCity_JCJailStay"
+    entitySetName: "JohnsonCounty_IowaCity_JCInvolvedIn"
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Jail_ID
+      ol.role:
+        type: ol.role
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Officer"
+      ol.roledescription:
+        type: ol.roledescription
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Transporting"
+  LocatedAt1:
+    fqn: 'ol.locatedat'
+    src: "JohnsonCounty_IowaCity_JCSentences"
+    dst: "JohnsonCounty_IowaCity_JCCourt"
+    entitySetName: "JohnsonCounty_IowaCity_JCLocatedAt"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "Court"
+  LocatedAt2:
+    fqn: "ol.locatedat"
+    src: "JohnsonCounty_IowaCity_JCJailStay"
+    dst: "JohnsonCounty_IowaCity_JCFacility"
+    entitySetName: "JohnsonCounty_IowaCity_JCLocatedAt"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "Held_At"

@@ -1,0 +1,577 @@
+entityDefinitions:
+  JohnsonCounty_IowaCity_Dispatch:
+    fqn: ol.dispatch
+    entitySetName: JohnsonCounty_IowaCity_Dispatch
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Dis_ID
+      criminaljustice.casenumber:
+        type: criminaljustice.casenumber
+        column: Case_Number
+      ol.caseid:
+        type: ol.caseid
+        column: Case_ID
+      ol.masterbusinessnumber:
+        type: ol.masterbusinessnumber
+        column: MBI_No
+      publicsafety.dispatch911callnumber:
+        type: publicsafety.dispatch911callnumber
+        column: CallNumber_911
+      ol.stringnumber:
+        type: ol.stringnumber
+        column: Dis_No
+      ol.howreported:
+        type: ol.howreported
+        column: HowReported
+      ol.receiveddatetime:
+        type: ol.receiveddatetime
+        column: CFS_DateTimeJanet
+        transforms:
+        - !<transforms.DateTimeTransform>
+          pattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
+      ol.priority:
+        type: ol.priority
+        column: Priority
+      ol.typeclass:
+        type: ol.typeclass
+        column: TYPE_CLASS
+      ol.type:
+        type: ol.type
+        column: TYPE_ID
+      criminaljustice.ncic:
+        type: criminaljustice.ncic
+        column: NCIC_Code
+      ol.level:
+        type: ol.level
+        transforms:
+        - !<transforms.BooleanContainsTransform>
+          column: CFS_EMS
+          string: X
+          transformsIfTrue:
+            - !<transforms.ColumnTransform>
+              column: PROQA_LEVEL
+          transformsIfFalse:
+            - !<transforms.BooleanContainsTransform>
+              column: CFS_Fire
+              string: X
+              transformsIfTrue:
+              - !<transforms.ColumnTransform>
+                column: FireDispatchLevel
+  JohnsonCounty_IowaCity_DispatchAgency:
+    fqn: ol.agency
+    entitySetName: JohnsonCounty_IowaCity_DispatchAgency
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        transforms:
+        - !<transforms.BooleanIsNullTransform>
+          column: Dis_ORI
+          transformsIfTrue:
+          - !<transforms.BooleanContainsTransform>
+            column: CFS_EMS
+            string: X
+            transformsIfTrue:
+              - !<transforms.ValueTransform>
+                value: Medical
+            transformsIfFalse:
+              - !<transforms.BooleanContainsTransform>
+                column: CFS_Fire
+                string: X
+                transformsIfTrue:
+                - !<transforms.ValueTransform>
+                  value: Fire
+                transformsIfFalse:
+                - !<transforms.BooleanContainsTransform>
+                  column: CFS_LEA
+                  string: X
+                  transformsIfTrue:
+                  - !<transforms.ValueTransform>
+                    value: Law Enforcement Agency
+                  transformsIfFalse:
+                  - !<transforms.ValueTransform>
+                    value: Unknown
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: Dis_ORI
+      ol.name:
+        type: ol.name
+        column: Dis_ORI
+      ol.type:
+        type: ol.type
+        transforms:
+        - !<transforms.BooleanContainsTransform>
+          column: CFS_EMS
+          string: X
+          transformsIfTrue:
+            - !<transforms.ValueTransform>
+              value: Medical
+          transformsIfFalse:
+            - !<transforms.BooleanContainsTransform>
+              column: CFS_Fire
+              string: X
+              transformsIfTrue:
+              - !<transforms.ValueTransform>
+                value: Fire
+              transformsIfFalse:
+              - !<transforms.BooleanContainsTransform>
+                column: CFS_LEA
+                string: X
+                transformsIfTrue:
+                - !<transforms.ValueTransform>
+                  value: Law Enforcement Agency
+                transformsIfFalse:
+                - !<transforms.ValueTransform>
+                  value: Unknown
+  JohnsonCounty_IowaCity_Disposition:
+    fqn: ol.disposition
+    entitySetName: JohnsonCounty_IowaCity_Disposition
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: ClearedBy
+      criminaljustice.disposition:
+        type: criminaljustice.disposition
+        column: ClearedBy
+      criminaljustice.disposition:
+        type: criminaljustice.disposition
+        column: ClearedBy2
+  JohnsonCounty_IowaCity_DispatchZone:
+    fqn: ol.zone
+    entitySetName: JohnsonCounty_IowaCity_DispatchZone
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: [ZONE_ID,SubZone]
+          separator: '_'
+      ol.name:
+        type: ol.name
+        column: Dis_Zone
+      ol.code:
+        type: ol.code
+        column: ZONE_ID
+      ol.subzone:
+        type: ol.subzone
+        column: SubZone
+      ol.type:
+        type: ol.type
+        transforms:
+        - !<transforms.ValueTransform>
+          value: Dispatch Zone
+    conditions:
+    - !<conditions.ConditionalOr> {}
+    - !<conditions.BooleanIsNullCondition>
+      column: ZONE_ID
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: Dis_Zone
+      reverse: true
+  JohnsonCounty_IowaCity_MedicalZone:
+    fqn: ol.zone
+    entitySetName: JohnsonCounty_IowaCity_MedicalZone
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Medical_Zone
+      ol.code:
+        type: ol.code
+        column: Medical_Zone
+      ol.type:
+        type: ol.type
+        transforms:
+        - !<transforms.ValueTransform>
+          value: Medical Zone
+    conditions:
+    - !<conditions.BooleanIsNullCondition>
+      column: Medical_Zone
+      reverse: true
+  JohnsonCounty_IowaCity_FireDistrictZone:
+    fqn: ol.zone
+    entitySetName: JohnsonCounty_IowaCity_FireDistrictZone
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: [FireDistrict,ESN]
+      ol.code:
+        type: ol.code
+        column: FireDistrict
+      ol.subzone:
+        type: ol.subzone
+        column: ESN
+      ol.type:
+        type: ol.type
+        transforms:
+        - !<transforms.ValueTransform>
+          value: Fire District
+    conditions:
+    - !<conditions.BooleanIsNullCondition>
+      column: FireDistrict
+      reverse: true
+  OfficerPerson:
+    fqn: general.person
+    entitySetName: JohnsonCounty_IowaCity_People1
+    name: OfficerPerson
+    propertyDefinitions:
+      nc.SubjectIdentification:
+        type: nc.SubjectIdentification
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.GetPrefixDigitsTransform>
+            separator: ' '
+            column: "ASSIGNED_OFFICER"
+          - !<transforms.ColumnTransform>
+            column: "AssignedOfficerID"
+      nc.PersonGivenName:
+        type: nc.PersonGivenName
+        transforms:
+        - !<transforms.BooleanContainsTransform>
+          column: ASSIGNED_OFFICER
+          string: ','
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: ASSIGNED_OFFICER
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ','
+            index: 1
+          - !<transforms.SplitTransform>
+            separator: ' '
+            index: 0
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: ASSIGNED_OFFICER
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ' '
+            index: 0
+      nc.PersonSurName:
+        type: nc.PersonSurName
+        transforms:
+        - !<transforms.BooleanContainsTransform>
+          column: ASSIGNED_OFFICER
+          string: ','
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: ASSIGNED_OFFICER
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ','
+            index: 0
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: ASSIGNED_OFFICER
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ' '
+            index: last
+            ifMoreThan: 1
+    conditions:
+    - !<conditions.ConditionalOr> {}
+    - !<conditions.BooleanRegexCondition>
+      column: ASSIGNED_OFFICER
+      pattern: \\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: ASSIGNED_OFFICER
+  OperatorPerson:
+    fqn: general.person
+    entitySetName: JohnsonCounty_IowaCity_People1
+    name: OperatorPerson
+    propertyDefinitions:
+      nc.SubjectIdentification:
+        type: nc.SubjectIdentification
+        column: Operator
+      nc.PersonGivenName:
+        type: nc.PersonGivenName
+        transforms:
+        - !<transforms.BooleanContainsTransform>
+          column: Operator
+          string: ','
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: Operator
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ','
+            index: 1
+          - !<transforms.SplitTransform>
+            separator: ' '
+            index: 0
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: Operator
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ' '
+            index: 0
+      nc.PersonSurName:
+        type: nc.PersonSurName
+        transforms:
+        - !<transforms.BooleanContainsTransform>
+          column: Operator
+          string: ','
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: Operator
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ','
+            index: 0
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: Operator
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ' '
+            index: last
+            ifMoreThan: 1
+  OfficerPersonnel:
+    fqn: o.employee
+    entitySetName: JohnsonCounty_IowaCity_JCJIPersonnel
+    name: OfficerPersonnel
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.GetPrefixDigitsTransform>
+            separator: ' '
+            column: "ASSIGNED_OFFICER"
+          - !<transforms.ColumnTransform>
+            column: "AssignedOfficerID"
+      publicsafety.employeeid: #same as badgenumber if dispatchtype and dispatchperson
+        type: publicsafety.employeeid
+        column: ASSIGNED_OFFICER
+        transforms:
+        - !<transforms.GetPrefixDigitsTransform>
+          separator: ' '
+      person.title:
+        type: person.title
+        transforms:
+        - !<transforms.ValueTransform>
+          value: Officer
+    conditions:
+    - !<conditions.ConditionalOr> {}
+    - !<conditions.BooleanRegexCondition>
+      column: ASSIGNED_OFFICER
+      pattern: \\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: ASSIGNED_OFFICER
+  OperatorPersonnel:
+    fqn: o.employee
+    entitySetName: JohnsonCounty_IowaCity_JCJIPersonnel
+    name: OperatorPersonnel
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Operator
+      person.title:
+        type: person.title
+        transforms:
+        - !<transforms.ValueTransform>
+          value: Operator
+  JohnsonCounty_IowaCity_Addresses:
+    fqn: ol.location
+    entitySetName: JohnsonCounty_IowaCity_Addresses
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: [LAddress, LCity, LZip, LState]
+      location.street:
+        type: location.street
+        transforms:
+        - !<transforms.BooleanContainsTransform>
+          string: '/'
+          transformsIfTrue:
+          - !<transforms.ValueTransform>
+            value:
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: LAddress
+      location.intersection:
+        type: location.intersection
+        transforms:
+        - !<transforms.BooleanContainsTransform>
+          string: '/'
+          transformsIfFalse:
+          - !<transforms.ValueTransform>
+            value:
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: LAddress
+          - !<transforms.ReplaceTransform>
+            target: ['/']
+            goal: [' & ']
+      location.apartment:
+        type: location.apartment
+        column: lAddress_Apt
+      location.zip:
+        type: location.zip
+        column: LZip
+      location.city:
+        type: location.city
+        column: LCity
+      location.state:
+        type: location.state
+        column: LState
+      location.name:
+        type: location.name
+        column: Location
+      location.latitude:
+        type: location.latitude
+        column: Latitude
+        transforms:
+        - !<transforms.ParseDoubleTransform> {}
+      location.longitude:
+        type: location.longitude
+        column: Longitude
+        transforms:
+        - !<transforms.ParseDoubleTransform> {}
+  JohnsonCounty_IowaCity_CFSContactInfo:
+    fqn: ol.contactinformation
+    entitySetName: JohnsonCounty_IowaCity_CFSContactInfo
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: LPhone
+      contact.phonenumber:
+        type: contact.phonenumber
+        column: LPhone
+        transforms:
+        - !<transforms.ReplaceRegexTransform>
+          target: '()\\-'
+          goal: ''
+associationDefinitions:
+  LocatedAtDispatchZone:
+    name: LocatedAtDispatchZone
+    fqn: ol.locatedat
+    entitySetName: JohnsonCounty_IowaCity_LocatedAt
+    propertyDefinitions:
+      general.id:
+        type: general.id
+        column: Dis_ID
+    src: JohnsonCounty_IowaCity_Dispatch
+    dst: JohnsonCounty_IowaCity_DispatchZone
+  LocatedAtMedicalZone:
+    name: LocatedAtMedicalZone
+    fqn: ol.locatedat
+    entitySetName: JohnsonCounty_IowaCity_LocatedAt
+    propertyDefinitions:
+      general.id:
+        type: general.id
+        column: Medical_Zone
+    src: JohnsonCounty_IowaCity_Dispatch
+    dst: JohnsonCounty_IowaCity_MedicalZone
+  LocatedAtFireDistrict:
+    name: LocatedAtFireDistrict
+    fqn: ol.locatedat
+    entitySetName: JohnsonCounty_IowaCity_LocatedAt
+    propertyDefinitions:
+      general.id:
+        type: general.id
+        column: Medical_Zone
+    src: JohnsonCounty_IowaCity_Dispatch
+    dst: JohnsonCounty_IowaCity_FireDistrictZone
+  LocatedAt:
+    fqn: ol.locatedat
+    entitySetName: JohnsonCounty_IowaCity_LocatedAt
+    propertyDefinitions:
+      general.id:
+        type: general.id
+        column: Dis_ID
+    src: JohnsonCounty_IowaCity_Dispatch
+    dst: JohnsonCounty_IowaCity_Addresses
+  CFSContactGiven:
+    fqn: ol.contactinfogiven
+    entitySetName: JohnsonCounty_IowaCity_CFSContactGiven
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Dis_ID
+    src: JohnsonCounty_IowaCity_CFSContactInfo
+    dst: JohnsonCounty_IowaCity_Dispatch
+  OfficerIsPersonnel:
+    name: OfficerIs
+    fqn: ol.is
+    entitySetName: JohnsonCounty_IowaCity_Is
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: ASSIGNED_OFFICER
+    src: OfficerPerson
+    dst: OfficerPersonnel
+  OperatorIsPersonnel:
+    name: OperatorIs
+    fqn: ol.is
+    entitySetName: JohnsonCounty_IowaCity_Is
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Operator
+    src: OperatorPerson
+    dst: OperatorPersonnel
+  ReceivedBy:
+    fqn: ol.receivedby
+    entitySetName: JohnsonCounty_IowaCity_ReceivedBy
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: CFS_DateTimeJanet
+        transforms:
+        - !<transforms.DateTimeTransform>
+          pattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
+    src: JohnsonCounty_IowaCity_Dispatch
+    dst: OperatorPerson
+  AssignedTo:
+    fqn: ol.assignedto
+    entitySetName: JohnsonCounty_IowaCity_AssignedTo
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: [Dis_ID, Dis_ORI, CFS_EMS, CFS_Fire, CFS_LEA]
+    src: JohnsonCounty_IowaCity_Dispatch
+    dst: JohnsonCounty_IowaCity_DispatchAgency
+  DispatchDisposition:
+    fqn: ol.clearedby
+    entitySetName: JohnsonCounty_IowaCity_ClearedBy
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Dis_ID
+    src: JohnsonCounty_IowaCity_Dispatch
+    dst: JohnsonCounty_IowaCity_Disposition
+  OfficerInvolvedinDispatch:
+    name: OfficerInvolved
+    fqn: ol.involvedin
+    entitySetName: JohnsonCounty_IowaCity_CFSInvolvedIn
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.GetPrefixDigitsTransform>
+            separator: ' '
+            column: "ASSIGNED_OFFICER"
+          - !<transforms.ColumnTransform>
+            column: "AssignedOfficerID"
+          - !<transforms.ColumnTransform>
+            column: "Dis_ID"
+      ol.role:
+        type: ol.role
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Officer"
+    src: OfficerPerson
+    dst: JohnsonCounty_IowaCity_Dispatch
