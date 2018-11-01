@@ -1,0 +1,13 @@
+entityDefinitions:
+  PersondetailsCJ:
+    name: "PersondetailsCJ"
+    entitySetName: "JohnsonCounty_IowaCity_JCPersondetailsCJ"
+    fqn: "ol.persondetailscriminaljustice"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "mni"
+      publicsafety.mugshot:
+        type: "publicsafety.mugshot"
+        column: "imagestring"
+associationDefinitions: {}
