@@ -271,7 +271,7 @@ entityDefinitions:
             index: last
             ifMoreThan: 1
     conditions:
-    - !<conditions.ConditionalOr> {}
+    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: ASSIGNED_OFFICER
       pattern: \\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b
@@ -358,13 +358,14 @@ entityDefinitions:
         - !<transforms.ValueTransform>
           value: Officer
     conditions:
-    - !<conditions.ConditionalOr> {}
+    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: ASSIGNED_OFFICER
       pattern: \\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b
       reverse: true
     - !<conditions.BooleanIsNullCondition>
       column: ASSIGNED_OFFICER
+      reverse: true
   OperatorPersonnel:
     fqn: o.employee
     entitySetName: JohnsonCounty_IowaCity_JCJIPersonnel
