@@ -46,7 +46,16 @@ entityDefinitions:
         column: "LastName"
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
-        column: "SystemUserId"
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.GetPrefixDigitsTransform>
+            separator: ' '
+            column: "Unit"
+          - !<transforms.ColumnTransform>
+            column: "OfficerId"
+        - !<transforms.CaseTransform>
+          type: "lower"
     conditions:
     - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
