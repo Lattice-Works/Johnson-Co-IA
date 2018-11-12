@@ -133,7 +133,7 @@ entityDefinitions:
       criminaljustice.disposition:
         type: criminaljustice.disposition
         column: ClearedBy
-      criminaljustice.disposition:
+      criminaljustice.disposition2:
         type: criminaljustice.disposition
         column: ClearedBy2
   JohnsonCounty_IowaCity_DispatchZone:
@@ -278,6 +278,7 @@ entityDefinitions:
       reverse: true
     - !<conditions.BooleanIsNullCondition>
       column: ASSIGNED_OFFICER
+      reverse: true
   OperatorPerson:
     fqn: general.person
     entitySetName: JohnsonCounty_IowaCity_People1
