@@ -188,8 +188,8 @@ entityDefinitions:
             column: "Unit"
           - !<transforms.ColumnTransform>
             column: "OfficerID"
-          - !<transforms.CaseTransform>
-            type: "lower"
+        - !<transforms.CaseTransform>
+          type: "lower"
     conditions:
     - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
