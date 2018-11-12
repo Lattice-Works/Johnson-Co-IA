@@ -97,7 +97,7 @@ entityDefinitions:
         type: "publicsafety.employeeid"
         column: "OfficerID"
     conditions:
-    - !<conditions.ConditionalOr> {}
+    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: 'Unit'
       pattern: "\\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b"
@@ -189,14 +189,14 @@ entityDefinitions:
           - !<transforms.ColumnTransform>
             column: "OfficerID"
     conditions:
-    - !<conditions.ConditionalOr> {}
+    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: 'Unit'
       pattern: "\\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b"
       reverse: true
     - !<conditions.BooleanIsNullCondition>
       column: 'Unit'
-      reverse: false
+      reverse: true
   JohnsonCounty_IowaCity_EMS_Unit:
     fqn: 'ol.emsunit'
     name: 'JohnsonCounty_IowaCity_EMS_Unit'
