@@ -267,6 +267,7 @@ entityDefinitions:
                 columns: ['Transp_Agency', 'Transp_Officer']
                 separator: "_"
    conditions:
+   - !<transforms.ConditionalOr>
     - !<conditions.BooleanIsNullCondition>
       column: "Transp_Officer"
       reverse: true
