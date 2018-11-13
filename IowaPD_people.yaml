@@ -14,8 +14,8 @@ entityDefinitions:
             column: "OName"
           - !<transforms.ColumnTransform>
             column: "OfficerID"
-          - !<transforms.CaseTransform>
-            type: "lower"
+        - !<transforms.CaseTransform>
+          type: "lower"
       nc.PersonGivenName:
         type: 'nc.PersonGivenName'
         transforms:
@@ -147,10 +147,10 @@ entityDefinitions:
         - !<transforms.BooleanIsNullTransform>
           column: "MNI_No"
           transformsIfTrue:
-          - !<transform.ColumnTransform>
+          - !<transforms.ColumnTransform>
             column: "MNI_No"
           transformsIfFalse:
-          - !<transform.ColumnTransform>
+          - !<transforms.ColumnTransform>
             column: "ID"
       nc.PersonGivenName:
         type: 'nc.PersonGivenName'
