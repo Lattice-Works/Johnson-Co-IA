@@ -131,7 +131,7 @@ entityDefinitions:
     - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
-      pattern: "\\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck| WIRELESS:|AMBULANCE)\\b"
+      pattern: \\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck| WIRELESS:|AMBULANCE)\\b
       reverse: true
     - !<conditions.BooleanIsNullCondition>
       column: 'OfficerID'
@@ -254,15 +254,14 @@ entityDefinitions:
           goal: ['hispanic', 'nonhispanic']
           ignoreCase: true
     conditions:                                   # other person (i.e. same as officer but)
-    - !<conditions.ConditionalOr> {}
+    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanIsNullCondition>
       column: 'DL_No'
       reverse: true
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
-      pattern: "\\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|WIRELESS:|AMBULANCE)\\b"
+      pattern: \\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck| WIRELESS:|AMBULANCE)\\b
       reverse: true
-    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanIsNullCondition>
       column: 'OfficerID'
   Organizations:
@@ -305,7 +304,7 @@ entityDefinitions:
     - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
-      pattern: "\\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b"
+      pattern: \\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck| WIRELESS:|AMBULANCE)\\b
       reverse: true
     - !<conditions.BooleanIsNullCondition>
       column: 'OfficerID'
@@ -337,7 +336,7 @@ entityDefinitions:
     - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
-      pattern: "\\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b"
+      pattern: \\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck| WIRELESS:|AMBULANCE)\\b
       reverse: true
     - !<conditions.BooleanIsNullCondition>
       column: 'OfficerID'
@@ -377,7 +376,7 @@ entityDefinitions:
     - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
-      pattern: "\\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b"
+      pattern: \\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck| WIRELESS:|AMBULANCE)\\b
       reverse: true
     - !<conditions.BooleanIsNullCondition>
       column: 'OfficerID'
@@ -412,15 +411,14 @@ entityDefinitions:
         transforms:
         - !<transforms.ParseIntTransform> {}
     conditions:                                   # other person (i.e. same as officer but)
-    - !<conditions.ConditionalOr> {}
+    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanIsNullCondition>
       column: 'DL_No'
       reverse: true
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
-      pattern: "\\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b"
+      pattern: \\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck| WIRELESS:|AMBULANCE)\\b
       reverse: true
-    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanIsNullCondition>
       column: 'OfficerID'
   OthersPersonIdentification:
@@ -443,15 +441,14 @@ entityDefinitions:
         - !<transforms.ValueTransform>
           value: "Driver's license"
     conditions:                                   # other person (i.e. same as officer but)
-    - !<conditions.ConditionalOr> {}
+    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanIsNullCondition>
       column: 'DL_No'
       reverse: true
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
-      pattern: "\\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b"
+      pattern: \\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck| WIRELESS:|AMBULANCE)\\b
       reverse: true
-    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanIsNullCondition>
       column: 'OfficerID'
   JohnsonCounty_IowaCity_Addresses:

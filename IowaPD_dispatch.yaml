@@ -276,7 +276,7 @@ entityDefinitions:
     - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: ASSIGNED_OFFICER
-      pattern: \\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b
+      pattern: \\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck| WIRELESS:|AMBULANCE)\\b
       reverse: true
     - !<conditions.BooleanIsNullCondition>
       column: ASSIGNED_OFFICER
@@ -368,7 +368,7 @@ entityDefinitions:
     - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: ASSIGNED_OFFICER
-      pattern: \\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b
+      pattern: \\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck| WIRELESS:|AMBULANCE)\\b
       reverse: true
     - !<conditions.BooleanIsNullCondition>
       column: ASSIGNED_OFFICER
