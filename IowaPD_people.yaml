@@ -131,7 +131,7 @@ entityDefinitions:
     - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
-      pattern: \\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck| WIRELESS:|AMBULANCE)\\b
+      pattern: "(?i)(^| )(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)($| )"
       reverse: true
     - !<conditions.BooleanIsNullCondition>
       column: 'OfficerID'
@@ -260,7 +260,7 @@ entityDefinitions:
       reverse: true
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
-      pattern: \\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck| WIRELESS:|AMBULANCE)\\b
+      pattern: "(?i)(^| )(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)($| )"
       reverse: true
     - !<conditions.BooleanIsNullCondition>
       column: 'OfficerID'
@@ -278,7 +278,7 @@ entityDefinitions:
     conditions:                                   # other person (i.e. same as officer but)
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
-      pattern: "\\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b"
+      pattern: "(?i)(^| )(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)($| )"
   OfficersPersonnelID:
     name: "OfficersPersonnelID"
     fqn: 'ol.identification'
@@ -304,7 +304,7 @@ entityDefinitions:
     - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
-      pattern: \\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck| WIRELESS:|AMBULANCE)\\b
+      pattern: "(?i)(^| )(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)($| )"
       reverse: true
     - !<conditions.BooleanIsNullCondition>
       column: 'OfficerID'
@@ -336,7 +336,7 @@ entityDefinitions:
     - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
-      pattern: \\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck| WIRELESS:|AMBULANCE)\\b
+      pattern: "(?i)(^| )(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)($| )"
       reverse: true
     - !<conditions.BooleanIsNullCondition>
       column: 'OfficerID'
@@ -376,7 +376,7 @@ entityDefinitions:
     - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
-      pattern: \\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck| WIRELESS:|AMBULANCE)\\b
+      pattern: "(?i)(^| )(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)($| )"
       reverse: true
     - !<conditions.BooleanIsNullCondition>
       column: 'OfficerID'
@@ -417,7 +417,7 @@ entityDefinitions:
       reverse: true
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
-      pattern: \\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck| WIRELESS:|AMBULANCE)\\b
+      pattern: "(?i)(^| )(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)($| )"
       reverse: true
     - !<conditions.BooleanIsNullCondition>
       column: 'OfficerID'
@@ -447,7 +447,7 @@ entityDefinitions:
       reverse: true
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
-      pattern: \\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck| WIRELESS:|AMBULANCE)\\b
+      pattern: "(?i)(^| )(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)($| )"
       reverse: true
     - !<conditions.BooleanIsNullCondition>
       column: 'OfficerID'

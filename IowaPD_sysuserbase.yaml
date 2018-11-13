@@ -37,11 +37,11 @@ entityDefinitions:
     - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: 'FirstName'
-      pattern: "\\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b"
+      pattern: "\\B(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\B"
       reverse: true
     - !<conditions.BooleanRegexCondition>
       column: 'LastName'
-      pattern: "\\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b"
+      pattern: "\\B(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\B"
       reverse: true
   Person:
     name: 'Person'
@@ -70,11 +70,11 @@ entityDefinitions:
     - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: 'FirstName'
-      pattern: "\\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b"
+      pattern: "(?i)(^| )(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)($| )"
       reverse: true
     - !<conditions.BooleanRegexCondition>
       column: 'LastName'
-      pattern: "\\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b"
+      pattern: "(?i)(^| )(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)($| )"
       reverse: true
   JohnsonCounty_IowaCity_DispatchAgency:
     fqn: 'ol.agency'
@@ -97,11 +97,11 @@ associationDefinitions:
     - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: 'FirstName'
-      pattern: "\\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b"
+      pattern: "(?i)(^| )(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)($| )"
       reverse: true
     - !<conditions.BooleanRegexCondition>
       column: 'LastName'
-      pattern: "\\b(?i)(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)\\b"
+      pattern: "(?i)(^| )(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)($| )"
       reverse: true
   JohnsonCounty_IowaCity_JCWorksAt:
     fqn: "ol.worksat"
