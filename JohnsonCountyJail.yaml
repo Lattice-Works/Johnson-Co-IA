@@ -846,8 +846,8 @@ associationDefinitions:
     dst: "Persondetails"
     entitySetName: "JohnsonCounty_IowaCity_JCis"
     propertyDefinitions:
-      ol.id:
-        type: "ol.id"
+      general.stringid:
+        type: "general.stringid"
         column: "MNI_No"
   JChas2:
     name: "JChas2"
@@ -856,8 +856,8 @@ associationDefinitions:
     dst: "PersondetailsCJ"
     entitySetName: "JohnsonCounty_IowaCity_JCis"
     propertyDefinitions:
-      ol.id:
-        type: "ol.id"
+      general.stringid:
+        type: "general.stringid"
         column: "MNI_No"
 
   #########################
@@ -871,8 +871,8 @@ associationDefinitions:
     dst: "Aofficers"
     entitySetName: "JohnsonCounty_IowaCity_JCis"
     propertyDefinitions:
-      ol.id:
-        type: "ol.id"
+      general.stringid:
+        type: "general.stringid"
         transforms:
         - !<transforms.BooleanIsNullTransform>
           column: "AO_ID"
@@ -889,8 +889,8 @@ associationDefinitions:
     dst: "Rofficers"
     entitySetName: "JohnsonCounty_IowaCity_JCis"
     propertyDefinitions:
-      ol.id:
-        type: "ol.id"
+      general.stringid:
+        type: "general.stringid"
         column: "Rel_Officer_ID"
   JCis4:
     name: "JCis4"
@@ -899,8 +899,8 @@ associationDefinitions:
     dst: "Sofficers"
     entitySetName: "JohnsonCounty_IowaCity_JCis"
     propertyDefinitions:
-      ol.id:
-        type: "ol.id"
+      general.stringid:
+        type: "general.stringid"
         column: "Search_Officer_ID"
   JCis5:
     name: "JCis5"
@@ -909,8 +909,8 @@ associationDefinitions:
     dst: "Tofficers"
     entitySetName: "JohnsonCounty_IowaCity_JCis"
     propertyDefinitions:
-      ol.id:
-        type: "ol.id"
+      general.stringid:
+        type: "general.stringid"
         transforms:
         - !<transforms.BooleanIsNullTransform>
           column: "Transp_Officer_ID"

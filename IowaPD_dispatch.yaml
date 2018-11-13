@@ -513,8 +513,8 @@ associationDefinitions:
     fqn: ol.is
     entitySetName: JohnsonCounty_IowaCity_Is
     propertyDefinitions:
-      ol.id:
-        type: ol.id
+      general.stringid:
+        type: general.stringid
         column: ASSIGNED_OFFICER
     src: OfficerPerson
     dst: OfficerPersonnel
@@ -523,8 +523,8 @@ associationDefinitions:
     fqn: ol.is
     entitySetName: JohnsonCounty_IowaCity_Is
     propertyDefinitions:
-      ol.id:
-        type: ol.id
+      general.stringid:
+        type: general.stringid
         column: Operator
     src: OperatorPerson
     dst: OperatorPersonnel
