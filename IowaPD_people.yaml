@@ -344,7 +344,7 @@ entityDefinitions:
   OfficersPersonDetails:
     name: "OfficersPersonDetails"
     fqn: 'ol.persondetails'
-    entitySetName: 'JohnsonCounty_IowaCity_JCJIPersonDetails'
+    entitySetName: 'JohnsonCounty_IowaCity_JCJIPersonDetails2'
     propertyDefinitions:
       ol.id:
         type: ol.id
