@@ -20,7 +20,7 @@ entityDefinitions:
 
   JohnsonCounty_IowaCity_BondPerson:
     fqn: general.person
-    entitySetName: JohnsonCounty_IowaCity_People2
+    entitySetName: JohnsonCounty_IowaCity_People3
     name: JohnsonCounty_IowaCity_BondPerson
     propertyDefinitions:
       nc.SubjectIdentification:
@@ -49,6 +49,7 @@ entityDefinitions:
         - !<transforms.ValueTransform>
           value: "Johnson County: jail"
     conditions:                                   # officers
+    - !<conditions.ConditionalOr> {}
     - !<conditions.BooleanRegexCondition>
       column: 'Person_Post'
       pattern: "\\b(?i)(WIFE|MOM|GRANDMA|PARENTS|DAD|BAILBOND|LEDERMAN|IMCC|BOND|BAIL)\\b"
@@ -69,7 +70,7 @@ entityDefinitions:
       pattern: "\\b(?i)(WIFE|MOM|GRANDMA|PARENTS|DAD)\\b"
   JohnsonCounty_IowaCity_JCInmates:
     fqn: 'general.person'
-    entitySetName: 'JohnsonCounty_IowaCity_People2'
+    entitySetName: 'JohnsonCounty_IowaCity_People3'
     name: "JohnsonCounty_IowaCity_JCInmates"
     propertyDefinitions:
       nc.SubjectIdentification:
@@ -276,7 +277,7 @@ entityDefinitions:
 
   Persondetails:
     name: "Persondetails"
-    entitySetName: "JohnsonCounty_IowaCity_JCJIPersondetails"
+    entitySetName: "JohnsonCounty_IowaCity_JCJIPersonDetails3"
     fqn: "ol.persondetails"
     propertyDefinitions:
       ol.id:
