@@ -43,11 +43,6 @@ entityDefinitions:
         - !<transforms.SplitTransform>
             separator: ','
             index: 0
-      ol.datasource:
-        type: ol.datasource
-        transforms:
-        - !<transforms.ValueTransform>
-          value: "Johnson County: jail"
     conditions:                                   # officers
     - !<conditions.BooleanRegexCondition>
       column: 'Person_Post'
@@ -121,11 +116,6 @@ entityDefinitions:
         - !<transforms.ReplaceTransform>
           target: ['A', 'W', 'B', 'I']
           goal: ['asian', 'white', 'black', 'amindian']
-      ol.datasource:
-        type: ol.datasource
-        transforms:
-        - !<transforms.ValueTransform>
-          value: "Johnson County: jail"
   Aofficerperson:
     name: "Aofficerperson"
     fqn: 'general.person'
@@ -159,11 +149,17 @@ entityDefinitions:
           transformsIfFalse:
           - !<transforms.ColumnTransform>
             column: "AO_ID"
-      ol.datasource:
-        type: ol.datasource
-        transforms:
-        - !<transforms.ValueTransform>
-          value: "Johnson County: jail"
+    conditions:
+    - !<conditions.ConditionalOr> {}
+    - !<conditions.BooleanIsNullCondition>
+      column: "AO"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: "AO_ID"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: "ArrestOfficerID"
+      reverse: true
   Rofficerperson:
     name: "Rofficerperson"
     entitySetName: "JohnsonCounty_IowaCity_JCOfficers"
@@ -189,11 +185,14 @@ entityDefinitions:
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
         column: 'Rel_Officer_ID'
-      ol.datasource:
-        type: ol.datasource
-        transforms:
-        - !<transforms.ValueTransform>
-          value: "Johnson County: jail"
+    conditions:
+    - !<conditions.ConditionalOr> {}
+    - !<conditions.BooleanIsNullCondition>
+      column: "Rel_Officer"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: "Rel_Officer_ID"
+      reverse: true
   Sofficerperson:
     name: "Sofficerperson"
     entitySetName: "JohnsonCounty_IowaCity_JCOfficers"
@@ -219,11 +218,14 @@ entityDefinitions:
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
         column: 'Search_Officer_ID'
-      ol.datasource:
-        type: ol.datasource
-        transforms:
-        - !<transforms.ValueTransform>
-          value: "Johnson County: jail"
+    conditions:
+    - !<conditions.ConditionalOr> {}
+    - !<conditions.BooleanIsNullCondition>
+      column: "Search_Officer"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: "Search_Officer_ID"
+      reverse: true
   Tofficerperson:
     name: "Tofficerperson"
     entitySetName: "JohnsonCounty_IowaCity_JCOfficers"
@@ -264,11 +266,18 @@ entityDefinitions:
               - !<transforms.ConcatTransform>
                 columns: ['Transp_Agency', 'Transp_Officer']
                 separator: "_"
-      ol.datasource:
-        type: ol.datasource
-        transforms:
-        - !<transforms.ValueTransform>
-          value: "Johnson County: jail"
+   conditions:
+   - !<transforms.ConditionalOr>
+    - !<conditions.BooleanIsNullCondition>
+      column: "Transp_Officer"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: "Transp_Officer_ID"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: "Transp_Agency"
+      reverse: true
+
 
   ###################
   ## PERSONDETAILS ##
@@ -298,6 +307,20 @@ entityDefinitions:
       nc.PersonHairColorText:
         type: "nc.PersonHairColorText"
         column: "OHair"
+    conditions:
+    - !<conditions.ConditionalOr> {}
+    - !<conditions.BooleanIsNullCondition>
+      column: "OWeight"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: "OHeight"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: "OEyes"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: "OHair"
+      reverse: true
   Aofficers:
     name: "Aofficers"
     entitySetName: "JohnsonCounty_IowaCity_JCOfficerInfo"
@@ -314,7 +337,15 @@ entityDefinitions:
           transformsIfFalse:
           - !<transforms.ColumnTransform>
             column: "AO_ID"
-  Rofficers:
+    conditions:
+    - !<conditions.ConditionalOr> {}
+    - !<conditions.BooleanIsNullCondition>
+      column: "AO_ID"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: "ArrestOfficerID"
+      reverse: true
+Rofficers:
     name: "Rofficers"
     entitySetName: "JohnsonCounty_IowaCity_JCOfficerInfo"
     fqn: "o.employee"
@@ -322,6 +353,10 @@ entityDefinitions:
       ol.id:
         type: "ol.id"
         column: "Rel_Officer_ID"
+    conditions:
+    - !<conditions.BooleanIsNullCondition>
+      column: "Rel_Officer_ID"
+      reverse: true
   Sofficers:
     name: "Sofficers"
     entitySetName: "JohnsonCounty_IowaCity_JCOfficerInfo"
@@ -329,7 +364,11 @@ entityDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        column: "Search_OFficer_ID"
+        column: "Search_Officer_ID"
+    conditions:
+    - !<conditions.BooleanIsNullCondition>
+      column: "Search_Officer_ID"
+      reverse: true
   Tofficers:
     name: "Tofficers"
     entitySetName: "JohnsonCounty_IowaCity_JCOfficerInfo"
@@ -353,6 +392,14 @@ entityDefinitions:
               - !<transforms.ConcatTransform>
                 columns: ['Transp_Agency', 'Transp_Officer']
                 separator: "_"
+    conditions:
+    - !<conditions.ConditionalOr> {}
+    - !<conditions.BooleanIsNullCondition>
+      column: "Transp_Officer_ID"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: "Transp_Agency"
+      reverse: true
   PersondetailsCJ:
     name: "PersondetailsCJ"
     entitySetName: "JohnsonCounty_IowaCity_JCPersondetailsCJ"
@@ -375,6 +422,18 @@ entityDefinitions:
       criminaljustice.treatasadult:
         type: "criminaljustice.treatasadult"
         column: "Adult_Juv_Waive"
+    conditions:
+    - !<conditions.ConditionalOr> {}
+    - !<conditions.BooleanIsNullCondition>
+      column: "Caution"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: "SexOff"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: "Adult_Juv_Waive"
+      reverse: true
+
 
   ##############
   ## AGENCIES ##
@@ -394,12 +453,12 @@ entityDefinitions:
       ol.name:
         type: "ol.name"
         column: "Arresting_Agency"
-  JohnsonCounty_IowaCity_BondAgency:
-    fqn: ol.agency
-    entitySetName: JohnsonCounty_IowaCity_BondAgency
+  JohnsonCounty_IowaCity_BondBusiness:
+    fqn: ol.organization
+    entitySetName: JohnsonCounty_IowaCity_BondBusiness
     propertyDefinitions:
-      ol.id:
-        type: ol.id
+      general.id:
+        type: general.id
         column: "Person_Post"
       ol.name:
         type: ol.name
@@ -463,10 +522,10 @@ entityDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        column: "Bond"
+        column: "Bond_Amount"
       criminaljustice.bailbondamount:
         type: "criminaljustice.bailbondamount"
-        column: "Bond"
+        column: "Bond_Amount"
   JohnsonCounty_IowaCity_JCJailStay:
     entitySetName: "JohnsonCounty_IowaCity_JCJailStay"
     fqn: "ol.jailstay"
@@ -599,6 +658,10 @@ entityDefinitions:
             transformsIfTrue:
             - !<transforms.ValueTransform>
               value: "Misdemeanor"
+    conditions:
+    - !<conditions.ooleanIsNullCondition>
+      column: "Charge"
+      reverse: true
   JohnsonCounty_IowaCity_JCJailStayLength:
     entitySetName: "JohnsonCounty_IowaCity_JCJailStayLength"
     fqn: "ol.jailstaylength"
@@ -704,6 +767,10 @@ entityDefinitions:
       location.name:
         type: "location.name"
         column: "Court"
+    conditions:
+    - !<conditions.BooleanIsNullCondition>
+      column: "Court"
+      reverse: true
   JohnsonCounty_IowaCity_JCFacility:
     entitySetName: "JohnsonCounty_IowaCity_JCFacility"
     fqn: 'o.facility'
@@ -719,6 +786,10 @@ entityDefinitions:
         transforms:
         - !<transforms.ValueTransform>
           value: "Jail"
+    conditions:
+    - !<conditions.BooleanIsNullCondition>
+      column: "Held_At"
+      reverse: true
   JohnsonCounty_IowaCity_JCBooking:
     fqn: 'ol.booking'
     entitySetName: 'JohnsonCounty_IowaCity_JCBooking'
@@ -1048,7 +1119,7 @@ associationDefinitions:
     fqn: 'ol.postedby'
     src: JohnsonCounty_IowaCity_JCBond
     entitySetName: "JohnsonCounty_IowaCity_JCPostedBy"
-    dst: JohnsonCounty_IowaCity_BondAgency
+    dst: JohnsonCounty_IowaCity_BondBusiness
     propertyDefinitions:
       ol.id:
         type: ol.id
