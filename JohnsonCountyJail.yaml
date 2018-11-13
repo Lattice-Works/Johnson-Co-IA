@@ -267,8 +267,8 @@ entityDefinitions:
               - !<transforms.ConcatTransform>
                 columns: ['Transp_Agency', 'Transp_Officer']
                 separator: "_"
-   conditions:
-   - !<transforms.ConditionalOr>
+    conditions:
+    - !<conditions.ConditionalOr> {}
     - !<conditions.BooleanIsNullCondition>
       column: "Transp_Officer"
       reverse: true
@@ -278,7 +278,6 @@ entityDefinitions:
     - !<conditions.BooleanIsNullCondition>
       column: "Transp_Agency"
       reverse: true
-
 
   ###################
   ## PERSONDETAILS ##
@@ -346,18 +345,18 @@ entityDefinitions:
     - !<conditions.BooleanIsNullCondition>
       column: "ArrestOfficerID"
       reverse: true
-Rofficers:
-    name: "Rofficers"
-    entitySetName: "JohnsonCounty_IowaCity_JCOfficerInfo"
-    fqn: "o.employee"
-    propertyDefinitions:
-      ol.id:
-        type: "ol.id"
+  Rofficers:
+      name: "Rofficers"
+      entitySetName: "JohnsonCounty_IowaCity_JCOfficerInfo"
+      fqn: "o.employee"
+      propertyDefinitions:
+        ol.id:
+          type: "ol.id"
+          column: "Rel_Officer_ID"
+      conditions:
+      - !<conditions.BooleanIsNullCondition>
         column: "Rel_Officer_ID"
-    conditions:
-    - !<conditions.BooleanIsNullCondition>
-      column: "Rel_Officer_ID"
-      reverse: true
+        reverse: true
   Sofficers:
     name: "Sofficers"
     entitySetName: "JohnsonCounty_IowaCity_JCOfficerInfo"
@@ -660,7 +659,7 @@ Rofficers:
             - !<transforms.ValueTransform>
               value: "Misdemeanor"
     conditions:
-    - !<conditions.ooleanIsNullCondition>
+    - !<conditions.BooleanIsNullCondition>
       column: "Charge"
       reverse: true
   JohnsonCounty_IowaCity_JCJailStayLength:
