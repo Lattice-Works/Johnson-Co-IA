@@ -226,8 +226,8 @@ entityDefinitions:
             column: "ASSIGNED_OFFICER"
           - !<transforms.ColumnTransform>
             column: "AssignedOfficerID"
-          - !<transforms.CaseTransform>
-            type: "lower"
+        - !<transforms.CaseTransform>
+          type: "lower"
       nc.PersonGivenName:
         type: nc.PersonGivenName
         transforms:
@@ -351,8 +351,8 @@ entityDefinitions:
             column: "ASSIGNED_OFFICER"
           - !<transforms.ColumnTransform>
             column: "AssignedOfficerID"
-          - !<transforms.CaseTransform>
-            type: "lower"
+        - !<transforms.CaseTransform>
+          type: "lower"
       publicsafety.employeeid: #same as badgenumber if dispatchtype and dispatchperson
         type: publicsafety.employeeid
         column: ASSIGNED_OFFICER
