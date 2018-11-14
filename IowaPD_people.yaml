@@ -146,10 +146,10 @@ entityDefinitions:
         transforms:
         - !<transforms.BooleanIsNullTransform>
           column: "MNI_No"
-          transformsIfTrue:
+          transformsIfFalse:
           - !<transforms.ColumnTransform>
             column: "MNI_No"
-          transformsIfFalse:
+          transformsIfTrue:
           - !<transforms.ColumnTransform>
             column: "ID"
       nc.PersonGivenName:
