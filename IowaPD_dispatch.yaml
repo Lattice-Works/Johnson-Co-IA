@@ -140,8 +140,8 @@ entityDefinitions:
     fqn: ol.zone
     entitySetName: JohnsonCounty_IowaCity_DispatchZone
     propertyDefinitions:
-      ol.id:
-        type: ol.id
+      general.id:
+        type: general.id
         transforms:
         - !<transforms.ConcatTransform>
           columns: [ZONE_ID,SubZone]
@@ -172,8 +172,8 @@ entityDefinitions:
     fqn: ol.zone
     entitySetName: JohnsonCounty_IowaCity_MedicalZone
     propertyDefinitions:
-      ol.id:
-        type: ol.id
+      general.id:
+        type: general.id
         column: Medical_Zone
       ol.code:
         type: ol.code
@@ -191,8 +191,8 @@ entityDefinitions:
     fqn: ol.zone
     entitySetName: JohnsonCounty_IowaCity_FireDistrictZone
     propertyDefinitions:
-      ol.id:
-        type: ol.id
+      general.id:
+        type: general.id
         transforms:
         - !<transforms.ConcatTransform>
           columns: [FireDistrict,ESN]
@@ -390,8 +390,8 @@ entityDefinitions:
     fqn: ol.location
     entitySetName: JohnsonCounty_IowaCity_Addresses
     propertyDefinitions:
-      ol.id:
-        type: ol.id
+      general.id:
+        type: general.id
         transforms:
         - !<transforms.ConcatTransform>
           columns: [LAddress, LCity, LZip, LState]
@@ -449,8 +449,8 @@ entityDefinitions:
     fqn: ol.contactinformation
     entitySetName: JohnsonCounty_IowaCity_CFSContactInfo
     propertyDefinitions:
-      ol.id:
-        type: ol.id
+      general.id:
+        type: general.id
         column: LPhone
       contact.phonenumber:
         type: contact.phonenumber

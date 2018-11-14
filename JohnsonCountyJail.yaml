@@ -288,8 +288,8 @@ entityDefinitions:
     entitySetName: "JohnsonCounty_IowaCity_JCJIPersonDetails3"
     fqn: "ol.persondetails"
     propertyDefinitions:
-      ol.id:
-        type: "ol.id"
+      general.id:
+        type: "general.id"
         column: "MNI_No"
       nc.PersonWeightMeasure:
         type: "nc.PersonWeightMeasure"
@@ -764,6 +764,9 @@ entityDefinitions:
     entitySetName: "JohnsonCounty_IowaCity_JCCourt"
     fqn: 'ol.location'
     propertyDefinitions:
+      general.id:
+        type: general.id
+        column: Court
       location.name:
         type: "location.name"
         column: "Court"

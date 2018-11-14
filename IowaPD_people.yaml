@@ -269,8 +269,8 @@ entityDefinitions:
     fqn: 'ol.organization'
     entitySetName: 'JohnsonCounty_IowaCity_Organizations'
     propertyDefinitions:
-      ol.id:
-        type: ol.id
+      general.id:
+        type: general.id
         column: OName
       ol.name:
         type: ol.name
@@ -346,8 +346,8 @@ entityDefinitions:
     fqn: 'ol.persondetails'
     entitySetName: 'JohnsonCounty_IowaCity_JCJIPersonDetails2'
     propertyDefinitions:
-      ol.id:
-        type: ol.id
+      general.id:
+        type: general.id
         column: OfficerID
       ol.eyecolor:
         type: "ol.eyecolor"
@@ -391,8 +391,8 @@ entityDefinitions:
         column: 'Juv'
         transforms:
         - !<transforms.ParseBoolTransform> {}
-      ol.id:
-        type: "ol.id"
+      general.id:
+        type: "general.id"
         column: "ID"
       ol.eyecolor:
         type: "ol.eyecolor"
@@ -503,8 +503,8 @@ entityDefinitions:
     fqn: 'ol.contactinformation'
     entitySetName: 'JohnsonCounty_IowaCity_CFSContactInfo'
     propertyDefinitions:
-      contact.id:
-        type: 'contact.id'
+      general.id:
+        type: 'general.id'
         column: 'ID'
       contact.phonenumber:
         type: 'contact.phonenumber'
@@ -514,8 +514,8 @@ entityDefinitions:
     fqn: 'ol.contactinformation'
     entitySetName: 'JohnsonCounty_IowaCity_CFSContactInfo'
     propertyDefinitions:
-      contact.id:
-        type: 'contact.id'
+      general.id:
+        type: 'general.id'
         column: 'ID'
       contact.phonenumber:
         type: 'contact.phonenumber'
@@ -742,8 +742,8 @@ associationDefinitions:
     src: 'JohnsonCounty_IowaCity_Addresses'
     dst: 'JohnsonCounty_IowaCity_Dispatch'
     propertyDefinitions:
-      general.stringid:
-        type: 'general.stringid'
+      ol.id:
+        type: 'ol.id'
         column: 'ID'
   OfficerIsPersonnel:
     fqn: 'ol.is'
