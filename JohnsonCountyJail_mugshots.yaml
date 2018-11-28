@@ -1,8 +1,8 @@
 entityDefinitions:
-  JohnsonCounty_IowaCity_PeopleTest:
+  JohnsonCounty_IowaCity_JCInmates:
     fqn: 'general.person'
-    entitySetName: 'JohnsonCounty_IowaCity_PeopleTest'
-    name: "JohnsonCounty_IowaCity_PeopleTest"
+    entitySetName: 'JohnsonCounty_IowaCity_People3'
+    name: "JohnsonCounty_IowaCity_JCInmates"
     propertyDefinitions:
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
