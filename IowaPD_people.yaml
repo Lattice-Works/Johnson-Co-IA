@@ -797,7 +797,10 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: 'ol.id'
-        column: "ID"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["MNI_No", "OName]
+          separator: "_"
   OthersHas2:
     fqn: 'ol.has'
     entitySetName: 'JohnsonCounty_IowaCity_Has'
