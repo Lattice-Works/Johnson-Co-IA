@@ -143,15 +143,16 @@ entityDefinitions:
     propertyDefinitions:
       nc.SubjectIdentification:
         type: 'nc.SubjectIdentification'
-        transforms:
-        - !<transforms.BooleanIsNullTransform>
-          column: "MNI_No"
-          transformsIfFalse:
-          - !<transforms.ColumnTransform>
-            column: "MNI_No"
-          transformsIfTrue:
-          - !<transforms.ColumnTransform>
-            column: "ID"
+        column: 'CallForServicePersonId'
+#         transforms:
+#         - !<transforms.BooleanIsNullTransform>
+#           column: "MNI_No"
+#           transformsIfFalse:
+#           - !<transforms.ColumnTransform>
+#             column: "MNI_No"
+#           transformsIfTrue:
+#           - !<transforms.ColumnTransform>
+#             column: "ID"
       nc.PersonGivenName:
         type: 'nc.PersonGivenName'
         transforms:
@@ -393,7 +394,7 @@ entityDefinitions:
         - !<transforms.ParseBoolTransform> {}
       general.id:
         type: "general.id"
-        column: "ID"
+        column: "CallForServicePersonId"
       ol.eyecolor:
         type: "ol.eyecolor"
         column: "Eyes"
@@ -428,7 +429,7 @@ entityDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        column: "ID"
+        column: "CallForServicePersonId"
       ol.stringnumber:
         type: "ol.stringnumber"
         column: "DL_No"
@@ -787,7 +788,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: 'ol.id'
-        column: "ID"
+        column: "CallForServicePersonId"
   OthersHas2:
     fqn: 'ol.has'
     entitySetName: 'JohnsonCounty_IowaCity_Has'
@@ -796,4 +797,4 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: 'ol.id'
-        column: "ID"
+        column: "CallForServicePersonId"
