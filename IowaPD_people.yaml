@@ -799,7 +799,7 @@ associationDefinitions:
         type: 'ol.id'
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ["MNI_No", "OName]
+          columns: ["MNI_No", "OName"]
           separator: "_"
   OthersHas2:
     fqn: 'ol.has'
