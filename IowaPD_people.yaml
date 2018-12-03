@@ -147,14 +147,6 @@ entityDefinitions:
         - !<transforms.ConcatTransform>
           columns: ["MNI_No", "OName"]
           separator: "_"
-#         - !<transforms.BooleanIsNullTransform>
-#           column: "MNI_No"
-#           transformsIfFalse:
-#           - !<transforms.ColumnTransform>
-#             column: "MNI_No"
-#           transformsIfTrue:
-#           - !<transforms.ColumnTransform>
-#             column: "ID"
       nc.PersonGivenName:
         type: 'nc.PersonGivenName'
         transforms:
@@ -257,7 +249,7 @@ entityDefinitions:
           goal: ['hispanic', 'nonhispanic']
           ignoreCase: true
     conditions:                                   # other person (i.e. same as officer but)
-    - !<conditions.ConditionalAnd> {}
+    - !<conditions.ConditionalOr> {}
     - !<conditions.BooleanIsNullCondition>
       column: 'DL_No'
       reverse: true
@@ -265,6 +257,7 @@ entityDefinitions:
       column: 'OName'
       pattern: "(?i)(^| )(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)($| )"
       reverse: true
+    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanIsNullCondition>
       column: 'OfficerID'
   Organizations:
@@ -400,7 +393,6 @@ entityDefinitions:
         - !<transforms.ConcatTransform>
           columns: ["MNI_No", "OName"]
           separator: "_"
-#         column: "ID"
       ol.eyecolor:
         type: "ol.eyecolor"
         column: "Eyes"
@@ -418,7 +410,7 @@ entityDefinitions:
         transforms:
         - !<transforms.ParseIntTransform> {}
     conditions:                                   # other person (i.e. same as officer but)
-    - !<conditions.ConditionalAnd> {}
+    - !<conditions.ConditionalOr> {}
     - !<conditions.BooleanIsNullCondition>
       column: 'DL_No'
       reverse: true
@@ -426,6 +418,7 @@ entityDefinitions:
       column: 'OName'
       pattern: "(?i)(^| )(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)($| )"
       reverse: true
+    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanIsNullCondition>
       column: 'OfficerID'
   OthersPersonIdentification:
@@ -451,7 +444,7 @@ entityDefinitions:
         - !<transforms.ValueTransform>
           value: "Driver's license"
     conditions:                                   # other person (i.e. same as officer but)
-    - !<conditions.ConditionalAnd> {}
+    - !<conditions.ConditionalOr> {}
     - !<conditions.BooleanIsNullCondition>
       column: 'DL_No'
       reverse: true
@@ -459,6 +452,7 @@ entityDefinitions:
       column: 'OName'
       pattern: "(?i)(^| )(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)($| )"
       reverse: true
+    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanIsNullCondition>
       column: 'OfficerID'
   JohnsonCounty_IowaCity_Addresses:
@@ -668,15 +662,9 @@ associationDefinitions:
       ol.id:
         type: 'ol.id'
         transforms:
-        - !<transforms.ConcatCombineTransform>
-          transforms:
-          - !<transforms.GetPrefixDigitsTransform>
-            separator: ' '
-            column: "Unit"
-          - !<transforms.ColumnTransform>
-            column: "OfficerID"
-          - !<transforms.ColumnTransform>
-            column: "Dis_ID"
+        - !<transforms.ConcatTransform>
+          columns: ["MNI_No", "OName"]
+          separator: "_"
       person.age:
         type: "person.age"
         column: 'Age'
