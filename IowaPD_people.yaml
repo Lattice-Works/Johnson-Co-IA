@@ -509,7 +509,7 @@ entityDefinitions:
     propertyDefinitions:
       general.id:
         type: 'general.id'
-        column: 'ID'
+        column: 'OPhone'
       contact.phonenumber:
         type: 'contact.phonenumber'
         column: 'OPhone'
@@ -520,7 +520,7 @@ entityDefinitions:
     propertyDefinitions:
       general.id:
         type: 'general.id'
-        column: 'ID'
+        column: 'CellPhone'
       contact.phonenumber:
         type: 'contact.phonenumber'
         column: 'CellPhone'
@@ -663,7 +663,7 @@ associationDefinitions:
         type: 'ol.id'
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ["MNI_No", "OName"]
+          columns: ["MNI_No", "OName", "Dis_ID"]
           separator: "_"
       person.age:
         type: "person.age"
@@ -694,7 +694,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: 'ol.id'
-        column: 'Dis_ID'
+        column: 'OPhone'
         transforms:
         - !<transforms.PrefixTransform>
           prefix: "1_"
@@ -706,7 +706,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: 'ol.id'
-        column: 'Dis_ID'
+        column: 'CellPhone'
         transforms:
         - !<transforms.PrefixTransform>
           prefix: "2_"
@@ -718,7 +718,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: 'ol.id'
-        column: 'Dis_ID'
+        column: 'OPhone'
         transforms:
         - !<transforms.PrefixTransform>
           prefix: "3_"
@@ -730,7 +730,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: 'ol.id'
-        column: 'Dis_ID'
+        column: 'CellPhone'
         transforms:
         - !<transforms.PrefixTransform>
           prefix: "4_"
@@ -768,6 +768,9 @@ associationDefinitions:
       ol.id:
         type: 'ol.id'
         column: OfficerID
+        transforms:
+        - !<transforms.PrefixTransform>
+          prefix: "ID_"
   OfficerHas2:
     fqn: 'ol.has'
     entitySetName: 'JohnsonCounty_IowaCity_Has'
@@ -777,6 +780,9 @@ associationDefinitions:
       ol.id:
         type: 'ol.id'
         column: OfficerID
+        transforms:
+        - !<transforms.PrefixTransform>
+          prefix: "details_"
   OthersHas1:
     fqn: 'ol.has'
     entitySetName: 'JohnsonCounty_IowaCity_Has'
@@ -789,6 +795,8 @@ associationDefinitions:
         - !<transforms.ConcatTransform>
           columns: ["MNI_No", "OName"]
           separator: "_"
+        - !<transforms.PrefixTransform>
+          prefix: "details_"
   OthersHas2:
     fqn: 'ol.has'
     entitySetName: 'JohnsonCounty_IowaCity_Has'
@@ -797,4 +805,9 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: 'ol.id'
-        column: "ID"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["MNI_No", "OName"]
+          separator: "_"
+        - !<transforms.PrefixTransform>
+          prefix: "ID_"
