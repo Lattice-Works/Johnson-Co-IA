@@ -121,14 +121,10 @@ entityDefinitions:
         type: "person.stateidnumber"
         column: "MNI_No"
     conditions:                                   # officers
-    - !<conditions.ConditionalOr> {}
-    - !<conditions.BooleanIsNullCondition>
-      column: 'DL_No'
-      reverse: true
+    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanIsNullCondition>
       column: 'OName'
       reverse: true
-    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
       pattern: "(?i)(^| )(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)($| )"
@@ -249,15 +245,11 @@ entityDefinitions:
           goal: ['hispanic', 'nonhispanic']
           ignoreCase: true
     conditions:                                   # other person (i.e. same as officer but)
-    - !<conditions.ConditionalOr> {}
-    - !<conditions.BooleanIsNullCondition>
-      column: 'DL_No'
-      reverse: true
+    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
       pattern: "(?i)(^| )(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)($| )"
       reverse: true
-    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanIsNullCondition>
       column: 'OfficerID'
   Organizations:
@@ -290,14 +282,10 @@ entityDefinitions:
         type: "location.state"
         column: "DL_State"
     conditions:                                   # officers
-    - !<conditions.ConditionalOr> {}
-    - !<conditions.BooleanIsNullCondition>
-      column: 'DL_No'
-      reverse: true
+    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanIsNullCondition>
       column: 'OName'
       reverse: true
-    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
       pattern: "(?i)(^| )(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)($| )"
@@ -322,14 +310,10 @@ entityDefinitions:
         - !<transforms.ValueTransform>
           value: 'Officer'
     conditions:                                   # officers
-    - !<conditions.ConditionalOr> {}
-    - !<conditions.BooleanIsNullCondition>
-      column: 'DL_No'
-      reverse: true
+    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanIsNullCondition>
       column: 'OName'
       reverse: true
-    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
       pattern: "(?i)(^| )(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)($| )"
@@ -362,14 +346,10 @@ entityDefinitions:
         transforms:
         - !<transforms.ParseIntTransform> {}
     conditions:                                   # officers
-    - !<conditions.ConditionalOr> {}
-    - !<conditions.BooleanIsNullCondition>
-      column: 'DL_No'
-      reverse: true
+    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanIsNullCondition>
       column: 'OName'
       reverse: true
-    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
       pattern: "(?i)(^| )(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)($| )"
@@ -410,10 +390,7 @@ entityDefinitions:
         transforms:
         - !<transforms.ParseIntTransform> {}
     conditions:                                   # other person (i.e. same as officer but)
-    - !<conditions.ConditionalOr> {}
-    - !<conditions.BooleanIsNullCondition>
-      column: 'DL_No'
-      reverse: true
+    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
       pattern: "(?i)(^| )(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)($| )"
@@ -444,15 +421,11 @@ entityDefinitions:
         - !<transforms.ValueTransform>
           value: "Driver's license"
     conditions:                                   # other person (i.e. same as officer but)
-    - !<conditions.ConditionalOr> {}
-    - !<conditions.BooleanIsNullCondition>
-      column: 'DL_No'
-      reverse: true
+    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
       pattern: "(?i)(^| )(UNIVERSITY|EMS|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|universityheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck)($| )"
       reverse: true
-    - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanIsNullCondition>
       column: 'OfficerID'
   JohnsonCounty_IowaCity_Addresses:
