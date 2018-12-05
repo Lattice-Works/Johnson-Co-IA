@@ -111,7 +111,7 @@ entityDefinitions:
           ignoreCase: true
       nc.PersonEthnicity:
         type: "nc.PersonEthnicity"
-        column: "OEthnicity"
+        column: "Ethnicity"
         transforms:
         - !<transforms.ReplaceTransform>
           target: ['H', "N"]
@@ -230,7 +230,7 @@ entityDefinitions:
           ignoreCase: true
       nc.PersonRace:
         type: "nc.PersonRace"
-        column: "ORace"
+        column: "ORace"å
         transforms:
         - !<transforms.ReplaceTransform>
           target: ['Asian', 'A', 'W', "White", "Black", "B", "American Indian", "I", "Indian"]
@@ -238,7 +238,7 @@ entityDefinitions:
           ignoreCase: true
       nc.PersonEthnicity:
         type: "nc.PersonEthnicity"
-        column: "OEthnicity"
+        column: "Ethnicity"
         transforms:
         - !<transforms.ReplaceTransform>
           target: ['H', "N"]
