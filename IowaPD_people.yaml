@@ -230,7 +230,7 @@ entityDefinitions:
           ignoreCase: true
       nc.PersonRace:
         type: "nc.PersonRace"
-        column: "ORace"å
+        column: "ORace"
         transforms:
         - !<transforms.ReplaceTransform>
           target: ['Asian', 'A', 'W', "White", "Black", "B", "American Indian", "I", "Indian"]
