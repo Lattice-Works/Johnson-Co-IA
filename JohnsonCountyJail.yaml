@@ -708,7 +708,7 @@ entityDefinitions:
         type: "ol.id"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ["SentenceDays","SentenceHours","Concurrent","Probation","ConsecWith"]
+          columns: ["SentenceDays","SentenceHrs","Concurrent","Probation","ConsecWith"]
           separator: "-"
       ol.sentencedays:
         type: "ol.sentencedays"
@@ -717,7 +717,7 @@ entityDefinitions:
         - !<transforms.ParseIntTransform> {}
       ol.sentencehours:
         type: "ol.sentencehours"
-        column: "SencenteHrs"
+        column: "SentenceHrs"
         transforms:
         - !<transforms.ParseIntTransform> {}
       ol.concurrent:
