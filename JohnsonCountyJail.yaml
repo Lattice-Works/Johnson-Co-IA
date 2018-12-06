@@ -708,7 +708,7 @@ entityDefinitions:
         type: "ol.id"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ["SentenceDays","SencenteHours","Concurrent","Probation","ConsecWith"]
+          columns: ["SentenceDays","SentenceHours","Concurrent","Probation","ConsecWith"]
           separator: "-"
       ol.sentencedays:
         type: "ol.sentencedays"
