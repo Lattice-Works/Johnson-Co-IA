@@ -717,7 +717,7 @@ entityDefinitions:
         - !<transforms.ParseIntTransform> {}
       ol.sentencehours:
         type: "ol.sentencehours"
-        column: "SencenteHours"
+        column: "SencenteHrs"
         transforms:
         - !<transforms.ParseIntTransform> {}
       ol.concurrent:
@@ -1031,7 +1031,7 @@ associationDefinitions:
         type: "ol.id"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ['SentenceDays', "SentenceHours", "Concurrent", "Probation", "ConseqWith","AltStart_Date"]
+          columns: ['SentenceDays', "SentenceHrs", "Concurrent", "Probation", "ConseqWith","AltStart_Date"]
   Resultsin2:
     fqn: 'ol.resultsin'
     src: "JohnsonCounty_IowaCity_JCCharge"
