@@ -20,7 +20,7 @@ entityDefinitions:
 
   JohnsonCounty_IowaCity_BondPerson:
     fqn: general.person
-    entitySetName: JohnsonCounty_IowaCity_People3
+    entitySetName: JohnsonCounty_IowaCity_People4
     name: JohnsonCounty_IowaCity_BondPerson
     propertyDefinitions:
       nc.SubjectIdentification:
@@ -43,11 +43,19 @@ entityDefinitions:
         - !<transforms.SplitTransform>
             separator: ','
             index: 0
+      ol.datasource:
+        type: "ol.datasource"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Johnson County Jail"
     conditions:
     - !<conditions.ConditionalOr> {}
     - !<conditions.BooleanRegexCondition>
       column: 'Person_Post'
       pattern: "(?i)(^| )(WIFE|MOM|GRANDMA|PARENTS|DAD|BAILBOND|LEDERMAN|IMCC|BOND|BAIL)($| )"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: "Person_Post"
       reverse: true
   JohnsonCounty_IowaCity_BondRelative:
     fqn: ol.relative
@@ -117,6 +125,31 @@ entityDefinitions:
         - !<transforms.ReplaceTransform>
           target: ['A', 'W', 'B', 'I']
           goal: ['asian', 'white', 'black', 'amindian']
+      ol.datasource:
+        type: "ol.datasource"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Johnson County Jail"
+    conditions:
+    - !<conditions.ConditionalOr> {}
+    - !<conditions.BooleanIsNullCondition>
+      column: "MNI_No"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: "JName"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: "DOB"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: "Alias"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: "Sex"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: "Race"
+      reverse: true
   Aofficerperson:
     name: "Aofficerperson"
     fqn: 'general.person'
@@ -150,6 +183,11 @@ entityDefinitions:
           transformsIfFalse:
           - !<transforms.ColumnTransform>
             column: "AO_ID"
+      ol.datasource:
+        type: "ol.datasource"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Johnson County Jail"
     conditions:
     - !<conditions.ConditionalOr> {}
     - !<conditions.BooleanIsNullCondition>
@@ -186,6 +224,11 @@ entityDefinitions:
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
         column: 'Rel_Officer_ID'
+      ol.datasource:
+        type: "ol.datasource"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Johnson County Jail"
     conditions:
     - !<conditions.ConditionalOr> {}
     - !<conditions.BooleanIsNullCondition>
@@ -219,6 +262,11 @@ entityDefinitions:
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
         column: 'Search_Officer_ID'
+      ol.datasource:
+        type: "ol.datasource"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Johnson County Jail"
     conditions:
     - !<conditions.ConditionalOr> {}
     - !<conditions.BooleanIsNullCondition>
@@ -267,6 +315,11 @@ entityDefinitions:
               - !<transforms.ConcatTransform>
                 columns: ['Transp_Agency', 'Transp_Officer']
                 separator: "_"
+      ol.datasource:
+        type: "ol.datasource"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Johnson County Jail"
     conditions:
     - !<conditions.ConditionalOr> {}
     - !<conditions.BooleanIsNullCondition>

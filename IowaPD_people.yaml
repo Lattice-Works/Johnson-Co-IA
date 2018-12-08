@@ -120,6 +120,11 @@ entityDefinitions:
       person.stateidnumber:
         type: "person.stateidnumber"
         column: "MNI_No"
+      ol.datasource:
+        type: "ol.datasource"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Johnson County CAD" 
     conditions:                                   # officers
     - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanIsNullCondition>
@@ -244,6 +249,11 @@ entityDefinitions:
           target: ['H', "N"]
           goal: ['hispanic', 'nonhispanic']
           ignoreCase: true
+      ol.datasource:
+        type: "ol.datasource"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Johnson County CAD" 
     conditions:                                   # other person (i.e. same as officer but)
     - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanIsNullCondition>
