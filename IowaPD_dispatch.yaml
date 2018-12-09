@@ -272,6 +272,11 @@ entityDefinitions:
             separator: ' '
             index: last
             ifMoreThan: 1
+      ol.datasource:
+        type: "ol.datasource"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Johnson County CAD"
     conditions:
     - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
@@ -336,6 +341,15 @@ entityDefinitions:
             separator: ' '
             index: last
             ifMoreThan: 1
+      ol.datasource:
+        type: "ol.datasource"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Johnson County CAD"
+    conditions:
+    - !<conditions.BooleanIsNullCondition>
+      column: "Operator"
+      reverse: true
   OfficerPersonnel:
     fqn: o.employee
     entitySetName: JohnsonCounty_IowaCity_JCJIPersonnel

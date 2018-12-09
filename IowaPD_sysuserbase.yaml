@@ -66,7 +66,19 @@ entityDefinitions:
             column: "OfficerId"
         - !<transforms.CaseTransform>
           type: "lower"
+      ol.datasource:
+        type: "ol.datasource"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Johnson County CAD"
     conditions:
+    - !<conditions.ConditionalOr> {}
+    - !<conditions.BooleanIsNullCondition>
+      column: "Unit"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: "OfficerId"
+      reverse: true
     - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanRegexCondition>
       column: 'FirstName'
