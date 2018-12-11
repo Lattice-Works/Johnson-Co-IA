@@ -1,7 +1,7 @@
 entityDefinitions:
   Personnel:
     name: 'Personnel'
-    fqn: "o.employee"
+    fqn: "ol.employee"
     entitySetName: "JohnsonCounty_IowaCity_JCJIPersonnel"
     propertyDefinitions:
       ol.id:

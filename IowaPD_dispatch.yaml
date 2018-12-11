@@ -351,7 +351,7 @@ entityDefinitions:
       column: "Operator"
       reverse: true
   OfficerPersonnel:
-    fqn: o.employee
+    fqn: ol.employee
     entitySetName: JohnsonCounty_IowaCity_JCJIPersonnel
     name: OfficerPersonnel
     propertyDefinitions:
@@ -388,7 +388,7 @@ entityDefinitions:
       column: ASSIGNED_OFFICER
       reverse: true
   OperatorPersonnel:
-    fqn: o.employee
+    fqn: ol.employee
     entitySetName: JohnsonCounty_IowaCity_JCJIPersonnel
     name: OperatorPersonnel
     propertyDefinitions:

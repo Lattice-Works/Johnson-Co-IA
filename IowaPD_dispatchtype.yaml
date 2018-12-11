@@ -79,7 +79,7 @@ entityDefinitions:
         type: 'criminaljustice.disposition'
         column: 'Disposition'
   Personnel:
-    fqn: 'o.employee'
+    fqn: 'ol.employee'
     entitySetName: 'JohnsonCounty_IowaCity_JCJIPersonnel'
     name: "Personnel"
     propertyDefinitions:

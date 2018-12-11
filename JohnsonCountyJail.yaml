@@ -377,7 +377,7 @@ entityDefinitions:
   Aofficers:
     name: "Aofficers"
     entitySetName: "JohnsonCounty_IowaCity_JCOfficerInfo"
-    fqn: "o.employee"
+    fqn: "ol.employee"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -401,7 +401,7 @@ entityDefinitions:
   Rofficers:
       name: "Rofficers"
       entitySetName: "JohnsonCounty_IowaCity_JCOfficerInfo"
-      fqn: "o.employee"
+      fqn: "ol.employee"
       propertyDefinitions:
         ol.id:
           type: "ol.id"
@@ -413,7 +413,7 @@ entityDefinitions:
   Sofficers:
     name: "Sofficers"
     entitySetName: "JohnsonCounty_IowaCity_JCOfficerInfo"
-    fqn: "o.employee"
+    fqn: "ol.employee"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -425,7 +425,7 @@ entityDefinitions:
   Tofficers:
     name: "Tofficers"
     entitySetName: "JohnsonCounty_IowaCity_JCOfficerInfo"
-    fqn: "o.employee"
+    fqn: "ol.employee"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
