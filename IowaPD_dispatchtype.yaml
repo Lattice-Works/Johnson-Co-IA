@@ -133,6 +133,8 @@ entityDefinitions:
           - !<transforms.SplitTransform>
             separator: ' '
             index: 0
+        - !<transforms.CaseTransform>
+          type: "name"
       nc.PersonSurName:
         type: 'nc.PersonSurName'
         transforms:
@@ -154,6 +156,8 @@ entityDefinitions:
             separator: ' '
             index: 'last'
             ifMoreThan: 1
+        - !<transforms.CaseTransform>
+          type: "name"
       nc.PersonMiddleName:
         type: 'nc.PersonMiddleName'
         transforms:
@@ -178,6 +182,8 @@ entityDefinitions:
             separator: ' '
             index: 1
             ifMoreThan: 2
+        - !<transforms.CaseTransform>
+          type: "name"
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
         transforms:
@@ -189,7 +195,7 @@ entityDefinitions:
           - !<transforms.ColumnTransform>
             column: "OfficerID"
         - !<transforms.CaseTransform>
-          type: "lower"
+          type: "name"
       ol.datasource:
         type: "ol.datasource"
         transforms:
