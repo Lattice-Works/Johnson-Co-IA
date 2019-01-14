@@ -421,6 +421,7 @@ entityDefinitions:
         type: location.street
         transforms:
         - !<transforms.BooleanContainsTransform>
+          column: LAddress
           string: '/'
           transformsIfTrue:
           - !<transforms.ValueTransform>
@@ -433,6 +434,7 @@ entityDefinitions:
         transforms:
         - !<transforms.BooleanContainsTransform>
           string: '/'
+          column: LAddress
           transformsIfFalse:
           - !<transforms.ValueTransform>
             value:
