@@ -65,7 +65,7 @@ entityDefinitions:
           - !<transforms.ColumnTransform>
             column: "OfficerId"
         - !<transforms.CaseTransform>
-          type: "lower"
+          type: "name"
       ol.datasource:
         type: "ol.datasource"
         transforms:

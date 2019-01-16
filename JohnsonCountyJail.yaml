@@ -1084,7 +1084,7 @@ associationDefinitions:
         type: "ol.id"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ['SentenceDays', "SentenceHrs", "Concurrent", "Probation", "ConseqWith","AltStart_Date"]
+          columns: ['SentenceDays', "SentenceHrs", "Concurrent", "Probation", "ConsecWith","Alt_Start_Date"]
   Resultsin2:
     fqn: 'ol.resultsin'
     src: "JohnsonCounty_IowaCity_JCCharge"
