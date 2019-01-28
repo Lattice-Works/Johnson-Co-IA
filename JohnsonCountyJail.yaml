@@ -778,8 +778,8 @@ entityDefinitions:
         column: "Concurrent"
         transforms:
         - !<transforms.ParseIntTransform> {}
-      ol.probation:
-        type: "ol.probation"
+      ol.probationeligible:
+        type: "ol.probationeligible"
         column: "Probation"
         transforms:
         - !<transforms.ParseBoolTransform> {}
