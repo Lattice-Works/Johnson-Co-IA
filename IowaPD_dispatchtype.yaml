@@ -20,6 +20,7 @@ entityDefinitions:
           datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
           timeColumn: TimeDisp
           timePattern: ['yyyy-MM-dd HH:mm:ss.S']
+          timezone: "America/Chicago"
       datetime.enroute:
         type: 'datetime.enroute'
         transforms:
@@ -28,6 +29,7 @@ entityDefinitions:
           datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
           timeColumn: 'TimeEnroute'
           timePattern: ['yyyy-MM-dd HH:mm:ss.S']
+          timezone: "America/Chicago"
       datetime.arrived:
         type: 'datetime.arrived'
         transforms:
@@ -36,6 +38,7 @@ entityDefinitions:
           datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
           timeColumn: 'TimeArr'
           timePattern: ['yyyy-MM-dd HH:mm:ss.S']
+          timezone: "America/Chicago"
       date.completeddatetime:
         type: 'date.completeddatetime'
         transforms:
@@ -44,6 +47,7 @@ entityDefinitions:
           datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
           timeColumn: 'TimeComp'
           timePattern: ['yyyy-MM-dd HH:mm:ss.S']
+          timezone: "America/Chicago"
       ol.notes:
         type: ol.notes
         column: Type_ID
@@ -286,12 +290,14 @@ associationDefinitions:
         transforms:
         - !<transforms.DateTimeTransform>
           pattern: ['yyyy-MM-dd HH:mm:ss.S']
+          timezone: "America/Chicago"
       ol.datetimeend:
         type: ol.datetimeend
         column: 'TimeComp'
         transforms:
         - !<transforms.DateTimeTransform>
           pattern: ['yyyy-MM-dd HH:mm:ss.S']
+          timezone: "America/Chicago"
       ol.role:
         type: ol.role
         transforms:
@@ -312,12 +318,14 @@ associationDefinitions:
         transforms:
         - !<transforms.DateTimeTransform>
           pattern: ['yyyy-MM-dd HH:mm:ss.S']
+          timezone: "America/Chicago"
       ol.datetimeend:
         type: ol.datetimeend
         column: 'TimeComp'
         transforms:
         - !<transforms.DateTimeTransform>
           pattern: ['yyyy-MM-dd HH:mm:ss.S']
+          timezone: "America/Chicago"
     src: "JohnsonCounty_IowaCity_EMS_Unit"
     dst: "JohnsonCounty_IowaCity_Dispatch"
   UnitAppearsinDispatch:
@@ -333,12 +341,14 @@ associationDefinitions:
         transforms:
         - !<transforms.DateTimeTransform>
           pattern: ['yyyy-MM-dd HH:mm:ss.S']
+          timezone: "America/Chicago"
       ol.datetimeend:
         type: ol.datetimeend
         column: 'TimeComp'
         transforms:
         - !<transforms.DateTimeTransform>
           pattern: ['yyyy-MM-dd HH:mm:ss.S']
+          timezone: "America/Chicago"
     src: "JohnsonCounty_IowaCity_Unit"
     dst: "JohnsonCounty_IowaCity_Dispatch"
   FireUnitAppearsinDispatch:

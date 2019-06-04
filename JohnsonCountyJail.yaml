@@ -617,6 +617,7 @@ entityDefinitions:
           transforms:
           - !<transforms.DateAsDateTimeTransform>
             pattern: ['M/d/yyyy','d-MMM-yy','MM/dd/yyy', 'M/dd/yyyy', 'MM/d/yyyy', 'dd-MMM-yy', 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm:ss.S']
+            timezone: "America/Chicago"
       incident.startdatetime:
         type: "incident.startdatetime"
         transforms:
@@ -627,17 +628,20 @@ entityDefinitions:
             column: 'Date_In'
           - !<transforms.DateAsDateTimeTransform>
             pattern: ['M/d/yyyy','d-MMM-yy','MM/dd/yyy', 'M/dd/yyyy', 'MM/d/yyyy', 'dd-MMM-yy', 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm:ss.S']
+            timezone: "America/Chicago"
           transformsIfTrue:
           - !<transforms.ColumnTransform>
             column: 'Start_Date'
           - !<transforms.DateAsDateTimeTransform>
             pattern: ['M/d/yyyy','d-MMM-yy','MM/dd/yyy', 'M/dd/yyyy', 'MM/d/yyyy', 'dd-MMM-yy', 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm:ss.S']
+            timezone: "America/Chicago"
       ol.alternatestartdate:
         type: "ol.alternatestartdate"
         column: "Alt_Start_Date"
         transforms:
         - !<transforms.DateAsDateTimeTransform>
           pattern: ['M/d/yyyy','d-MMM-yy','MM/dd/yyy', 'M/dd/yyyy', 'MM/d/yyyy', 'dd-MMM-yy', 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm:ss.S']
+          timezone: "America/Chicago"
       ol.releasedatetime:
         type: "ol.releasedatetime"
         transforms:
@@ -648,11 +652,13 @@ entityDefinitions:
             column: 'Date_Out'
           - !<transforms.DateAsDateTimeTransform>
             pattern: ['M/d/yyyy','d-MMM-yy','MM/dd/yyy', 'M/dd/yyyy', 'MM/d/yyyy', 'dd-MMM-yy', 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm:ss.S']
+            timezone: "America/Chicago"
           transformsIfTrue:
           - !<transforms.ColumnTransform>
             column: 'Release_Date'
           - !<transforms.DateAsDateTimeTransform>
             pattern: ['M/d/yyyy','d-MMM-yy','MM/dd/yyy', 'M/dd/yyyy', 'MM/d/yyyy', 'dd-MMM-yy', 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm:ss.S']
+            timezone: "America/Chicago"
       ol.projectedreleasedatetime:
         type: "ol.projectedreleasedatetime"
         transforms:
@@ -663,11 +669,13 @@ entityDefinitions:
             column: 'Est_Rel_Date'
           - !<transforms.DateAsDateTimeTransform>
             pattern: ['M/d/yyyy','d-MMM-yy','MM/dd/yyy', 'M/dd/yyyy', 'MM/d/yyyy', 'dd-MMM-yy', 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm:ss.S']
+            timezone: "America/Chicago"
           transformsIfTrue:
           - !<transforms.ColumnTransform>
             column: 'Exp_Release_Date'
           - !<transforms.DateAsDateTimeTransform>
             pattern: ['M/d/yyyy','d-MMM-yy','MM/dd/yyy', 'M/dd/yyyy', 'MM/d/yyyy', 'dd-MMM-yy', 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm:ss.S']
+            timezone: "America/Chicago"
       general.status:
         type: "general.status"
         column: "Status"
@@ -1226,6 +1234,7 @@ associationDefinitions:
         transforms:
         - !<transforms.DateAsDateTimeTransform>
           pattern: ['M/d/yyyy','d-MMM-yy','MM/dd/yyy', 'M/dd/yyyy', 'MM/d/yyyy', 'dd-MMM-yy', 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm:ss.S']
+          timezone: "America/Chicago"
   JohnsonCounty_IowaCity_JCArrestedBy2:
     fqn: "ol.arrestedby"
     src: "JohnsonCounty_IowaCity_JCInmates"
@@ -1241,6 +1250,7 @@ associationDefinitions:
         transforms:
         - !<transforms.DateAsDateTimeTransform>
           pattern: ['M/d/yyyy','d-MMM-yy','MM/dd/yyy', 'M/dd/yyyy', 'MM/d/yyyy', 'dd-MMM-yy', 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm:ss.S']
+          timezone: "America/Chicago"
   JohnsonCounty_IowaCity_JCCommittedBy:
     fqn: "ol.committedby"
     src: "JohnsonCounty_IowaCity_JCInmates"
