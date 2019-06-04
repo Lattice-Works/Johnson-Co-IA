@@ -30,6 +30,7 @@ entityDefinitions:
         transforms:
         - !<transforms.DateTimeTransform>
           pattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
+          timezone: "America/Chicago"
       ol.priority:
         type: ol.priority
         column: Priority
@@ -469,6 +470,16 @@ entityDefinitions:
         column: Longitude
         transforms:
         - !<transforms.ParseDoubleTransform> {}
+      ol.locationcoordinates:
+        type: ol.locationcoordinates
+        transforms:
+        - !<transforms.GeographyPointTransform>:
+          latTransforms:
+          - !<transforms.ColumnTransform>:
+            column: Latitude
+          lonTransforms:
+          - !<transforms.ColumnTransform>:
+            column: Longitude
   JohnsonCounty_IowaCity_CFSContactInfo:
     fqn: ol.contactinformation
     entitySetName: JohnsonCounty_IowaCity_CFSContactInfo
@@ -562,6 +573,7 @@ associationDefinitions:
         transforms:
         - !<transforms.DateTimeTransform>
           pattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
+          timezone: "America/Chicago"
     src: JohnsonCounty_IowaCity_Dispatch
     dst: OperatorPerson
   AssignedTo:
