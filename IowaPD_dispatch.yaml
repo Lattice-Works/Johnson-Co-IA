@@ -473,9 +473,13 @@ entityDefinitions:
       ol.locationcoordinates:
         type: ol.locationcoordinates
         transforms:
-        - !<transforms.ConcatTransform>
-          columns: ['Latitude', 'Longitude']
-          separator: ","
+        - !<transforms.GeographyPointTransform>:
+          latTransforms:
+          - !<transforms.ColumnTransform>:
+            column: Latitude
+          lonTransforms:
+          - !<transforms.ColumnTransform>:
+            column: Longitude
   JohnsonCounty_IowaCity_CFSContactInfo:
     fqn: ol.contactinformation
     entitySetName: JohnsonCounty_IowaCity_CFSContactInfo
