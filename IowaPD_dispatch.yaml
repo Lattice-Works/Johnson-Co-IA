@@ -451,6 +451,8 @@ entityDefinitions:
       location.zip:
         type: location.zip
         column: LZip
+        transforms:
+        - !<transforms.ParseIntTransform> {}
       location.city:
         type: location.city
         column: LCity
@@ -477,9 +479,11 @@ entityDefinitions:
           latTransforms:
           - !<transforms.ColumnTransform>
             column: Latitude
+          - !<transforms.ParseDoubleTransform> {}
           lonTransforms:
           - !<transforms.ColumnTransform>
             column: Longitude
+          - !<transforms.ParseDoubleTransform> {}
   # JohnsonCounty_IowaCity_CFSContactInfo:
   #   fqn: ol.contactinformation
   #   entitySetName: JohnsonCounty_IowaCity_CFSContactInfo
