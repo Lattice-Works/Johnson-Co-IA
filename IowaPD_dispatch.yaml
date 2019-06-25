@@ -484,6 +484,7 @@ entityDefinitions:
           - !<transforms.ColumnTransform>
             column: Longitude
           - !<transforms.ParseDoubleTransform> {}
+        - !<transforms.ParseGeographyPointTransform> {}
   # JohnsonCounty_IowaCity_CFSContactInfo:
   #   fqn: ol.contactinformation
   #   entitySetName: JohnsonCounty_IowaCity_CFSContactInfo
