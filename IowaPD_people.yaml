@@ -1,508 +1,508 @@
 entityDefinitions:
-  # Officers:
-  #   name: "Officers"
-  #   fqn: 'general.person'
-  #   entitySetName: 'JohnsonCounty_IowaCity_People1'
-  #   propertyDefinitions:
-  #     nc.SubjectIdentification:
-  #       type: 'nc.SubjectIdentification'
-  #       transforms:
-  #       - !<transforms.BooleanRegexTransform>
-  #         column: 'OName'
-  #         pattern: "^[0-9]"
-  #         transformsIfFalse:
-  #         - !<transforms.ConcatCombineTransform>
-  #           transforms:
-  #           - !<transforms.GetPrefixDigitsTransform>
-  #             separator: ' '
-  #             column: "OName"
-  #           - !<transforms.ColumnTransform>
-  #             column: "OfficerID"
-  #         - !<transforms.CaseTransform>
-  #           type: "lower"
-  #         transformsIfTrue:
-  #         - !<transforms.ConcatTransform>
-  #           columns: ["MNI_No", "OName"]
-  #           separator: "_"
-  #         - !<transforms.CaseTransform>
-  #           type: "name"
-  #     nc.PersonGivenName:
-  #       type: 'nc.PersonGivenName'
-  #       transforms:
-  #       - !<transforms.BooleanRegexTransform>
-  #         column: "OName"
-  #         pattern: ",$"
-  #         transformsIfTrue:
-  #         - !<transforms.ColumnTransform>
-  #           column: 'OName'
-  #         - !<transforms.RemoveDigitsTransform> {}
-  #         - !<transforms.SplitTransform>
-  #           separator: ' '
-  #           index: 0
-  #         transformsIfFalse:
-  #         - !<transforms.BooleanContainsTransform>
-  #           column: "OName"
-  #           string: ","
-  #           transformsIfTrue:
-  #           - !<transforms.ColumnTransform>
-  #             column: 'OName'
-  #           - !<transforms.RemoveDigitsTransform> {}
-  #           - !<transforms.SplitTransform>
-  #             separator: ','
-  #             index: 1
-  #           - !<transforms.SplitTransform>
-  #             separator: ' '
-  #             index: 0
-  #           transformsIfFalse:
-  #           - !<transforms.ColumnTransform>
-  #             column: 'OName'
-  #           - !<transforms.RemoveDigitsTransform> {}
-  #           - !<transforms.SplitTransform>
-  #             separator: ' '
-  #             index: 0
-  #       - !<transforms.CaseTransform>
-  #         type: "name"
-  #     nc.PersonSurName:
-  #       type: 'nc.PersonSurName'
-  #       transforms:
-  #       - !<transforms.BooleanRegexTransform>
-  #         column: "OName"
-  #         pattern: ",$"
-  #         transformsIfTrue:
-  #         - !<transforms.ColumnTransform>
-  #           column: 'OName'
-  #         - !<transforms.RemoveDigitsTransform> {}
-  #         - !<transforms.SplitTransform>
-  #           separator: ' '
-  #           index: 'last'
-  #           ifMoreThan: 1
-  #         transformsIfFalse:
-  #         - !<transforms.BooleanContainsTransform>
-  #             column: "OName"
-  #             string: ","
-  #             transformsIfTrue:
-  #             - !<transforms.ColumnTransform>
-  #               column: 'OName'
-  #             - !<transforms.RemoveDigitsTransform> {}
-  #             - !<transforms.SplitTransform>
-  #               separator: ','
-  #               index: 0
-  #             transformsIfFalse:
-  #             - !<transforms.ColumnTransform>
-  #               column: 'OName'
-  #             - !<transforms.RemoveDigitsTransform> {}
-  #             - !<transforms.SplitTransform>
-  #               separator: ' '
-  #               index: 'last'
-  #               ifMoreThan: 1
-  #       - !<transforms.CaseTransform>
-  #         type: "name"
-  #     nc.PersonMiddleName:
-  #       type: 'nc.PersonMiddleName'
-  #       transforms:
-  #       - !<transforms.BooleanContainsTransform>
-  #         column: "OName"
-  #         string: ","
-  #         transformsIfTrue:
-  #         - !<transforms.ColumnTransform>
-  #           column: 'OName'
-  #         - !<transforms.RemoveDigitsTransform> {}
-  #         - !<transforms.SplitTransform>
-  #           separator: ','
-  #           index: 1
-  #         - !<transforms.SplitTransform>
-  #           separator: ' '
-  #           index: 1
-  #         transformsIfFalse:
-  #         - !<transforms.ColumnTransform>
-  #           column: 'OName'
-  #         - !<transforms.RemoveDigitsTransform> {}
-  #         - !<transforms.SplitTransform>
-  #           separator: ' '
-  #           index: 1
-  #           ifMoreThan: 2
-  #       - !<transforms.CaseTransform>
-  #         type: "name"
-  #     nc.PersonBirthDate:
-  #       type: "nc.PersonBirthDate"
-  #       column: "DOB"
-  #       transforms:
-  #       - !<transforms.DateTransform>
-  #         pattern: ["yyyy-MM-dd HH:mm:ss.S"]
-  #     nc.SSN:
-  #       type: "nc.SSN"
-  #       column: "SSN"
-  #     nc.PersonSex:
-  #       type: "nc.PersonSex"
-  #       column: "OSex"
-  #       transforms:
-  #       - !<transforms.ReplaceTransform>
-  #         target: ['Male', 'M', 'Female', 'F', 'FM', 'F`']
-  #         goal: ['M', 'M', 'F', 'F', 'F', 'F']
-  #         ignoreCase: true
-  #     nc.PersonRace:
-  #       type: "nc.PersonRace"
-  #       column: "ORace"
-  #       transforms:
-  #       - !<transforms.ReplaceTransform>
-  #         target: ['Asian', 'A', 'W', "White", "Black", "B", "American Indian", "I", "Indian"]
-  #         goal: ['asian', 'asian', 'white', 'white', 'black', 'black', 'amindian', 'amindian', 'amindian']
-  #         ignoreCase: true
-  #     nc.PersonEthnicity:
-  #       type: "nc.PersonEthnicity"
-  #       column: "Ethnicity"
-  #       transforms:
-  #       - !<transforms.ReplaceTransform>
-  #         target: ['H', "N"]
-  #         goal: ['hispanic', 'nonhispanic']
-  #         ignoreCase: true
-  #     person.stateidnumber:
-  #       type: "person.stateidnumber"
-  #       column: "MNI_No"
-  #     ol.datasource:
-  #       type: "ol.datasource"
-  #       transforms:
-  #       - !<transforms.ValueTransform>
-  #         value: "Johnson County CAD"
-  #   conditions:                                   # officers
-  #   - !<conditions.ConditionalOr> {}
-  #   - !<conditions.BooleanIsNullCondition>
-  #     column: 'OfficerID'
+  Officers:
+    name: "Officers"
+    fqn: 'general.person'
+    entitySetName: 'JohnsonCounty_IowaCity_People1'
+    propertyDefinitions:
+      nc.SubjectIdentification:
+        type: 'nc.SubjectIdentification'
+        transforms:
+        - !<transforms.BooleanRegexTransform>
+          column: 'OName'
+          pattern: "^[0-9]"
+          transformsIfFalse:
+          - !<transforms.ConcatCombineTransform>
+            transforms:
+            - !<transforms.GetPrefixDigitsTransform>
+              separator: ' '
+              column: "OName"
+            - !<transforms.ColumnTransform>
+              column: "OfficerID"
+          - !<transforms.CaseTransform>
+            type: "lower"
+          transformsIfTrue:
+          - !<transforms.ConcatTransform>
+            columns: ["MNI_No", "OName"]
+            separator: "_"
+          - !<transforms.CaseTransform>
+            type: "name"
+      nc.PersonGivenName:
+        type: 'nc.PersonGivenName'
+        transforms:
+        - !<transforms.BooleanRegexTransform>
+          column: "OName"
+          pattern: ",$"
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: 'OName'
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ' '
+            index: 0
+          transformsIfFalse:
+          - !<transforms.BooleanContainsTransform>
+            column: "OName"
+            string: ","
+            transformsIfTrue:
+            - !<transforms.ColumnTransform>
+              column: 'OName'
+            - !<transforms.RemoveDigitsTransform> {}
+            - !<transforms.SplitTransform>
+              separator: ','
+              index: 1
+            - !<transforms.SplitTransform>
+              separator: ' '
+              index: 0
+            transformsIfFalse:
+            - !<transforms.ColumnTransform>
+              column: 'OName'
+            - !<transforms.RemoveDigitsTransform> {}
+            - !<transforms.SplitTransform>
+              separator: ' '
+              index: 0
+        - !<transforms.CaseTransform>
+          type: "name"
+      nc.PersonSurName:
+        type: 'nc.PersonSurName'
+        transforms:
+        - !<transforms.BooleanRegexTransform>
+          column: "OName"
+          pattern: ",$"
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: 'OName'
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ' '
+            index: 'last'
+            ifMoreThan: 1
+          transformsIfFalse:
+          - !<transforms.BooleanContainsTransform>
+              column: "OName"
+              string: ","
+              transformsIfTrue:
+              - !<transforms.ColumnTransform>
+                column: 'OName'
+              - !<transforms.RemoveDigitsTransform> {}
+              - !<transforms.SplitTransform>
+                separator: ','
+                index: 0
+              transformsIfFalse:
+              - !<transforms.ColumnTransform>
+                column: 'OName'
+              - !<transforms.RemoveDigitsTransform> {}
+              - !<transforms.SplitTransform>
+                separator: ' '
+                index: 'last'
+                ifMoreThan: 1
+        - !<transforms.CaseTransform>
+          type: "name"
+      nc.PersonMiddleName:
+        type: 'nc.PersonMiddleName'
+        transforms:
+        - !<transforms.BooleanContainsTransform>
+          column: "OName"
+          string: ","
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: 'OName'
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ','
+            index: 1
+          - !<transforms.SplitTransform>
+            separator: ' '
+            index: 1
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: 'OName'
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ' '
+            index: 1
+            ifMoreThan: 2
+        - !<transforms.CaseTransform>
+          type: "name"
+      nc.PersonBirthDate:
+        type: "nc.PersonBirthDate"
+        column: "DOB"
+        transforms:
+        - !<transforms.DateTransform>
+          pattern: ["yyyy-MM-dd HH:mm:ss.S"]
+      nc.SSN:
+        type: "nc.SSN"
+        column: "SSN"
+      nc.PersonSex:
+        type: "nc.PersonSex"
+        column: "OSex"
+        transforms:
+        - !<transforms.ReplaceTransform>
+          target: ['Male', 'M', 'Female', 'F', 'FM', 'F`']
+          goal: ['M', 'M', 'F', 'F', 'F', 'F']
+          ignoreCase: true
+      nc.PersonRace:
+        type: "nc.PersonRace"
+        column: "ORace"
+        transforms:
+        - !<transforms.ReplaceTransform>
+          target: ['Asian', 'A', 'W', "White", "Black", "B", "American Indian", "I", "Indian"]
+          goal: ['asian', 'asian', 'white', 'white', 'black', 'black', 'amindian', 'amindian', 'amindian']
+          ignoreCase: true
+      nc.PersonEthnicity:
+        type: "nc.PersonEthnicity"
+        column: "Ethnicity"
+        transforms:
+        - !<transforms.ReplaceTransform>
+          target: ['H', "N"]
+          goal: ['hispanic', 'nonhispanic']
+          ignoreCase: true
+      person.stateidnumber:
+        type: "person.stateidnumber"
+        column: "MNI_No"
+      ol.datasource:
+        type: "ol.datasource"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Johnson County CAD"
+    conditions:                                   # officers
+    - !<conditions.ConditionalOr> {}
+    - !<conditions.BooleanIsNullCondition>
+      column: 'OfficerID'
+      reverse: true
+    - !<conditions.BooleanRegexCondition>
+      column: 'OName'
+      pattern: "^[0-9]"
+    - !<conditions.ConditionalAnd> {}
+    - !<conditions.BooleanIsNullCondition>
+      column: 'OName'
+      reverse: true
+    - !<conditions.BooleanRegexCondition>
+      column: 'OName'
+      pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|PD|criticom|IC,PD|criticom|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
   #     reverse: true
-  #   - !<conditions.BooleanRegexCondition>
-  #     column: 'OName'
-  #     pattern: "^[0-9]"
-  #   - !<conditions.ConditionalAnd> {}
-  #   - !<conditions.BooleanIsNullCondition>
-  #     column: 'OName'
-  #     reverse: true
-  #   - !<conditions.BooleanRegexCondition>
-  #     column: 'OName'
-  #     pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|PD|criticom|IC,PD|criticom|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
-  # #     reverse: true
-  # Others:
-  #   name: "Others"
-  #   fqn: 'general.person'
-  #   entitySetName: 'JohnsonCounty_IowaCity_People2'
-  #   propertyDefinitions:
-  #     nc.SubjectIdentification:
-  #       type: 'nc.SubjectIdentification'
-  #       transforms:
-  #       - !<transforms.ConcatTransform>
-  #         columns: ["MNI_No", "OName"]
-  #         separator: "_"
-  #       - !<transforms.CaseTransform>
-  #         type: "name"
-  #     nc.PersonGivenName:
-  #       type: 'nc.PersonGivenName'
-  #       transforms:
-  #       - !<transforms.BooleanContainsTransform>
-  #         column: "OName"
-  #         string: ","
-  #         transformsIfTrue:
-  #         - !<transforms.ColumnTransform>
-  #           column: 'OName'
-  #         - !<transforms.RemoveDigitsTransform> {}
-  #         - !<transforms.SplitTransform>
-  #           separator: ','
-  #           index: 1
-  #         - !<transforms.SplitTransform>
-  #           separator: ' '
-  #           index: 0
-  #         transformsIfFalse:
-  #         - !<transforms.ColumnTransform>
-  #           column: 'OName'
-  #         - !<transforms.RemoveDigitsTransform> {}
-  #         - !<transforms.SplitTransform>
-  #           separator: ' '
-  #           index: 0
-  #       - !<transforms.CaseTransform>
-  #         type: "name"
-  #     nc.PersonSurName:
-  #       type: 'nc.PersonSurName'
-  #       transforms:
-  #       - !<transforms.BooleanContainsTransform>
-  #         column: "OName"
-  #         string: ","
-  #         transformsIfTrue:
-  #         - !<transforms.ColumnTransform>
-  #           column: 'OName'
-  #         - !<transforms.RemoveDigitsTransform> {}
-  #         - !<transforms.SplitTransform>
-  #           separator: ','
-  #           index: 0
-  #         transformsIfFalse:
-  #         - !<transforms.ColumnTransform>
-  #           column: 'OName'
-  #         - !<transforms.RemoveDigitsTransform> {}
-  #         - !<transforms.SplitTransform>
-  #           separator: ' '
-  #           index: 'last'
-  #           ifMoreThan: 1
-  #       - !<transforms.CaseTransform>
-  #         type: "name"
-  #     nc.PersonMiddleName:
-  #       type: 'nc.PersonMiddleName'
-  #       transforms:
-  #       - !<transforms.BooleanContainsTransform>
-  #         column: "OName"
-  #         string: ","
-  #         transformsIfTrue:
-  #         - !<transforms.ColumnTransform>
-  #           column: 'OName'
-  #         - !<transforms.RemoveDigitsTransform> {}
-  #         - !<transforms.SplitTransform>
-  #           separator: ','
-  #           index: 1
-  #         - !<transforms.SplitTransform>
-  #           separator: ' '
-  #           index: 1
-  #         transformsIfFalse:
-  #         - !<transforms.ColumnTransform>
-  #           column: 'OName'
-  #         - !<transforms.RemoveDigitsTransform> {}
-  #         - !<transforms.SplitTransform>
-  #           separator: ' '
-  #           index: 1
-  #           ifMoreThan: 2
-  #       - !<transforms.CaseTransform>
-  #         type: "name"
-  #     nc.PersonBirthDate:
-  #       type: "nc.PersonBirthDate"
-  #       column: "DOB"
-  #       transforms:
-  #       - !<transforms.DateTransform>
-  #         pattern: ["yyyy-MM-dd","yyyy-MM-dd HH:mm:ss.S"]
-  #     nc.SSN:
-  #       type: "nc.SSN"
-  #       column: "SSN"
-  #     nc.PersonSex:
-  #       type: "nc.PersonSex"
-  #       column: "OSex"
-  #       transforms:
-  #       - !<transforms.ReplaceTransform>
-  #         target: ['Male', 'M', 'Female', 'F', 'FM', 'F`']
-  #         goal: ['M', 'M', 'F', 'F', 'F', 'F']
-  #         ignoreCase: true
-  #     nc.PersonRace:
-  #       type: "nc.PersonRace"
-  #       column: "ORace"
-  #       transforms:
-  #       - !<transforms.ReplaceTransform>
-  #         target: ['Asian', 'A', 'W', "White", "Black", "B", "American Indian", "I", "Indian"]
-  #         goal: ['asian', 'asian', 'white', 'white', 'black', 'black', 'amindian', 'amindian', 'amindian']
-  #         ignoreCase: true
-  #     nc.PersonEthnicity:
-  #       type: "nc.PersonEthnicity"
-  #       column: "Ethnicity"
-  #       transforms:
-  #       - !<transforms.ReplaceTransform>
-  #         target: ['H', "N"]
-  #         goal: ['hispanic', 'nonhispanic']
-  #         ignoreCase: true
-  #     ol.datasource:
-  #       type: "ol.datasource"
-  #       transforms:
-  #       - !<transforms.ValueTransform>
-  #         value: "Johnson County CAD"
-  #   conditions:                                   # other person (i.e. same as officer but)
-  #   - !<conditions.ConditionalAnd> {}
-  #   - !<conditions.BooleanIsNullCondition>
-  #     column: 'OfficerID'
-  #   - !<conditions.BooleanRegexCondition>
-  #     column: 'OName'
-  #     pattern: "^[0-9]"
-  #     reverse: true
-  #   - !<conditions.BooleanIsNullCondition>
-  #     column: 'OName'
-  #     reverse: true
-  #   - !<conditions.BooleanRegexCondition>
-  #     column: 'OName'
-  #     pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|DP|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
-  #     reverse: true
-  # Organizations:
-  #   name: "Organizations"
-  #   fqn: 'ol.organization'
-  #   entitySetName: 'JohnsonCounty_IowaCity_Organizations'
-  #   propertyDefinitions:
-  #     general.id:
-  #       type: general.id
-  #       column: OName
-  #     ol.name:
-  #       type: ol.name
-  #       column: OName
-  #   conditions:                                   # other person (i.e. same as officer but)
-  #   - !<conditions.BooleanRegexCondition>
-  #     column: 'OName'
-  #     pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|DP|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
-  # OfficersPersonnelID:
-  #   name: "OfficersPersonnelID"
-  #   fqn: 'ol.identification'
-  #   entitySetName: 'JohnsonCounty_IowaCity_JCJIPersonnelID'
-  #   propertyDefinitions:
-  #     ol.id:
-  #       type: ol.id
-  #       column: OfficerID
-  #     ol.stringnumber:
-  #       type: "ol.stringnumber"
-  #       column: "DL_No"
-  #     location.state:
-  #       type: "location.state"
-  #       column: "DL_State"
-  #   conditions:                                   # officers
-  #   - !<conditions.ConditionalAnd> {}
-  #   - !<conditions.BooleanIsNullCondition>
-  #     column: 'OName'
-  #     reverse: true
-  #   - !<conditions.BooleanRegexCondition>
-  #     column: 'OName'
-  #     pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|DP|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
-  #     reverse: true
-  #   - !<conditions.BooleanIsNullCondition>
-  #     column: 'OfficerID'
-  #     reverse: true
-  # OfficersPersonnel:
-  #   name: "OfficersPersonnel"
-  #   fqn: 'ol.employee'
-  #   entitySetName: 'JohnsonCounty_IowaCity_JCJIPersonnel'
-  #   propertyDefinitions:
-  #     ol.id:
-  #       type: ol.id
-  #       column: OfficerID
-  #     publicsafety.employeeid:
-  #       type: "publicsafety.employeeid"
-  #       column: "BadgeNumber"
-  #     person.title:
-  #       type: "person.title"
-  #       transforms:
-  #       - !<transforms.ValueTransform>
-  #         value: 'Officer'
-  #   conditions:                                   # officers
-  #   - !<conditions.ConditionalAnd> {}
-  #   - !<conditions.BooleanIsNullCondition>
-  #     column: 'OName'
-  #     reverse: true
-  #   - !<conditions.BooleanRegexCondition>
-  #     column: 'OName'
-  #     pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|DP|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
-  #     reverse: true
-  #   - !<conditions.BooleanIsNullCondition>
-  #     column: 'OfficerID'
-  #     reverse: true
-  # OfficersPersonDetails:
-  #   name: "OfficersPersonDetails"
-  #   fqn: 'ol.persondetails'
-  #   entitySetName: 'JohnsonCounty_IowaCity_JCJIPersonDetails2'
-  #   propertyDefinitions:
-  #     general.id:
-  #       type: general.id
-  #       column: OfficerID
-  #     ol.eyecolor:
-  #       type: "ol.eyecolor"
-  #       column: "Eyes"
-  #     ol.haircolor:
-  #       type: "ol.haircolor"
-  #       column: "Hair"
-  #     ol.height:
-  #       type: "ol.height"
-  #       column: "Height"
-  #       transforms:
-  #       - !<transforms.ParseIntTransform> {}
-  #     ol.weight:
-  #       type: "ol.weight"
-  #       column: "Weight"
-  #       transforms:
-  #       - !<transforms.ParseIntTransform> {}
-  #   conditions:                                   # officers
-  #   - !<conditions.ConditionalAnd> {}
-  #   - !<conditions.BooleanIsNullCondition>
-  #     column: 'OName'
-  #     reverse: true
-  #   - !<conditions.BooleanRegexCondition>
-  #     column: 'OName'
-  #     pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|DP|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
-  #     reverse: true
-  #   - !<conditions.BooleanIsNullCondition>
-  #     column: 'OfficerID'
-  #     reverse: true
-  # OthersPersonDetails:
-  #   name: "OthersPersonDetails"
-  #   fqn: 'ol.persondetails'
-  #   entitySetName: 'JohnsonCounty_IowaCity_JIPeopleDetails'
-  #   propertyDefinitions:
-  #     person.juvenile:
-  #       type: 'person.juvenile'
-  #       column: 'Juv'
-  #       transforms:
-  #       - !<transforms.ParseBoolTransform> {}
-  #     general.id:
-  #       type: "general.id"
-  #       transforms:
-  #       - !<transforms.ConcatTransform>
-  #         columns: ["MNI_No", "OName"]
-  #         separator: "_"
-  #     ol.eyecolor:
-  #       type: "ol.eyecolor"
-  #       column: "Eyes"
-  #     ol.haircolor:
-  #       type: "ol.haircolor"
-  #       column: "Hair"
-  #     ol.height:
-  #       type: "ol.height"
-  #       column: "Height"
-  #       transforms:
-  #       - !<transforms.ParseIntTransform> {}
-  #     ol.weight:
-  #       type: "ol.weight"
-  #       column: "Weight"
-  #       transforms:
-  #       - !<transforms.ParseIntTransform> {}
-  #   conditions:                                   # other person (i.e. same as officer but)
-  #   - !<conditions.ConditionalAnd> {}
-  #   - !<conditions.BooleanIsNullCondition>
-  #     column: 'OName'
-  #     reverse: true
-  #   - !<conditions.BooleanRegexCondition>
-  #     column: 'OName'
-  #     pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|DP|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
-  #     reverse: true
-  #   - !<conditions.BooleanIsNullCondition>
-  #     column: 'OfficerID'
-  #     reverse: false
-  # OthersPersonIdentification:
-  #   name: "OthersPersonIdentification"
-  #   fqn: 'ol.identification'
-  #   entitySetName: 'JohnsonCounty_IowaCity_JIPeopleIdentification'
-  #   propertyDefinitions:
-  #     ol.id:
-  #       type: "ol.id"
-  #       transforms:
-  #       - !<transforms.ConcatTransform>
-  #         columns: ["MNI_No", "OName"]
-  #         separator: "_"
-  #     ol.stringnumber:
-  #       type: "ol.stringnumber"
-  #       column: "DL_No"
-  #     location.state:
-  #       type: "location.state"
-  #       column: "DL_State"
-  #     ol.type:
-  #       type: 'ol.type'
-  #       transforms:
-  #       - !<transforms.ValueTransform>
-  #         value: "Driver's license"
-  #   conditions:                                   # other person (i.e. same as officer but)
-  #   - !<conditions.ConditionalAnd> {}
-  #   - !<conditions.BooleanIsNullCondition>
-  #     column: 'OName'
-  #     reverse: true
-  #   - !<conditions.BooleanRegexCondition>
-  #     column: 'OName'
-  #     pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|DP|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
-  #     reverse: true
-  #   - !<conditions.BooleanIsNullCondition>
-  #     column: 'OfficerID'
-  #     reverse: false
+  Others:
+    name: "Others"
+    fqn: 'general.person'
+    entitySetName: 'JohnsonCounty_IowaCity_People2'
+    propertyDefinitions:
+      nc.SubjectIdentification:
+        type: 'nc.SubjectIdentification'
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["MNI_No", "OName"]
+          separator: "_"
+        - !<transforms.CaseTransform>
+          type: "name"
+      nc.PersonGivenName:
+        type: 'nc.PersonGivenName'
+        transforms:
+        - !<transforms.BooleanContainsTransform>
+          column: "OName"
+          string: ","
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: 'OName'
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ','
+            index: 1
+          - !<transforms.SplitTransform>
+            separator: ' '
+            index: 0
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: 'OName'
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ' '
+            index: 0
+        - !<transforms.CaseTransform>
+          type: "name"
+      nc.PersonSurName:
+        type: 'nc.PersonSurName'
+        transforms:
+        - !<transforms.BooleanContainsTransform>
+          column: "OName"
+          string: ","
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: 'OName'
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ','
+            index: 0
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: 'OName'
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ' '
+            index: 'last'
+            ifMoreThan: 1
+        - !<transforms.CaseTransform>
+          type: "name"
+      nc.PersonMiddleName:
+        type: 'nc.PersonMiddleName'
+        transforms:
+        - !<transforms.BooleanContainsTransform>
+          column: "OName"
+          string: ","
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: 'OName'
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ','
+            index: 1
+          - !<transforms.SplitTransform>
+            separator: ' '
+            index: 1
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: 'OName'
+          - !<transforms.RemoveDigitsTransform> {}
+          - !<transforms.SplitTransform>
+            separator: ' '
+            index: 1
+            ifMoreThan: 2
+        - !<transforms.CaseTransform>
+          type: "name"
+      nc.PersonBirthDate:
+        type: "nc.PersonBirthDate"
+        column: "DOB"
+        transforms:
+        - !<transforms.DateTransform>
+          pattern: ["yyyy-MM-dd","yyyy-MM-dd HH:mm:ss.S"]
+      nc.SSN:
+        type: "nc.SSN"
+        column: "SSN"
+      nc.PersonSex:
+        type: "nc.PersonSex"
+        column: "OSex"
+        transforms:
+        - !<transforms.ReplaceTransform>
+          target: ['Male', 'M', 'Female', 'F', 'FM', 'F`']
+          goal: ['M', 'M', 'F', 'F', 'F', 'F']
+          ignoreCase: true
+      nc.PersonRace:
+        type: "nc.PersonRace"
+        column: "ORace"
+        transforms:
+        - !<transforms.ReplaceTransform>
+          target: ['Asian', 'A', 'W', "White", "Black", "B", "American Indian", "I", "Indian"]
+          goal: ['asian', 'asian', 'white', 'white', 'black', 'black', 'amindian', 'amindian', 'amindian']
+          ignoreCase: true
+      nc.PersonEthnicity:
+        type: "nc.PersonEthnicity"
+        column: "Ethnicity"
+        transforms:
+        - !<transforms.ReplaceTransform>
+          target: ['H', "N"]
+          goal: ['hispanic', 'nonhispanic']
+          ignoreCase: true
+      ol.datasource:
+        type: "ol.datasource"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Johnson County CAD"
+    conditions:                                   # other person (i.e. same as officer but)
+    - !<conditions.ConditionalAnd> {}
+    - !<conditions.BooleanIsNullCondition>
+      column: 'OfficerID'
+    - !<conditions.BooleanRegexCondition>
+      column: 'OName'
+      pattern: "^[0-9]"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: 'OName'
+      reverse: true
+    - !<conditions.BooleanRegexCondition>
+      column: 'OName'
+      pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|DP|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
+      reverse: true
+  Organizations:
+    name: "Organizations"
+    fqn: 'ol.organization'
+    entitySetName: 'JohnsonCounty_IowaCity_Organizations'
+    propertyDefinitions:
+      general.id:
+        type: general.id
+        column: OName
+      ol.name:
+        type: ol.name
+        column: OName
+    conditions:                                   # other person (i.e. same as officer but)
+    - !<conditions.BooleanRegexCondition>
+      column: 'OName'
+      pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|DP|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
+  OfficersPersonnelID:
+    name: "OfficersPersonnelID"
+    fqn: 'ol.identification'
+    entitySetName: 'JohnsonCounty_IowaCity_JCJIPersonnelID'
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: OfficerID
+      ol.stringnumber:
+        type: "ol.stringnumber"
+        column: "DL_No"
+      location.state:
+        type: "location.state"
+        column: "DL_State"
+    conditions:                                   # officers
+    - !<conditions.ConditionalAnd> {}
+    - !<conditions.BooleanIsNullCondition>
+      column: 'OName'
+      reverse: true
+    - !<conditions.BooleanRegexCondition>
+      column: 'OName'
+      pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|DP|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: 'OfficerID'
+      reverse: true
+  OfficersPersonnel:
+    name: "OfficersPersonnel"
+    fqn: 'ol.employee'
+    entitySetName: 'JohnsonCounty_IowaCity_JCJIPersonnel'
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: OfficerID
+      publicsafety.employeeid:
+        type: "publicsafety.employeeid"
+        column: "BadgeNumber"
+      person.title:
+        type: "person.title"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: 'Officer'
+    conditions:                                   # officers
+    - !<conditions.ConditionalAnd> {}
+    - !<conditions.BooleanIsNullCondition>
+      column: 'OName'
+      reverse: true
+    - !<conditions.BooleanRegexCondition>
+      column: 'OName'
+      pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|DP|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: 'OfficerID'
+      reverse: true
+  OfficersPersonDetails:
+    name: "OfficersPersonDetails"
+    fqn: 'ol.persondetails'
+    entitySetName: 'JohnsonCounty_IowaCity_JCJIPersonDetails2'
+    propertyDefinitions:
+      general.id:
+        type: general.id
+        column: OfficerID
+      ol.eyecolor:
+        type: "ol.eyecolor"
+        column: "Eyes"
+      ol.haircolor:
+        type: "ol.haircolor"
+        column: "Hair"
+      ol.height:
+        type: "ol.height"
+        column: "Height"
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+      ol.weight:
+        type: "ol.weight"
+        column: "Weight"
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+    conditions:                                   # officers
+    - !<conditions.ConditionalAnd> {}
+    - !<conditions.BooleanIsNullCondition>
+      column: 'OName'
+      reverse: true
+    - !<conditions.BooleanRegexCondition>
+      column: 'OName'
+      pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|DP|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: 'OfficerID'
+      reverse: true
+  OthersPersonDetails:
+    name: "OthersPersonDetails"
+    fqn: 'ol.persondetails'
+    entitySetName: 'JohnsonCounty_IowaCity_JIPeopleDetails'
+    propertyDefinitions:
+      person.juvenile:
+        type: 'person.juvenile'
+        column: 'Juv'
+        transforms:
+        - !<transforms.ParseBoolTransform> {}
+      general.id:
+        type: "general.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["MNI_No", "OName"]
+          separator: "_"
+      ol.eyecolor:
+        type: "ol.eyecolor"
+        column: "Eyes"
+      ol.haircolor:
+        type: "ol.haircolor"
+        column: "Hair"
+      ol.height:
+        type: "ol.height"
+        column: "Height"
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+      ol.weight:
+        type: "ol.weight"
+        column: "Weight"
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+    conditions:                                   # other person (i.e. same as officer but)
+    - !<conditions.ConditionalAnd> {}
+    - !<conditions.BooleanIsNullCondition>
+      column: 'OName'
+      reverse: true
+    - !<conditions.BooleanRegexCondition>
+      column: 'OName'
+      pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|DP|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: 'OfficerID'
+      reverse: false
+  OthersPersonIdentification:
+    name: "OthersPersonIdentification"
+    fqn: 'ol.identification'
+    entitySetName: 'JohnsonCounty_IowaCity_JIPeopleIdentification'
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["MNI_No", "OName"]
+          separator: "_"
+      ol.stringnumber:
+        type: "ol.stringnumber"
+        column: "DL_No"
+      location.state:
+        type: "location.state"
+        column: "DL_State"
+      ol.type:
+        type: 'ol.type'
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Driver's license"
+    conditions:                                   # other person (i.e. same as officer but)
+    - !<conditions.ConditionalAnd> {}
+    - !<conditions.BooleanIsNullCondition>
+      column: 'OName'
+      reverse: true
+    - !<conditions.BooleanRegexCondition>
+      column: 'OName'
+      pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|DP|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
+      reverse: true
+    - !<conditions.BooleanIsNullCondition>
+      column: 'OfficerID'
+      reverse: false
   JohnsonCounty_IowaCity_Addresses:
     fqn: 'ol.location'
     entitySetName: 'JohnsonCounty_IowaCity_Addresses'
@@ -550,312 +550,312 @@ entityDefinitions:
       location.state:
         type: 'location.state'
         column: 'OState'
-  # Contact1:
-  #   name: "Contact1"
-  #   fqn: 'ol.contactinformation'
-  #   entitySetName: 'JohnsonCounty_IowaCity_CFSContactInfo'
-  #   propertyDefinitions:
-  #     general.id:
-  #       type: 'general.id'
-  #       column: 'OPhone'
-  #     contact.phonenumber:
-  #       type: 'contact.phonenumber'
-  #       column: 'OPhone'
-  # Contact2:
-  #   name: "Contact2"
-  #   fqn: 'ol.contactinformation'
-  #   entitySetName: 'JohnsonCounty_IowaCity_CFSContactInfo'
-  #   propertyDefinitions:
-  #     general.id:
-  #       type: 'general.id'
-  #       column: 'CellPhone'
-  #     contact.phonenumber:
-  #       type: 'contact.phonenumber'
-  #       column: 'CellPhone'
-  # JohnsonCounty_IowaCity_Dispatch:
-  #   fqn: 'ol.dispatch'
-  #   entitySetName: 'JohnsonCounty_IowaCity_Dispatch'
-  #   propertyDefinitions:
-  #     ol.id:
-  #       type: "ol.id"
-  #       column: "Dis_ID"
-  #     ol.notes:
-  #       type: 'ol.notes'
-  #       column: 'OSQ'
-  # JohnsonCounty_IowaCity_Vehicle:
-  #   fqn: 'ol.vehicle'
-  #   entitySetName: 'JohnsonCounty_IowaCity_Vehicle'
-  #   propertyDefinitions:
-  #     ol.id:
-  #       type: 'ol.id'
-  #       transforms:
-  #       - !<transforms.ConcatTransform>
-  #         columns: ['MAKE', 'MODEL', 'LIC', 'LIS']
-  #     vehicle.make:
-  #       type: 'vehicle.make'
-  #       column: 'MAKE'
-  #     vehicle.model:
-  #       type: 'vehicle.model'
-  #       column: "MODEL"
-  #     vehicle.vin:
-  #       type: 'vehicle.vin'
-  #       column: 'VIN'
-  #     vehicle.year:
-  #       type: 'vehicle.year'
-  #       transforms:
-  #       - !<transforms.BooleanContainsTransform>
-  #         column: 'VehYear'
-  #         string: 'DOB'
-  #         transformsIfTrue:
-  #         - !<transforms.ValueTransform>
-  #           value: ''
-  #         transformsIfFalse:
-  #         - !<transforms.BooleanContainsTransform>
-  #           column: 'VehYear'
-  #           string: '/'
-  #           transformsIfTrue:
-  #           - !<transforms.SplitTransform>
-  #             separator: '/'
-  #             index: 'last'
-  #           transformsIfFalse:
-  #           - !<transforms.ColumnTransform>
-  #             column: 'VehYear'
-  #     vehicle.color:
-  #       type: "vehicle.color"
-  #       column: "Color"
-  #     vehicle.color:
-  #       type: "vehicle.color"
-  #       column: "ColorSecondary"
-  #     vehicle.style:
-  #       type: 'vehicle.style'
-  #       column: 'Style'
-  #     vehicle.licensenumber:
-  #       type: "vehicle.licensenumber"
-  #       column: "LIC"
-  #     vehicle.licensestate:
-  #       type: 'vehicle.licensestate'
-  #       column: "LIS"
-  #     vehicle.licenseplatetype:
-  #       type: "vehicle.licenseplatetype"
-  #       column: "LIT"
-  #     vehicle.licenseyear:
-  #       type: 'vehicle.licenseyear'
-  #       transforms:
-  #       - !<transforms.BooleanContainsTransform>
-  #         column: 'VehYear'
-  #         string: 'DOB'
-  #         transformsIfTrue:
-  #         - !<transforms.ValueTransform>
-  #           value: ''
-  #         transformsIfFalse:
-  #         - !<transforms.BooleanContainsTransform>
-  #           column: 'VehYear'
-  #           string: '/'
-  #           transformsIfTrue:
-  #           - !<transforms.SplitTransform>
-  #             separator: '/'
-  #             index: 'last'
-  #           transformsIfFalse:
-  #           - !<transforms.ColumnTransform>
-  #             column: 'VehYear'
-  #     ol.dispatchtransfer:
-  #       type: 'ol.dispatchtransfer'
-  #       column: 'TransferVehicle'
-  #       transforms:
-  #       - !<transforms.ParseBoolTransform> {}
-associationDefinitions: {}
-  # InvolvedIn:
-  #   fqn: 'ol.involvedin'
-  #   entitySetName: 'JohnsonCounty_IowaCity_CFSInvolvedIn'
-  #   src: "JohnsonCounty_IowaCity_Vehicle"
-  #   dst: "JohnsonCounty_IowaCity_Dispatch"
-  #   propertyDefinitions:
-  #     ol.id:
-  #       type: 'ol.id'
-  #       column: 'Dis_ID'
-  # OfficerInvolvedIn:
-  #   fqn: 'ol.involvedin'
-  #   entitySetName: 'JohnsonCounty_IowaCity_CFSInvolvedIn'
-  #   src: "Officers"
-  #   dst: "JohnsonCounty_IowaCity_Dispatch"
-  #   propertyDefinitions:
-  #     ol.id:
-  #       type: 'ol.id'
-  #       transforms:
-  #       - !<transforms.ConcatCombineTransform>
-  #         transforms:
-  #         - !<transforms.GetPrefixDigitsTransform>
-  #           separator: ' '
-  #           column: "OName"
-  #         - !<transforms.ColumnTransform>
-  #           column: "OfficerID"
-  #         - !<transforms.ColumnTransform>
-  #           column: "Dis_ID"
-  #     person.age:
-  #       type: "person.age"
-  #       column: 'Age'
-  #       transforms:
-  #       - !<transforms.ParseIntTransform> {}
-  #     ol.role:
-  #       type: ol.role
-  #       transforms:
-  #       - !<transforms.ValueTransform>
-  #         value: "Officer"
-  # OthersInvolvedIn:
-  #   fqn: 'ol.involvedin'
-  #   entitySetName: 'JohnsonCounty_IowaCity_CFSInvolvedIn'
-  #   src: "Others"
-  #   dst: "JohnsonCounty_IowaCity_Dispatch"
-  #   propertyDefinitions:
-  #     ol.id:
-  #       type: 'ol.id'
-  #       transforms:
-  #       - !<transforms.ConcatTransform>
-  #         columns: ["MNI_No", "OName", "Dis_ID"]
-  #         separator: "_"
-  #     person.age:
-  #       type: "person.age"
-  #       column: 'Age'
-  #       transforms:
-  #       - !<transforms.ParseIntTransform> {}
-  #     ol.role:
-  #       type: 'ol.role'
-  #       column: 'Type'
-  #       transforms:
-  #       - !<transforms.ReplaceTransform>
-  #         target: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-  #         goal: ['Victim','Witness','Suspect', "Reporter", 'Other', 'Passenger', 'Driver', 'Driver', 'Passenger', "Passenger"]
-  # OrganizationsInvolvedIn:
-  #   fqn: 'ol.involvedin'
-  #   entitySetName: 'JohnsonCounty_IowaCity_CFSInvolvedIn'
-  #   src: "Organizations"
-  #   dst: "JohnsonCounty_IowaCity_Dispatch"
-  #   propertyDefinitions:
-  #     ol.id:
-  #       type: 'ol.id'
-  #       column: 'Dis_ID'
-  # OfficersContactedAt1:
-  #   fqn: 'ol.contactedat'
-  #   entitySetName: 'JohnsonCounty_IowaCity_CFSContactedAt'
-  #   src: 'OfficersPersonnel'
-  #   dst: 'Contact1'
-  #   propertyDefinitions:
-  #     ol.id:
-  #       type: 'ol.id'
-  #       column: 'OPhone'
-  #       transforms:
-  #       - !<transforms.PrefixTransform>
-  #         prefix: "1_"
-  # OfficersContactedAt2:
-  #   fqn: 'ol.contactedat'
-  #   entitySetName: 'JohnsonCounty_IowaCity_CFSContactedAt'
-  #   src: 'OfficersPersonnel'
-  #   dst: 'Contact2'
-  #   propertyDefinitions:
-  #     ol.id:
-  #       type: 'ol.id'
-  #       column: 'CellPhone'
-  #       transforms:
-  #       - !<transforms.PrefixTransform>
-  #         prefix: "2_"
-  # OthersContactedAt1:
-  #   fqn: 'ol.contactedat'
-  #   entitySetName: 'JohnsonCounty_IowaCity_CFSContactedAt'
-  #   src: 'Others'
-  #   dst: 'Contact1'
-  #   propertyDefinitions:
-  #     ol.id:
-  #       type: 'ol.id'
-  #       column: 'OPhone'
-  #       transforms:
-  #       - !<transforms.PrefixTransform>
-  #         prefix: "3_"
-  # OthersContactedAt2:
-  #   fqn: 'ol.contactedat'
-  #   entitySetName: 'JohnsonCounty_IowaCity_CFSContactedAt'
-  #   src: 'Others'
-  #   dst: 'Contact2'
-  #   propertyDefinitions:
-  #     ol.id:
-  #       type: 'ol.id'
-  #       column: 'CellPhone'
-  #       transforms:
-  #       - !<transforms.PrefixTransform>
-  #         prefix: "4_"
-  # JohnsonCounty_IowaCity_CFSInvolvedIn:
-  #   fqn: 'ol.involvedin'
-  #   entitySetName: 'JohnsonCounty_IowaCity_CFSInvolvedIn'
-  #   src: 'JohnsonCounty_IowaCity_Addresses'
-  #   dst: 'JohnsonCounty_IowaCity_Dispatch'
-  #   propertyDefinitions:
-  #     ol.id:
-  #       type: 'ol.id'
-  #       column: 'ID'
-  # OfficerIsPersonnel:
-  #   fqn: 'ol.is'
-  #   entitySetName: 'JohnsonCounty_IowaCity_Is'
-  #   src: 'Officers'
-  #   dst: 'OfficersPersonnel'
-  #   propertyDefinitions:
-  #     general.stringid:
-  #       type: 'general.stringid'
-  #       transforms:
-  #       - !<transforms.ConcatCombineTransform>
-  #         transforms:
-  #         - !<transforms.GetPrefixDigitsTransform>
-  #           separator: ' '
-  #           column: "OName"
-  #         - !<transforms.ColumnTransform>
-  #           column: "OfficerID"
-  # OfficerHas1:
-  #   fqn: 'ol.has'
-  #   entitySetName: 'JohnsonCounty_IowaCity_Has'
-  #   src: 'Officers'
-  #   dst: 'OfficersPersonnelID'
-  #   propertyDefinitions:
-  #     ol.id:
-  #       type: 'ol.id'
-  #       column: OfficerID
-  #       transforms:
-  #       - !<transforms.PrefixTransform>
-  #         prefix: "ID_"
-  # OfficerHas2:
-  #   fqn: 'ol.has'
-  #   entitySetName: 'JohnsonCounty_IowaCity_Has'
-  #   src: 'Officers'
-  #   dst: 'OfficersPersonDetails'
-  #   propertyDefinitions:
-  #     ol.id:
-  #       type: 'ol.id'
-  #       column: OfficerID
-  #       transforms:
-  #       - !<transforms.PrefixTransform>
-  #         prefix: "details_"
-  # OthersHas1:
-  #   fqn: 'ol.has'
-  #   entitySetName: 'JohnsonCounty_IowaCity_Has'
-  #   src: 'Others'
-  #   dst: 'OthersPersonDetails'
-  #   propertyDefinitions:
-  #     ol.id:
-  #       type: 'ol.id'
-  #       transforms:
-  #       - !<transforms.ConcatTransform>
-  #         columns: ["MNI_No", "OName"]
-  #         separator: "_"
-  #       - !<transforms.PrefixTransform>
-  #         prefix: "details_"
-  # OthersHas2:
-  #   fqn: 'ol.has'
-  #   entitySetName: 'JohnsonCounty_IowaCity_Has'
-  #   src: 'Others'
-  #   dst: 'OthersPersonIdentification'
-  #   propertyDefinitions:
-  #     ol.id:
-  #       type: 'ol.id'
-  #       transforms:
-  #       - !<transforms.ConcatTransform>
-  #         columns: ["MNI_No", "OName"]
-  #         separator: "_"
-  #       - !<transforms.PrefixTransform>
-  #         prefix: "ID_"
+  Contact1:
+    name: "Contact1"
+    fqn: 'ol.contactinformation'
+    entitySetName: 'JohnsonCounty_IowaCity_CFSContactInfo'
+    propertyDefinitions:
+      general.id:
+        type: 'general.id'
+        column: 'OPhone'
+      contact.phonenumber:
+        type: 'contact.phonenumber'
+        column: 'OPhone'
+  Contact2:
+    name: "Contact2"
+    fqn: 'ol.contactinformation'
+    entitySetName: 'JohnsonCounty_IowaCity_CFSContactInfo'
+    propertyDefinitions:
+      general.id:
+        type: 'general.id'
+        column: 'CellPhone'
+      contact.phonenumber:
+        type: 'contact.phonenumber'
+        column: 'CellPhone'
+  JohnsonCounty_IowaCity_Dispatch:
+    fqn: 'ol.dispatch'
+    entitySetName: 'JohnsonCounty_IowaCity_Dispatch'
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "Dis_ID"
+      ol.notes:
+        type: 'ol.notes'
+        column: 'OSQ'
+  JohnsonCounty_IowaCity_Vehicle:
+    fqn: 'ol.vehicle'
+    entitySetName: 'JohnsonCounty_IowaCity_Vehicle'
+    propertyDefinitions:
+      ol.id:
+        type: 'ol.id'
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ['MAKE', 'MODEL', 'LIC', 'LIS']
+      vehicle.make:
+        type: 'vehicle.make'
+        column: 'MAKE'
+      vehicle.model:
+        type: 'vehicle.model'
+        column: "MODEL"
+      vehicle.vin:
+        type: 'vehicle.vin'
+        column: 'VIN'
+      vehicle.year:
+        type: 'vehicle.year'
+        transforms:
+        - !<transforms.BooleanContainsTransform>
+          column: 'VehYear'
+          string: 'DOB'
+          transformsIfTrue:
+          - !<transforms.ValueTransform>
+            value: ''
+          transformsIfFalse:
+          - !<transforms.BooleanContainsTransform>
+            column: 'VehYear'
+            string: '/'
+            transformsIfTrue:
+            - !<transforms.SplitTransform>
+              separator: '/'
+              index: 'last'
+            transformsIfFalse:
+            - !<transforms.ColumnTransform>
+              column: 'VehYear'
+      vehicle.color:
+        type: "vehicle.color"
+        column: "Color"
+      vehicle.color:
+        type: "vehicle.color"
+        column: "ColorSecondary"
+      vehicle.style:
+        type: 'vehicle.style'
+        column: 'Style'
+      vehicle.licensenumber:
+        type: "vehicle.licensenumber"
+        column: "LIC"
+      vehicle.licensestate:
+        type: 'vehicle.licensestate'
+        column: "LIS"
+      vehicle.licenseplatetype:
+        type: "vehicle.licenseplatetype"
+        column: "LIT"
+      vehicle.licenseyear:
+        type: 'vehicle.licenseyear'
+        transforms:
+        - !<transforms.BooleanContainsTransform>
+          column: 'VehYear'
+          string: 'DOB'
+          transformsIfTrue:
+          - !<transforms.ValueTransform>
+            value: ''
+          transformsIfFalse:
+          - !<transforms.BooleanContainsTransform>
+            column: 'VehYear'
+            string: '/'
+            transformsIfTrue:
+            - !<transforms.SplitTransform>
+              separator: '/'
+              index: 'last'
+            transformsIfFalse:
+            - !<transforms.ColumnTransform>
+              column: 'VehYear'
+      ol.dispatchtransfer:
+        type: 'ol.dispatchtransfer'
+        column: 'TransferVehicle'
+        transforms:
+        - !<transforms.ParseBoolTransform> {}
+associationDefinitions:
+  InvolvedIn:
+    fqn: 'ol.involvedin'
+    entitySetName: 'JohnsonCounty_IowaCity_CFSInvolvedIn'
+    src: "JohnsonCounty_IowaCity_Vehicle"
+    dst: "JohnsonCounty_IowaCity_Dispatch"
+    propertyDefinitions:
+      ol.id:
+        type: 'ol.id'
+        column: 'Dis_ID'
+  OfficerInvolvedIn:
+    fqn: 'ol.involvedin'
+    entitySetName: 'JohnsonCounty_IowaCity_CFSInvolvedIn'
+    src: "Officers"
+    dst: "JohnsonCounty_IowaCity_Dispatch"
+    propertyDefinitions:
+      ol.id:
+        type: 'ol.id'
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.GetPrefixDigitsTransform>
+            separator: ' '
+            column: "OName"
+          - !<transforms.ColumnTransform>
+            column: "OfficerID"
+          - !<transforms.ColumnTransform>
+            column: "Dis_ID"
+      person.age:
+        type: "person.age"
+        column: 'Age'
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+      ol.role:
+        type: ol.role
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Officer"
+  OthersInvolvedIn:
+    fqn: 'ol.involvedin'
+    entitySetName: 'JohnsonCounty_IowaCity_CFSInvolvedIn'
+    src: "Others"
+    dst: "JohnsonCounty_IowaCity_Dispatch"
+    propertyDefinitions:
+      ol.id:
+        type: 'ol.id'
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["MNI_No", "OName", "Dis_ID"]
+          separator: "_"
+      person.age:
+        type: "person.age"
+        column: 'Age'
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+      ol.role:
+        type: 'ol.role'
+        column: 'Type'
+        transforms:
+        - !<transforms.ReplaceTransform>
+          target: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+          goal: ['Victim','Witness','Suspect', "Reporter", 'Other', 'Passenger', 'Driver', 'Driver', 'Passenger', "Passenger"]
+  OrganizationsInvolvedIn:
+    fqn: 'ol.involvedin'
+    entitySetName: 'JohnsonCounty_IowaCity_CFSInvolvedIn'
+    src: "Organizations"
+    dst: "JohnsonCounty_IowaCity_Dispatch"
+    propertyDefinitions:
+      ol.id:
+        type: 'ol.id'
+        column: 'Dis_ID'
+  OfficersContactedAt1:
+    fqn: 'ol.contactedat'
+    entitySetName: 'JohnsonCounty_IowaCity_CFSContactedAt'
+    src: 'OfficersPersonnel'
+    dst: 'Contact1'
+    propertyDefinitions:
+      ol.id:
+        type: 'ol.id'
+        column: 'OPhone'
+        transforms:
+        - !<transforms.PrefixTransform>
+          prefix: "1_"
+  OfficersContactedAt2:
+    fqn: 'ol.contactedat'
+    entitySetName: 'JohnsonCounty_IowaCity_CFSContactedAt'
+    src: 'OfficersPersonnel'
+    dst: 'Contact2'
+    propertyDefinitions:
+      ol.id:
+        type: 'ol.id'
+        column: 'CellPhone'
+        transforms:
+        - !<transforms.PrefixTransform>
+          prefix: "2_"
+  OthersContactedAt1:
+    fqn: 'ol.contactedat'
+    entitySetName: 'JohnsonCounty_IowaCity_CFSContactedAt'
+    src: 'Others'
+    dst: 'Contact1'
+    propertyDefinitions:
+      ol.id:
+        type: 'ol.id'
+        column: 'OPhone'
+        transforms:
+        - !<transforms.PrefixTransform>
+          prefix: "3_"
+  OthersContactedAt2:
+    fqn: 'ol.contactedat'
+    entitySetName: 'JohnsonCounty_IowaCity_CFSContactedAt'
+    src: 'Others'
+    dst: 'Contact2'
+    propertyDefinitions:
+      ol.id:
+        type: 'ol.id'
+        column: 'CellPhone'
+        transforms:
+        - !<transforms.PrefixTransform>
+          prefix: "4_"
+  JohnsonCounty_IowaCity_CFSInvolvedIn:
+    fqn: 'ol.involvedin'
+    entitySetName: 'JohnsonCounty_IowaCity_CFSInvolvedIn'
+    src: 'JohnsonCounty_IowaCity_Addresses'
+    dst: 'JohnsonCounty_IowaCity_Dispatch'
+    propertyDefinitions:
+      ol.id:
+        type: 'ol.id'
+        column: 'ID'
+  OfficerIsPersonnel:
+    fqn: 'ol.is'
+    entitySetName: 'JohnsonCounty_IowaCity_Is'
+    src: 'Officers'
+    dst: 'OfficersPersonnel'
+    propertyDefinitions:
+      general.stringid:
+        type: 'general.stringid'
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.GetPrefixDigitsTransform>
+            separator: ' '
+            column: "OName"
+          - !<transforms.ColumnTransform>
+            column: "OfficerID"
+  OfficerHas1:
+    fqn: 'ol.has'
+    entitySetName: 'JohnsonCounty_IowaCity_Has'
+    src: 'Officers'
+    dst: 'OfficersPersonnelID'
+    propertyDefinitions:
+      ol.id:
+        type: 'ol.id'
+        column: OfficerID
+        transforms:
+        - !<transforms.PrefixTransform>
+          prefix: "ID_"
+  OfficerHas2:
+    fqn: 'ol.has'
+    entitySetName: 'JohnsonCounty_IowaCity_Has'
+    src: 'Officers'
+    dst: 'OfficersPersonDetails'
+    propertyDefinitions:
+      ol.id:
+        type: 'ol.id'
+        column: OfficerID
+        transforms:
+        - !<transforms.PrefixTransform>
+          prefix: "details_"
+  OthersHas1:
+    fqn: 'ol.has'
+    entitySetName: 'JohnsonCounty_IowaCity_Has'
+    src: 'Others'
+    dst: 'OthersPersonDetails'
+    propertyDefinitions:
+      ol.id:
+        type: 'ol.id'
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["MNI_No", "OName"]
+          separator: "_"
+        - !<transforms.PrefixTransform>
+          prefix: "details_"
+  OthersHas2:
+    fqn: 'ol.has'
+    entitySetName: 'JohnsonCounty_IowaCity_Has'
+    src: 'Others'
+    dst: 'OthersPersonIdentification'
+    propertyDefinitions:
+      ol.id:
+        type: 'ol.id'
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["MNI_No", "OName"]
+          separator: "_"
+        - !<transforms.PrefixTransform>
+          prefix: "ID_"
