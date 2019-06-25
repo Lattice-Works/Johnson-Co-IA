@@ -472,18 +472,18 @@ entityDefinitions:
         column: Longitude
         transforms:
         - !<transforms.ParseDoubleTransform> {}
-      # ol.locationcoordinates:
-      #   type: ol.locationcoordinates
-      #   transforms:
-      #   - !<transforms.GeographyPointTransform>
-      #     latTransforms:
-      #     - !<transforms.ColumnTransform>
-      #       column: Latitude
-      #     - !<transforms.ParseDoubleTransform> {}
-      #     lonTransforms:
-      #     - !<transforms.ColumnTransform>
-      #       column: Longitude
-      #     - !<transforms.ParseDoubleTransform> {}
+      ol.locationcoordinates:
+        type: ol.locationcoordinates
+        transforms:
+        - !<transforms.GeographyPointTransform>
+          latTransforms:
+          - !<transforms.ColumnTransform>
+            column: Latitude
+          - !<transforms.ParseDoubleTransform> {}
+          lonTransforms:
+          - !<transforms.ColumnTransform>
+            column: Longitude
+          - !<transforms.ParseDoubleTransform> {}
   # JohnsonCounty_IowaCity_CFSContactInfo:
   #   fqn: ol.contactinformation
   #   entitySetName: JohnsonCounty_IowaCity_CFSContactInfo
