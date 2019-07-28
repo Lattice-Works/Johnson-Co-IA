@@ -1,0 +1,426 @@
+
+
+
+entityDefinitions:
+
+  person:
+    fqn: "general.person"
+    entitySetName: "JohnsonCountyERPatients"
+    propertyDefinitions:
+      nc.SubjectIdentification:
+        type: "nc.SubjectIdentification"
+        column: "MRN"
+      nc.PersonSex:
+        type: "nc.PersonSex"
+        column: "Sex"
+      ol.datasource:
+        type: "ol.datasource"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "University of Iowa Hospital E.D."
+    conditions:
+    - !<conditions.ConditionalOr> {}
+    - !<conditions.BooleanRegexCondition>
+      column: "MRN"
+      pattern: "(^ *$)|(\\bNA\\b)"
+      reverse: True
+    - !<conditions.BooleanRegexCondition>
+      column: "Sex"
+      pattern: "(^ *$)|(\\bNA\\b)"
+      reverse: True
+    name: "person"
+
+  persondetails:
+    fqn: "ol.persondetails"
+    entitySetName: "JohnsonCountyERPatientDetails"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "Age.(Years)"
+      person.ageatevent:
+        type: "person.ageatevent"
+        column: "Age.(Years)"
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+    conditions:
+    - !<conditions.BooleanRegexCondition>
+      column: "Age.(Years)"
+      pattern: "(^ *$)|(\\bNA\\b)"
+      reverse: True
+    name: "persondetails"
+
+  encounter:
+    fqn: "ol.encounter"
+    entitySetName: "JohnsonCountyEREncounters"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "CSN"
+      ol.datetimestart:
+        type: "ol.datetimestart"
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.ColumnTransform>
+            column: "Visit.Date"
+          - !<transforms.NestedTransformsTransform>
+            transforms:
+            - !<transforms.ColumnTransform>
+              column: "Arr..Time"
+            - !<transforms.PaddingTransform>
+              pattern: "0"
+              length: 4
+              pre: true
+        - !<transforms.DateTimeTransform>
+          pattern: ["MM/dd/yyyy-HHmm.0", "M/dd/yyyy-HHmm.0", "MM/d/yyyy-HHmm.0", "M/d/yyyy-HHmm.0", "MM/dd/yyyy-HHmm", "M/dd/yyyy-HHmm", "MM/d/yyyy-HHmm", "M/d/yyyy-HHmm"]
+          timezone: "America/Chicago"
+      ol.durationinterval:
+        type: "ol.durationinterval"
+        column: "ED.Completed.Length.of.Stay.(Minutes)"
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+      ol.criticality:
+        type: "ol.criticality"
+        column: "Acuity"
+    conditions:
+    - !<conditions.ConditionalOr> {}
+    - !<conditions.BooleanRegexCondition>
+      column: "ED.Completed.Length.of.Stay.(Minutes)"
+      pattern: "(^ *$)|(\\bNA\\b)"
+      reverse: True
+    - !<conditions.BooleanRegexCondition>
+      column: "Arr..Time"
+      pattern: "(^ *$)|(\\bNA\\b)"
+      reverse: True
+    - !<conditions.BooleanRegexCondition>
+      column: "Visit.Date"
+      pattern: "(^ *$)|(\\bNA\\b)"
+      reverse: True
+    - !<conditions.BooleanRegexCondition>
+      column: "Acuity"
+      pattern: "(^ *$)|(\\bNA\\b)"
+      reverse: True
+    name: "encounter"
+
+  modeoftransit:
+    fqn: "ol.modeoftransit"
+    entitySetName: "JohnsonCountyERModesOfTransit"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["Arrival.Method", "Mode.of.Arrival", "CSN"]
+          separator: "_"
+      ol.type:
+        type: "ol.type"
+        column: "Arrival.Method"
+      ol.subtype:
+        type: "ol.subtype"
+        column: "Mode.of.Arrival"
+    conditions:
+    - !<conditions.ConditionalOr> {}
+    - !<conditions.BooleanRegexCondition>
+      column: "Mode.of.Arrival"
+      pattern: "(^ *$)|(\\bNA\\b)"
+      reverse: True
+    - !<conditions.BooleanRegexCondition>
+      column: "Arrival.Method"
+      pattern: "(^ *$)|(\\bNA\\b)"
+      reverse: True
+    name: "modeoftransit"
+
+  episode:
+    fqn: "ol.episode"
+    entitySetName: "JohnsonCountyEREpisodes"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "CSN"
+      ol.type:
+        type: "ol.type"
+        column: "Patient.Class"
+      ol.effectivedate:
+        type: "ol.effectivedate"
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.ColumnTransform>
+            column: "Visit.Date"
+          - !<transforms.NestedTransformsTransform>
+            transforms:
+            - !<transforms.ColumnTransform>
+              column: "Arr..Time"
+            - !<transforms.PaddingTransform>
+              pattern: "0"
+              length: 4
+              pre: true
+        - !<transforms.DateTimeTransform>
+          pattern: ["MM/dd/yyyy-HHmm.0", "M/dd/yyyy-HHmm.0", "MM/d/yyyy-HHmm.0", "M/d/yyyy-HHmm.0", "MM/dd/yyyy-HHmm", "M/dd/yyyy-HHmm", "MM/d/yyyy-HHmm", "M/d/yyyy-HHmm"]
+          timezone: "America/Chicago"
+      ol.datetimeend:
+        type: "ol.datetimeend"
+        column: "Disch.Date/Time"
+        transforms:
+        - !<transforms.DateTimeTransform>
+          pattern: ["MM/dd/yyyy HHmm", " MM/dd/yyyy HHmm"]
+          timezone: "America/Chicago"
+    conditions:
+    - !<conditions.ConditionalOr> {}
+    - !<conditions.BooleanRegexCondition>
+      column: "Disch.Date/Time"
+      pattern: "(^ *$)|(\\bNA\\b)"
+      reverse: True
+    - !<conditions.BooleanRegexCondition>
+      column: "Arr..Time"
+      pattern: "(^ *$)|(\\bNA\\b)"
+      reverse: True
+    - !<conditions.BooleanRegexCondition>
+      column: "Patient.Class"
+      pattern: "(^ *$)|(\\bNA\\b)"
+      reverse: True
+    - !<conditions.BooleanRegexCondition>
+      column: "Visit.Date"
+      pattern: "(^ *$)|(\\bNA\\b)"
+      reverse: True
+    name: "episode"
+
+  agency:
+    fqn: "ol.agency"
+    entitySetName: "JohnsonCountyHelicopterServices"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "Helicopter.Service"
+      ol.name:
+        type: "ol.name"
+        column: "Helicopter.Service"
+    conditions:
+    - !<conditions.BooleanRegexCondition>
+      column: "Helicopter.Service"
+      pattern: "(^ *$)|(\\bNA\\b)"
+      reverse: True
+    name: "agency"
+
+  insurance_org:
+    fqn: "ol.organization"
+    entitySetName: "JohnsonCountyERInsuranceOrganizations"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "Fin.Class"
+      ol.type:
+        type: "ol.type"
+        column: "Fin.Class"
+    conditions:
+    - !<conditions.BooleanRegexCondition>
+      column: "Fin.Class"
+      pattern: "(^ *$)|(\\bNA\\b)"
+      reverse: True
+    name: "insurance_org"
+
+  location:
+    fqn: "ol.location"
+    entitySetName: "JohnsonCountyERLocations"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "Pt.County"
+      ol.county:
+        type: "ol.county"
+        column: "Pt.County"
+    conditions:
+    - !<conditions.BooleanRegexCondition>
+      column: "Pt.County"
+      pattern: "(^ *$)|(\\bNA\\b)"
+      reverse: True
+    name: "location"
+
+  healthcondition:
+    fqn: "ol.healthcondition"
+    entitySetName: "JohnsonCountyERHealthConditions"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["CC.Comments", "Chief.Complaint", "Primary.Dx"]
+          separator: "_"
+      ol.description:
+        type: "ol.description"
+        column: "CC.Comments"
+      ol.category:
+        type: "ol.category"
+        column: "Chief.Complaint"
+      ol.name:
+        type: "ol.name"
+        column: "Primary.Dx"
+    conditions:
+    - !<conditions.ConditionalOr> {}
+    - !<conditions.BooleanRegexCondition>
+      column: "CC.Comments"
+      pattern: "(^ *$)|(\\bNA\\b)"
+      reverse: True
+    - !<conditions.BooleanRegexCondition>
+      column: "Primary.Dx"
+      pattern: "(^ *$)|(\\bNA\\b)"
+      reverse: True
+    - !<conditions.BooleanRegexCondition>
+      column: "Chief.Complaint"
+      pattern: "(^ *$)|(\\bNA\\b)"
+      reverse: True
+    name: "healthcondition"
+
+
+associationDefinitions:
+
+  providedby:
+    fqn: "ol.providedby"
+    entitySetName: "JohnsonCountyProvidedBy"
+    src: "modeoftransit"
+    dst: "agency"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["Arrival.Method", "Mode.of.Arrival", "Helicopter.Service"]
+    name: "providedby"
+
+  isto:
+    fqn: "ol.isto"
+    entitySetName: "JohnsonCountyIsTo"
+    src: "modeoftransit"
+    dst: "encounter"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["Arrival.Method", "Mode.of.Arrival", "CSN"]
+    name: "isto"
+
+  presentsfor1:
+    fqn: "ol.presentsfor"
+    entitySetName: "JohnsonCountyPresentsFor"
+    src: "person"
+    dst: "encounter"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["MRN", "CSN"]
+    name: "presentsfor1"
+
+  presentsfor2:
+    fqn: "ol.presentsfor"
+    entitySetName: "JohnsonCountyPresentsFor"
+    src: "person"
+    dst: "episode"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["MRN", "CSN"]
+          - !<transforms.ValueTransform>
+            value: "2"
+    name: "presentsfor2"
+
+  partof:
+    fqn: "ol.partof"
+    entitySetName: "JohnsonCountyPartOf"
+    src: "encounter"
+    dst: "episode"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["CSN"]
+    name: "partof"
+
+  locatedat:
+    fqn: "ol.locatedat"
+    entitySetName: "JohnsonCountyLocatedAt"
+    src: "person"
+    dst: "location"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["MRN", "Pt.County"]
+    name: "locatedat"
+
+  transportedby1:
+    fqn: "ol.transportedby"
+    entitySetName: "JohnsonCountyTransportedBy"
+    src: "person"
+    dst: "agency"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["MRN", "Helicopter.Service"]
+    name: "transportedby1"
+
+  transportedby2:
+    fqn: "ol.transportedby"
+    entitySetName: "JohnsonCountyTransportedBy"
+    src: "person"
+    dst: "modeoftransit"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["Arrival.Method", "Mode.of.Arrival", "MRN"]
+          - !<transforms.ValueTransform>
+            value: "2"
+    name: "transportedby2"
+
+  insuredby:
+    fqn: "health.insuredby"
+    entitySetName: "JohnsonCountyInsuredBy"
+    src: "person"
+    dst: "insurance_org"
+    # generator: !<generators.TransformSeriesGenerator>
+    #   transforms:
+    #   - !<transforms.ConcatTransform>
+    #     columns: ["MRN", "Fin.Class"]
+    propertyDefinitions: {}
+    name: "insuredby"
+
+  has:
+    fqn: "ol.has"
+    entitySetName: "JohnsonCountyHas"
+    src: "person"
+    dst: "persondetails"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["MRN", "Age.(Years)"]
+    name: "has"
+
+  observedin:
+    fqn: "ol.observedin"
+    entitySetName: "JohnsonCountyReported"
+    src: "healthcondition"
+    dst: "person"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["MRN", "Primary.Dx", "CC.Comments", "Chief.Complaint"]
+    name: "observedin"
+
