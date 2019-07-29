@@ -67,6 +67,7 @@ entityDefinitions:
             transforms:
             - !<transforms.ColumnTransform>
               column: "Arr..Time"
+            - !<transforms.ParseIntTransform> {}
             - !<transforms.PaddingTransform>
               pattern: "0"
               length: 4
