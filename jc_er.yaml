@@ -152,6 +152,7 @@ entityDefinitions:
             transforms:
             - !<transforms.ColumnTransform>
               column: "Arr..Time"
+            - !<transforms.ParseIntTransform> {}
             - !<transforms.PaddingTransform>
               pattern: "0"
               length: 4
@@ -424,4 +425,3 @@ associationDefinitions:
         - !<transforms.ConcatTransform>
           columns: ["MRN", "Primary.Dx", "CC.Comments", "Chief.Complaint"]
     name: "observedin"
-
