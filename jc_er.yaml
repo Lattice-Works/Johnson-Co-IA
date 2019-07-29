@@ -391,10 +391,10 @@ associationDefinitions:
     entitySetName: "JohnsonCountyInsuredBy"
     src: "person"
     dst: "insurance_org"
-    # generator: !<generators.TransformSeriesGenerator>
-    #   transforms:
-    #   - !<transforms.ConcatTransform>
-    #     columns: ["MRN", "Fin.Class"]
+    generator: !<generators.TransformSeriesGenerator>
+      transforms:
+      - !<transforms.ConcatTransform>
+        columns: ["MRN", "Fin.Class"]
     propertyDefinitions: {}
     name: "insuredby"
 
