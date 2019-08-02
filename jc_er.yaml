@@ -415,7 +415,7 @@ associationDefinitions:
 
   observedin:
     fqn: "ol.observedin"
-    entitySetName: "JohnsonCountyReported"
+    entitySetName: "JohnsonCountyObservedIn"
     src: "healthcondition"
     dst: "person"
     propertyDefinitions:
