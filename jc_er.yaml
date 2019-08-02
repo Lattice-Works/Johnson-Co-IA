@@ -13,6 +13,98 @@ entityDefinitions:
       nc.PersonSex:
         type: "nc.PersonSex"
         column: "Sex"
+      nc.PersonRace1:
+        type: "nc.PersonRace"
+        transforms:
+        - !<transform.BooleanRegexTransform>
+          column: "Race"
+          pattern: "African American/Black"
+          transformsIfTrue:
+          - !<transforms.ValueTransform>
+            value: "Black"
+          transformsIfFalse:
+          - !<transforms.ValueTransform>
+            value: ""
+      nc.PersonRace2:
+        type: "nc.PersonRace"
+        transforms:
+        - !<transform.BooleanRegexTransform>
+          column: "Race"
+          pattern: "American Indian/Alaska Native"
+          transformsIfTrue:
+          - !<transforms.ValueTransform>
+            value: "Native American"
+          transformsIfFalse:
+          - !<transforms.ValueTransform>
+            value: ""
+      nc.PersonRace3:
+        type: "nc.PersonRace"
+        transforms:
+        - !<transform.BooleanRegexTransform>
+          column: "Race"
+          pattern: "Asian"
+          transformsIfTrue:
+          - !<transforms.ValueTransform>
+            value: "Asian"
+          transformsIfFalse:
+          - !<transforms.ValueTransform>
+            value: ""
+      nc.PersonRace4:
+        type: "nc.PersonRace"
+        transforms:
+        - !<transform.BooleanRegexTransform>
+          column: "Race"
+          pattern: "Declined"
+          transformsIfTrue:
+          - !<transforms.ValueTransform>
+            value: "Declined"
+          transformsIfFalse:
+          - !<transforms.ValueTransform>
+            value: ""
+      nc.PersonRace5:
+        type: "nc.PersonRace"
+        transforms:
+        - !<transform.BooleanRegexTransform>
+          column: "Race"
+          pattern: "Multiracial/Two or More Races"
+          transformsIfTrue:
+          - !<transforms.ValueTransform>
+            value: "Multiracial"
+          transformsIfFalse:
+          - !<transforms.ValueTransform>
+            value: ""
+      nc.PersonRace6:
+        type: "nc.PersonRace"
+        transforms:
+        - !<transform.BooleanRegexTransform>
+          column: "Race"
+          pattern: "Native Hawaiian/Pacific Islander"
+          transformsIfTrue:
+          - !<transforms.ValueTransform>
+            value: "Pacific Islander"
+          transformsIfFalse:
+          - !<transforms.ValueTransform>
+            value: ""
+      nc.PersonRace7:
+        type: "nc.PersonRace"
+        transforms:
+        - !<transform.BooleanRegexTransform>
+          column: "Race"
+          pattern: "White"
+          transformsIfTrue:
+          - !<transforms.ValueTransform>
+            value: "White"
+          transformsIfFalse:
+          - !<transforms.ValueTransform>
+            value: ""
+      nc.PersonEthnicity:
+        type: "nc.PersonEthnicity"
+        column: "Race"
+        transforms:
+        - !<transforms.ReplaceTransform>
+          target: ["Hispanic/Latino of any race"]
+          goal: ["hispanic"]
+          valueElse: ""
       ol.datasource:
         type: "ol.datasource"
         transforms:
