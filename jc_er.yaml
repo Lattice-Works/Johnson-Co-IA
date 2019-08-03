@@ -16,7 +16,7 @@ entityDefinitions:
       nc.PersonRace1:
         type: "nc.PersonRace"
         transforms:
-        - !<transform.BooleanRegexTransform>
+        - !<transforms.BooleanRegexTransform>
           column: "Race"
           pattern: "African American/Black"
           transformsIfTrue:
@@ -28,7 +28,7 @@ entityDefinitions:
       nc.PersonRace2:
         type: "nc.PersonRace"
         transforms:
-        - !<transform.BooleanRegexTransform>
+        - !<transforms.BooleanRegexTransform>
           column: "Race"
           pattern: "American Indian/Alaska Native"
           transformsIfTrue:
@@ -40,7 +40,7 @@ entityDefinitions:
       nc.PersonRace3:
         type: "nc.PersonRace"
         transforms:
-        - !<transform.BooleanRegexTransform>
+        - !<transforms.BooleanRegexTransform>
           column: "Race"
           pattern: "Asian"
           transformsIfTrue:
@@ -52,7 +52,7 @@ entityDefinitions:
       nc.PersonRace4:
         type: "nc.PersonRace"
         transforms:
-        - !<transform.BooleanRegexTransform>
+        - !<transforms.BooleanRegexTransform>
           column: "Race"
           pattern: "Declined"
           transformsIfTrue:
@@ -64,7 +64,7 @@ entityDefinitions:
       nc.PersonRace5:
         type: "nc.PersonRace"
         transforms:
-        - !<transform.BooleanRegexTransform>
+        - !<transforms.BooleanRegexTransform>
           column: "Race"
           pattern: "Multiracial/Two or More Races"
           transformsIfTrue:
@@ -76,7 +76,7 @@ entityDefinitions:
       nc.PersonRace6:
         type: "nc.PersonRace"
         transforms:
-        - !<transform.BooleanRegexTransform>
+        - !<transforms.BooleanRegexTransform>
           column: "Race"
           pattern: "Native Hawaiian/Pacific Islander"
           transformsIfTrue:
@@ -88,7 +88,7 @@ entityDefinitions:
       nc.PersonRace7:
         type: "nc.PersonRace"
         transforms:
-        - !<transform.BooleanRegexTransform>
+        - !<transforms.BooleanRegexTransform>
           column: "Race"
           pattern: "White"
           transformsIfTrue:
