@@ -16,7 +16,7 @@ entityDefinitions:
       nc.PersonRace1:
         type: "nc.PersonRace"
         transforms:
-        - !<transform.BooleanRegexTransform>
+        - !<transforms.BooleanRegexTransform>
           column: "Race"
           pattern: "African American/Black"
           transformsIfTrue:
@@ -28,7 +28,7 @@ entityDefinitions:
       nc.PersonRace2:
         type: "nc.PersonRace"
         transforms:
-        - !<transform.BooleanRegexTransform>
+        - !<transforms.BooleanRegexTransform>
           column: "Race"
           pattern: "American Indian/Alaska Native"
           transformsIfTrue:
@@ -40,7 +40,7 @@ entityDefinitions:
       nc.PersonRace3:
         type: "nc.PersonRace"
         transforms:
-        - !<transform.BooleanRegexTransform>
+        - !<transforms.BooleanRegexTransform>
           column: "Race"
           pattern: "Asian"
           transformsIfTrue:
@@ -52,7 +52,7 @@ entityDefinitions:
       nc.PersonRace4:
         type: "nc.PersonRace"
         transforms:
-        - !<transform.BooleanRegexTransform>
+        - !<transforms.BooleanRegexTransform>
           column: "Race"
           pattern: "Declined"
           transformsIfTrue:
@@ -64,7 +64,7 @@ entityDefinitions:
       nc.PersonRace5:
         type: "nc.PersonRace"
         transforms:
-        - !<transform.BooleanRegexTransform>
+        - !<transforms.BooleanRegexTransform>
           column: "Race"
           pattern: "Multiracial/Two or More Races"
           transformsIfTrue:
@@ -76,7 +76,7 @@ entityDefinitions:
       nc.PersonRace6:
         type: "nc.PersonRace"
         transforms:
-        - !<transform.BooleanRegexTransform>
+        - !<transforms.BooleanRegexTransform>
           column: "Race"
           pattern: "Native Hawaiian/Pacific Islander"
           transformsIfTrue:
@@ -88,7 +88,7 @@ entityDefinitions:
       nc.PersonRace7:
         type: "nc.PersonRace"
         transforms:
-        - !<transform.BooleanRegexTransform>
+        - !<transforms.BooleanRegexTransform>
           column: "Race"
           pattern: "White"
           transformsIfTrue:
@@ -151,22 +151,31 @@ entityDefinitions:
       ol.datetimestart:
         type: "ol.datetimestart"
         transforms:
-        - !<transforms.ConcatCombineTransform>
-          transforms:
+        - !<transforms.BooleanIsNullTransform>
+          column: "Arr..Time"
+          transformsIfTrue:
           - !<transforms.ColumnTransform>
             column: "Visit.Date"
-          - !<transforms.NestedTransformsTransform>
+          - !<transforms.DateAsDateTimeTransform>
+            pattern: ["MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy"]
+            timezone: "America/Chicago"
+          transformsIfFalse:
+          - !<transforms.ConcatCombineTransform>
             transforms:
             - !<transforms.ColumnTransform>
-              column: "Arr..Time"
-            - !<transforms.ParseIntTransform> {}
-            - !<transforms.PaddingTransform>
-              pattern: "0"
-              length: 4
-              pre: true
-        - !<transforms.DateTimeTransform>
-          pattern: ["MM/dd/yyyy-HHmm.0", "M/dd/yyyy-HHmm.0", "MM/d/yyyy-HHmm.0", "M/d/yyyy-HHmm.0", "MM/dd/yyyy-HHmm", "M/dd/yyyy-HHmm", "MM/d/yyyy-HHmm", "M/d/yyyy-HHmm"]
-          timezone: "America/Chicago"
+              column: "Visit.Date"
+            - !<transforms.NestedTransformsTransform>
+              transforms:
+              - !<transforms.ColumnTransform>
+                column: "Arr..Time"
+              - !<transforms.ParseIntTransform> {}
+              - !<transforms.PaddingTransform>
+                pattern: "0"
+                length: 4
+                pre: true
+          - !<transforms.DateTimeTransform>
+            pattern: ["MM/dd/yyyy-HHmm.0", "M/dd/yyyy-HHmm.0", "MM/d/yyyy-HHmm.0", "M/d/yyyy-HHmm.0", "MM/dd/yyyy-HHmm", "M/dd/yyyy-HHmm", "MM/d/yyyy-HHmm", "M/d/yyyy-HHmm"]
+            timezone: "America/Chicago"
       ol.durationinterval:
         type: "ol.durationinterval"
         column: "ED.Completed.Length.of.Stay.(Minutes)"
@@ -236,22 +245,31 @@ entityDefinitions:
       ol.effectivedate:
         type: "ol.effectivedate"
         transforms:
-        - !<transforms.ConcatCombineTransform>
-          transforms:
+        - !<transforms.BooleanIsNullTransform>
+          column: "Arr..Time"
+          transformsIfTrue:
           - !<transforms.ColumnTransform>
             column: "Visit.Date"
-          - !<transforms.NestedTransformsTransform>
+          - !<transforms.DateAsDateTimeTransform>
+            pattern: ["MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy"]
+            timezone: "America/Chicago"
+          transformsIfFalse:
+          - !<transforms.ConcatCombineTransform>
             transforms:
             - !<transforms.ColumnTransform>
-              column: "Arr..Time"
-            - !<transforms.ParseIntTransform> {}
-            - !<transforms.PaddingTransform>
-              pattern: "0"
-              length: 4
-              pre: true
-        - !<transforms.DateTimeTransform>
-          pattern: ["MM/dd/yyyy-HHmm.0", "M/dd/yyyy-HHmm.0", "MM/d/yyyy-HHmm.0", "M/d/yyyy-HHmm.0", "MM/dd/yyyy-HHmm", "M/dd/yyyy-HHmm", "MM/d/yyyy-HHmm", "M/d/yyyy-HHmm"]
-          timezone: "America/Chicago"
+              column: "Visit.Date"
+            - !<transforms.NestedTransformsTransform>
+              transforms:
+              - !<transforms.ColumnTransform>
+                column: "Arr..Time"
+              - !<transforms.ParseIntTransform> {}
+              - !<transforms.PaddingTransform>
+                pattern: "0"
+                length: 4
+                pre: true
+          - !<transforms.DateTimeTransform>
+            pattern: ["MM/dd/yyyy-HHmm.0", "M/dd/yyyy-HHmm.0", "MM/d/yyyy-HHmm.0", "M/d/yyyy-HHmm.0", "MM/dd/yyyy-HHmm", "M/dd/yyyy-HHmm", "MM/d/yyyy-HHmm", "M/d/yyyy-HHmm"]
+            timezone: "America/Chicago"
       ol.datetimeend:
         type: "ol.datetimeend"
         column: "Disch.Date/Time"
@@ -517,3 +535,5 @@ associationDefinitions:
         - !<transforms.ConcatTransform>
           columns: ["MRN", "Primary.Dx", "CC.Comments", "Chief.Complaint"]
     name: "observedin"
+
+
