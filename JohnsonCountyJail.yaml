@@ -1682,7 +1682,7 @@ associationDefinitions:
     fqn: "ol.transportedby"
     entitySetName: "JohnsonCounty_IowaCity_JCTransportedby"
     src: "JohnsonCounty_IowaCity_JCInmates"
-    dst: "Tofficerperson"
+    dst: "Tofficers"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
