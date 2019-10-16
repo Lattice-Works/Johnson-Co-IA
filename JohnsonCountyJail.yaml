@@ -967,17 +967,15 @@ associationDefinitions:
   hasrelationshipwith:
     fqn: "ol.hasrelationshipwith"
     entitySetName: "JohnsonCounty_IowaCity_JCHasRelationshipWith"
-    src: "JohnsonCounty_IowaCity_JCInmates"
-    dst: "JohnsonCounty_IowaCity_BondRelative"
+    src: "JohnsonCounty_IowaCity_BondRelative"
+    dst: "JohnsonCounty_IowaCity_JCInmates"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
         column: "Person_Post"
-      ol.role:
+      ol.role: # regex to pick out "wife", "parents" etc. already in bondrelative
         type: "ol.role"
-        transforms:
-        - !<transforms.ValueTransform>
-          value: "Kin"
+        column: "Person_Post"
     name: "hasrelationshipwith"
 
   JohnsonCounty_IowaCity_JCBondSet:
@@ -1001,7 +999,7 @@ associationDefinitions:
         type: "ol.id"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ["SentenceDays", "SentenceHrs", "Concurrent", "Probation", "ConsecWith", "Alt_Start_Date"]
+          columns: ["SentenceDays", "SentenceHrs", "Concurrent", "Probation", "ConsecWith", "Start_Date"]
       general.datetime:
         type: "general.datetime"
         column: "Start_Date"
@@ -1227,7 +1225,7 @@ associationDefinitions:
     fqn: "ol.arrestedby"
     entitySetName: "JohnsonCounty_IowaCity_JCArrestedBy"
     src: "JohnsonCounty_IowaCity_JCInmates"
-    dst: "Aofficerperson"
+    dst: "Aofficers"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -1271,7 +1269,7 @@ associationDefinitions:
     fqn: "ol.searchedby"
     entitySetName: "JohnsonCounty_IowaCity_JCSearchedBy"
     src: "JohnsonCounty_IowaCity_JCInmates"
-    dst: "Sofficerperson"
+    dst: "Sofficers"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -1310,7 +1308,9 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        column: "Person_Post"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["Person_Post", "Bond_Amount"]
     name: "Postedby1"
 
   Postedby2:
@@ -1321,7 +1321,9 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        column: "Person_Post"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["Person_Post", "Bond_Amount"]
     name: "Postedby2"
 
   Postedby3:
@@ -1332,7 +1334,9 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        column: "Person_Post"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["Person_Post", "Bond_Amount"]
     name: "Postedby3"
 
   JohnsonCounty_IowaCity_JCInvolvedIn1:
@@ -1344,28 +1348,12 @@ associationDefinitions:
       ol.id:
         type: "ol.id"
         column: "Jail_ID"
-    name: "JohnsonCounty_IowaCity_JCInvolvedIn1"
-
-  JohnsonCounty_IowaCity_JCInvolvedIn10:
-    fqn: "ol.involvedin"
-    entitySetName: "JohnsonCounty_IowaCity_JCInvolvedIn"
-    src: "Aofficerperson"
-    dst: "JohnsonCounty_IowaCity_JCCharge"
-    propertyDefinitions:
-      ol.id:
-        type: "ol.id"
-        column: "Jail_ID"
       ol.role:
         type: "ol.role"
         transforms:
         - !<transforms.ValueTransform>
-          value: "Officer"
-      ol.roledescription:
-        type: "ol.roledescription"
-        transforms:
-        - !<transforms.ValueTransform>
-          value: "Arresting"
-    name: "JohnsonCounty_IowaCity_JCInvolvedIn10"
+          value: "ArrestingAgency"
+    name: "JohnsonCounty_IowaCity_JCInvolvedIn1"
 
   JohnsonCounty_IowaCity_JCInvolvedIn2:
     fqn: "ol.involvedin"
@@ -1376,12 +1364,17 @@ associationDefinitions:
       ol.id:
         type: "ol.id"
         column: "Jail_ID"
+      ol.role:
+        type: "ol.role"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "TransportingAgency"
     name: "JohnsonCounty_IowaCity_JCInvolvedIn2"
 
   JohnsonCounty_IowaCity_JCInvolvedIn3:
     fqn: "ol.involvedin"
     entitySetName: "JohnsonCounty_IowaCity_JCInvolvedIn"
-    src: "Tofficerperson"
+    src: "Tofficers"
     dst: "JohnsonCounty_IowaCity_JCJailStay"
     propertyDefinitions:
       ol.id:
@@ -1408,6 +1401,11 @@ associationDefinitions:
       ol.id:
         type: "ol.id"
         column: "Jail_ID"
+      ol.role:
+        type: "ol.role"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "ReleasingAgency"
     name: "JohnsonCounty_IowaCity_JCInvolvedIn4"
 
   JohnsonCounty_IowaCity_JCInvolvedIn5:
@@ -1419,12 +1417,17 @@ associationDefinitions:
       ol.id:
         type: "ol.id"
         column: "Jail_ID"
+      ol.role:
+        type: "ol.role"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "ChargingAgency"
     name: "JohnsonCounty_IowaCity_JCInvolvedIn5"
 
   JohnsonCounty_IowaCity_JCInvolvedIn6:
     fqn: "ol.involvedin"
     entitySetName: "JohnsonCounty_IowaCity_JCInvolvedIn"
-    src: "Aofficerperson"
+    src: "Aofficers"
     dst: "JohnsonCounty_IowaCity_JCJailStay"
     propertyDefinitions:
       ol.id:
@@ -1445,7 +1448,7 @@ associationDefinitions:
   JohnsonCounty_IowaCity_JCInvolvedIn7:
     fqn: "ol.involvedin"
     entitySetName: "JohnsonCounty_IowaCity_JCInvolvedIn"
-    src: "Rofficerperson"
+    src: "Rofficers"
     dst: "JohnsonCounty_IowaCity_JCJailStay"
     propertyDefinitions:
       ol.id:
@@ -1466,7 +1469,7 @@ associationDefinitions:
   JohnsonCounty_IowaCity_JCInvolvedIn8:
     fqn: "ol.involvedin"
     entitySetName: "JohnsonCounty_IowaCity_JCInvolvedIn"
-    src: "Sofficerperson"
+    src: "Sofficers"
     dst: "JohnsonCounty_IowaCity_JCJailStay"
     propertyDefinitions:
       ol.id:
@@ -1483,6 +1486,27 @@ associationDefinitions:
         - !<transforms.ValueTransform>
           value: "Searching"
     name: "JohnsonCounty_IowaCity_JCInvolvedIn8"
+
+  JohnsonCounty_IowaCity_JCInvolvedIn9:
+    fqn: "ol.involvedin"
+    entitySetName: "JohnsonCounty_IowaCity_JCInvolvedIn"
+    src: "Aofficers"
+    dst: "JohnsonCounty_IowaCity_JCCharge"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "Jail_ID"
+      ol.role:
+        type: "ol.role"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Officer"
+      ol.roledescription:
+        type: "ol.roledescription"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Arresting"
+    name: "JohnsonCounty_IowaCity_JCInvolvedIn9"
 
   JohnsonCounty_IowaCity_JCWorksAt1:
     fqn: "ol.worksat"
@@ -1534,7 +1558,7 @@ associationDefinitions:
     fqn: "ol.releasedby"
     entitySetName: "JohnsonCounty_IowaCity_JCReleasedBy"
     src: "JohnsonCounty_IowaCity_JCInmates"
-    dst: "Rofficerperson"
+    dst: "Rofficers"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -1682,7 +1706,7 @@ associationDefinitions:
     fqn: "ol.transportedby"
     entitySetName: "JohnsonCounty_IowaCity_JCTransportedby"
     src: "JohnsonCounty_IowaCity_JCInmates"
-    dst: "Tofficerperson"
+    dst: "Tofficers"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
