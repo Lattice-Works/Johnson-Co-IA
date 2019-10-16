@@ -59,7 +59,7 @@ entityDefinitions:
         column: "Race"
         transforms:
         - !<transforms.ReplaceTransform>
-          goal: ["asian", "white", "black", "amindian"]
+          goal: ["Asian", "White", "Black", "Native American"]
           target: ["A", "W", "B", "I"]
       ol.datasource:
         type: "ol.datasource"
