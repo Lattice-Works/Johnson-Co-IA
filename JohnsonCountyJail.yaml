@@ -1070,7 +1070,7 @@ associationDefinitions:
           columns: ["SentenceHrs", "SentenceDays", "Jail_ID", "Concurrent", "Probation", "BookedID", "MNI_No"]
     name: "Resultsin5"
 
-  JohnsonCounty_IowaCity_JCRegisteredFor:
+  JohnsonCounty_IowaCity_JCRegisteredFor1:
     fqn: "general.registeredfor"
     entitySetName: "JohnsonCounty_IowaCity_JCRegisteredFor"
     src: "jailtimemodifications"
@@ -1079,7 +1079,24 @@ associationDefinitions:
       ol.id:
         type: "ol.id"
         column: "Jail_ID"
-    name: "JohnsonCounty_IowaCity_JCRegisteredFor"
+    name: "JohnsonCounty_IowaCity_JCRegisteredFor1"
+
+  JohnsonCounty_IowaCity_JCRegisteredFor2:
+    fqn: "general.registeredfor"
+    entitySetName: "JohnsonCounty_IowaCity_JCRegisteredFor"
+    src: "JohnsonCounty_IowaCity_JCChargeEvent"
+    dst: "JohnsonCounty_IowaCity_JCCharge"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.ColumnTransform>
+            column: "Jail_ID"
+          - !<transforms.ValueTransform>
+            value: "2"
+    name: "JohnsonCounty_IowaCity_JCRegisteredFor2"
 
   JohnsonCounty_IowaCity_JCSubjectOf:
     fqn: "ol.subjectof"
@@ -1343,7 +1360,7 @@ associationDefinitions:
     fqn: "ol.involvedin"
     entitySetName: "JohnsonCounty_IowaCity_JCInvolvedIn"
     src: "ArrestingAgency"
-    dst: "JohnsonCounty_IowaCity_JCCharge"
+    dst: "JohnsonCounty_IowaCity_JCChargeEvent"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -1412,7 +1429,7 @@ associationDefinitions:
     fqn: "ol.involvedin"
     entitySetName: "JohnsonCounty_IowaCity_JCInvolvedIn"
     src: "ChargingAgency"
-    dst: "JohnsonCounty_IowaCity_JCCharge"
+    dst: "JohnsonCounty_IowaCity_JCChargeEvent"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -1491,7 +1508,7 @@ associationDefinitions:
     fqn: "ol.involvedin"
     entitySetName: "JohnsonCounty_IowaCity_JCInvolvedIn"
     src: "Aofficers"
-    dst: "JohnsonCounty_IowaCity_JCCharge"
+    dst: "JohnsonCounty_IowaCity_JCChargeEvent"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
