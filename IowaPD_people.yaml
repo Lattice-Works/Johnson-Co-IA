@@ -1,3 +1,5 @@
+# select * from dispatch_person_all;
+
 entityDefinitions:
   Officers:
     name: "Officers"
@@ -425,6 +427,8 @@ entityDefinitions:
     - !<conditions.BooleanIsNullCondition>
       column: 'OfficerID'
       reverse: true
+
+
   OthersPersonDetails:
     name: "OthersPersonDetails"
     fqn: 'ol.persondetails'
@@ -469,6 +473,8 @@ entityDefinitions:
     - !<conditions.BooleanIsNullCondition>
       column: 'OfficerID'
       reverse: false
+
+
   OthersPersonIdentification:
     name: "OthersPersonIdentification"
     fqn: 'ol.identification'
@@ -572,9 +578,9 @@ entityDefinitions:
       contact.phonenumber:
         type: 'contact.phonenumber'
         column: 'CellPhone'
-  JohnsonCounty_IowaCity_Dispatch:
-    fqn: 'ol.dispatch'
-    entitySetName: 'JohnsonCounty_IowaCity_Dispatch'
+  JohnsonCounty_IowaCity_CallsForService:
+    fqn: 'ol.callforservice'
+    entitySetName: 'JohnsonCounty_IowaCity_CallsForService'
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -668,7 +674,7 @@ associationDefinitions:
     fqn: 'ol.involvedin'
     entitySetName: 'JohnsonCounty_IowaCity_CFSInvolvedIn'
     src: "JohnsonCounty_IowaCity_Vehicle"
-    dst: "JohnsonCounty_IowaCity_Dispatch"
+    dst: "JohnsonCounty_IowaCity_CallsForService"
     propertyDefinitions:
       ol.id:
         type: 'ol.id'
@@ -676,8 +682,8 @@ associationDefinitions:
   OfficerInvolvedIn:
     fqn: 'ol.involvedin'
     entitySetName: 'JohnsonCounty_IowaCity_CFSInvolvedIn'
-    src: "Officers"
-    dst: "JohnsonCounty_IowaCity_Dispatch"
+    src: "OfficersPersonnel"
+    dst: "JohnsonCounty_IowaCity_CallsForService"
     propertyDefinitions:
       ol.id:
         type: 'ol.id'
@@ -705,7 +711,7 @@ associationDefinitions:
     fqn: 'ol.involvedin'
     entitySetName: 'JohnsonCounty_IowaCity_CFSInvolvedIn'
     src: "Others"
-    dst: "JohnsonCounty_IowaCity_Dispatch"
+    dst: "JohnsonCounty_IowaCity_CallsForService"
     propertyDefinitions:
       ol.id:
         type: 'ol.id'
@@ -729,7 +735,7 @@ associationDefinitions:
     fqn: 'ol.involvedin'
     entitySetName: 'JohnsonCounty_IowaCity_CFSInvolvedIn'
     src: "Organizations"
-    dst: "JohnsonCounty_IowaCity_Dispatch"
+    dst: "JohnsonCounty_IowaCity_CallsForService"
     propertyDefinitions:
       ol.id:
         type: 'ol.id'
@@ -786,19 +792,19 @@ associationDefinitions:
     fqn: 'ol.involvedin'
     entitySetName: 'JohnsonCounty_IowaCity_CFSInvolvedIn'
     src: 'JohnsonCounty_IowaCity_Addresses'
-    dst: 'JohnsonCounty_IowaCity_Dispatch'
+    dst: 'JohnsonCounty_IowaCity_CallsForService'
     propertyDefinitions:
       ol.id:
         type: 'ol.id'
         column: 'ID'
   OfficerIsPersonnel:
-    fqn: 'ol.is'
+    fqn: 'o.is'
     entitySetName: 'JohnsonCounty_IowaCity_Is'
     src: 'Officers'
     dst: 'OfficersPersonnel'
     propertyDefinitions:
-      general.stringid:
-        type: 'general.stringid'
+      general.id:
+        type: 'general.id'
         transforms:
         - !<transforms.ConcatCombineTransform>
           transforms:

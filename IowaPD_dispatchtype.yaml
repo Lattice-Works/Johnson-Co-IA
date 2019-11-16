@@ -1,7 +1,9 @@
+# select * from dispatch_type_all;
+
 entityDefinitions:
-  JohnsonCounty_IowaCity_Dispatch:
-    fqn: 'ol.dispatch'
-    entitySetName: 'JohnsonCounty_IowaCity_Dispatch'
+  JohnsonCounty_IowaCity_CallsForService:
+    fqn: 'ol.callforservice'
+    entitySetName: 'JohnsonCounty_IowaCity_CallsForService'
     propertyDefinitions:
       ol.id:
         type: 'ol.id'
@@ -14,39 +16,31 @@ entityDefinitions:
         column: "Type_Priority"
       datetime.alerted:
         type: 'datetime.alerted'
+        column: "TimeDisp"
         transforms:
-        - !<transforms.CombineDateTimeTransform>
-          dateColumn: CFS_DateTimeJanet
-          datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
-          timeColumn: TimeDisp
-          timePattern: ['yyyy-MM-dd HH:mm:ss.S']
+        - !<transforms.DateTimeTransform>
+          pattern: ['yyyy-MM-dd HH:mm:ss.S']
           timezone: "America/Chicago"
       datetime.enroute:
         type: 'datetime.enroute'
+        column: "TimeEnroute"
         transforms:
-        - !<transforms.CombineDateTimeTransform>
-          dateColumn: CFS_DateTimeJanet
-          datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
-          timeColumn: 'TimeEnroute'
-          timePattern: ['yyyy-MM-dd HH:mm:ss.S']
+        - !<transforms.DateTimeTransform>
+          pattern: ['yyyy-MM-dd HH:mm:ss.S']
           timezone: "America/Chicago"
       datetime.arrived:
         type: 'datetime.arrived'
+        column: "TimeArr"
         transforms:
-        - !<transforms.CombineDateTimeTransform>
-          dateColumn: CFS_DateTimeJanet
-          datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
-          timeColumn: 'TimeArr'
-          timePattern: ['yyyy-MM-dd HH:mm:ss.S']
+        - !<transforms.DateTimeTransform>
+          pattern: ['yyyy-MM-dd HH:mm:ss.S']
           timezone: "America/Chicago"
       date.completeddatetime:
         type: 'date.completeddatetime'
+        column: 'TimeComp'
         transforms:
-        - !<transforms.CombineDateTimeTransform>
-          dateColumn: CFS_DateTimeJanet
-          datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
-          timeColumn: 'TimeComp'
-          timePattern: ['yyyy-MM-dd HH:mm:ss.S']
+        - !<transforms.DateTimeTransform>
+          pattern: ['yyyy-MM-dd HH:mm:ss.S']
           timezone: "America/Chicago"
       ol.notes:
         type: ol.notes
@@ -72,6 +66,8 @@ entityDefinitions:
         transforms:
         - !<transforms.PrefixTransform>
           prefix: '| Case_Num: '
+    name: "JohnsonCounty_IowaCity_CallsForService"
+
   JohnsonCounty_IowaCity_Disposition:
     fqn: 'ol.disposition'
     entitySetName: 'JohnsonCounty_IowaCity_Disposition'
@@ -260,11 +256,11 @@ entityDefinitions:
       pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|PD|criticom|IC,PD|criticom|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
 associationDefinitions:
   PersonIsPersonnel:
-    fqn: 'ol.is'
+    fqn: 'o.is'
     entitySetName: 'JohnsonCounty_IowaCity_Is'
     propertyDefinitions:
-      general.stringid:
-        type: "general.stringid"
+      general.id:
+        type: "general.id"
         column: "Unit"
     src: "People"
     dst: "Personnel"
@@ -303,8 +299,8 @@ associationDefinitions:
         transforms:
         - !<transforms.ValueTransform>
           value: "Officer"
-    src: "People"
-    dst: "JohnsonCounty_IowaCity_Dispatch"
+    src: "Personnel"
+    dst: "JohnsonCounty_IowaCity_CallsForService"
   EMSUnitAppearsinDispatch:
     fqn: "ol.involvedin"
     entitySetName: "JohnsonCounty_IowaCity_CFSInvolvedIn"
@@ -327,7 +323,7 @@ associationDefinitions:
           pattern: ['yyyy-MM-dd HH:mm:ss.S']
           timezone: "America/Chicago"
     src: "JohnsonCounty_IowaCity_EMS_Unit"
-    dst: "JohnsonCounty_IowaCity_Dispatch"
+    dst: "JohnsonCounty_IowaCity_CallsForService"
   UnitAppearsinDispatch:
     fqn: "ol.involvedin"
     entitySetName: "JohnsonCounty_IowaCity_CFSInvolvedIn"
@@ -350,7 +346,7 @@ associationDefinitions:
           pattern: ['yyyy-MM-dd HH:mm:ss.S']
           timezone: "America/Chicago"
     src: "JohnsonCounty_IowaCity_Unit"
-    dst: "JohnsonCounty_IowaCity_Dispatch"
+    dst: "JohnsonCounty_IowaCity_CallsForService"
   FireUnitAppearsinDispatch:
     fqn: "ol.involvedin"
     entitySetName: "JohnsonCounty_IowaCity_CFSInvolvedIn"
@@ -359,13 +355,13 @@ associationDefinitions:
         type: ol.id
         column: Dispatch_Type_ID
     src: "JohnsonCounty_IowaCity_Fire_Unit"
-    dst: "JohnsonCounty_IowaCity_Dispatch"
+    dst: "JohnsonCounty_IowaCity_CallsForService"
   DispatchResultsInDisposition:
     fqn: 'ol.clearedby'
     entitySetName: 'JohnsonCounty_IowaCity_ClearedBy'
     propertyDefinitions:
       ol.id:
         type: ol.id
-        column: Dispatch_ID
-    src: 'JohnsonCounty_IowaCity_Dispatch'
+        column: Dis_ID
+    src: 'JohnsonCounty_IowaCity_CallsForService'
     dst: 'JohnsonCounty_IowaCity_Disposition'
