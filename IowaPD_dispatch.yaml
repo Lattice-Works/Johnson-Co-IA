@@ -1,7 +1,6 @@
 # select * from dispatch_all;
 
 entityDefinitions:
-
   JohnsonCounty_IowaCity_CallsForService:
     fqn: "ol.callforservice"
     entitySetName: JohnsonCounty_IowaCity_CallsForService
@@ -56,7 +55,6 @@ entityDefinitions:
               transformsIfTrue:
               - !<transforms.ColumnTransform>
                 column: FireDispatchLevel
-
   JohnsonCounty_IowaCity_CallsForServiceAgency:
     fqn: ol.agency
     entitySetName: JohnsonCounty_IowaCity_JCAgencies
@@ -492,7 +490,6 @@ entityDefinitions:
         transforms:
         - !<transforms.ValueTransform>
           value: Operator
-
   JohnsonCounty_IowaCity_CFSContactInfo:
     fqn: ol.contactinformation
     entitySetName: JohnsonCounty_IowaCity_CFSContactInfo
@@ -507,7 +504,6 @@ entityDefinitions:
         - !<transforms.ReplaceRegexTransform>
           target: '()\\-'
           goal: ''
-
   JohnsonCounty_IowaCity_JC911CallNumbers:
     fqn: "ol.contactinformation"
     entitySetName: "JohnsonCounty_IowaCity_JC911CallNumbers"
@@ -630,6 +626,7 @@ associationDefinitions:
     src: OperatorPerson
     dst: OperatorPersonnel
 
+
   AssignedTo:
     fqn: ol.assignedto
     entitySetName: JohnsonCounty_IowaCity_AssignedTo
@@ -690,4 +687,3 @@ associationDefinitions:
           timezone: "America/Chicago"
     src: JohnsonCounty_IowaCity_CallsForService
     dst: OperatorPersonnel
-
