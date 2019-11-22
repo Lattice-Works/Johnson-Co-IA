@@ -1,0 +1,98 @@
+entityDefinitions:
+  person:
+    fqn: "general.person"
+    entitySetName: 'JohnsonCounty_IowaCity_People3'
+    propertyDefinitions:
+      nc.SubjectIdentification:
+        type: "nc.SubjectIdentification"
+        column: "Index_ID"
+    name: "person"
+
+  image:
+    fqn: "ol.image"
+    entitySetName: "JohnsonCountyJailImages"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "Image_ID"
+      ol.imagedata:
+        type: "ol.imagedata"
+        column: "Image"
+      ol.type:
+        type: "ol.type"
+        column: "Image_Cat"
+    name: "image"
+
+  jailstay:
+    fqn: "ol.jailstay"
+    entitySetName: "JohnsonCounty_IowaCity_JCJailStay"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "Jail_Id"
+      incident.startdatetime:
+        type: "incident.startdatetime"
+        column: "Date_In"
+        transforms:
+        - !<transforms.DateTimeTransform>
+          pattern: ["yyyy-MM-dd HH:mm:ss.S"]
+          timezone: "America/Chicago"
+    name: "jailstay"
+
+
+
+associationDefinitions:
+
+  ispictureof:
+    fqn: "ol.ispictureof"
+    entitySetName: "JohnsonCountyIsPictureOf"
+    src: "image"
+    dst: "person"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["Image_ID", "MNI_No"]
+      date.completeddatetime:
+        type: "date.completeddatetime"
+        column: "Image_Date"
+        transforms:
+        - !<transforms.DateTimeTransform>
+          pattern: ["yyyy-MM-dd HH:mm:ss.S"]
+          timezone: "America/Chicago"
+    name: "ispictureof"
+
+  partof:
+    fqn: "ol.partof"
+    entitySetName: "JohnsonCountyPartOf"
+    src: "image"
+    dst: "jailstay"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["Image_ID", "Jail_Id"]
+      date.completeddatetime:
+        type: "date.completeddatetime"
+        column: "Date_In"
+        transforms:
+        - !<transforms.DateTimeTransform>
+          pattern: ["yyyy-MM-dd HH:mm:ss.S"]
+          timezone: "America/Chicago"
+    name: "partof"
+
+  
+  subjectof:
+    fqn: "ol.subjectof"
+    entitySetName: "JohnsonCounty_IowaCity_JCSubjectOf"
+    src: "person"
+    dst: "jailstay"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["MNI_No", "Jail_Id"]
+    name: "subjectof"
