@@ -30,8 +30,8 @@ entityDefinitions:
       ol.id:
         type: "ol.id"
         column: "Jail_Id"
-      ol.commitdatetime:
-        type: "ol.commitdatetime"
+      incident.startdatetime:
+        type: "incident.startdatetime"
         column: "Date_In"
         transforms:
         - !<transforms.DateTimeTransform>
