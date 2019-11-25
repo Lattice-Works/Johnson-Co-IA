@@ -6,6 +6,9 @@ entityDefinitions:
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
         column: "MNI_No"
+      person.stateidnumber:
+	type: "person.stateidnumber"
+	column: "Index_ID"
     name: "person"
 
   image:
