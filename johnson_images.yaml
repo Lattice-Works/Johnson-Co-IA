@@ -5,7 +5,7 @@ entityDefinitions:
     propertyDefinitions:
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
-        column: "Index_ID"
+        column: "MNI_No"
     name: "person"
 
   image:
@@ -30,8 +30,8 @@ entityDefinitions:
       ol.id:
         type: "ol.id"
         column: "Jail_Id"
-      ol.commitdatetime:
-        type: "ol.commitdatetime"
+      incident.startdatetime:
+        type: "incident.startdatetime"
         column: "Date_In"
         transforms:
         - !<transforms.DateTimeTransform>
@@ -65,7 +65,7 @@ associationDefinitions:
 
   partof:
     fqn: "ol.partof"
-    entitySetName: "JohnsonCountyPartOf"
+    entitySetName: "JohnsonCountyJailPartOf"
     src: "image"
     dst: "jailstay"
     propertyDefinitions:
