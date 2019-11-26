@@ -5,7 +5,15 @@ entityDefinitions:
     propertyDefinitions:
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
+        column: "MNI_No"
+      person.stateidnumber:
+	  type: "person.stateidnumber"
         column: "Index_ID"
+      person.stateidstate:
+        type: "person.stateidstate"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Iowa"
     name: "person"
 
   image:
@@ -65,7 +73,7 @@ associationDefinitions:
 
   partof:
     fqn: "ol.partof"
-    entitySetName: "JohnsonCountyPartOf"
+    entitySetName: "JohnsonCountyJailPartOf"
     src: "image"
     dst: "jailstay"
     propertyDefinitions:
