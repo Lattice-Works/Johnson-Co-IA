@@ -7,8 +7,13 @@ entityDefinitions:
         type: "nc.SubjectIdentification"
         column: "MNI_No"
       person.stateidnumber:
-	type: "person.stateidnumber"
-	column: "Index_ID"
+	      type: "person.stateidnumber"
+        column: "Index_ID"
+      person.stateidstate:
+        type: "person.stateidstate"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Iowa"
     name: "person"
 
   image:
