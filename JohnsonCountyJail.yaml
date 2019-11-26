@@ -21,6 +21,14 @@ entityDefinitions:
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
         column: "MNI_No"
+      person.stateidnumber:
+        type: "person.stateidnumber"
+        column: "Index_ID"
+      person.stateidstate:
+        type: "person.stateidstate"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Iowa"
       nc.PersonGivenName:
         type: "nc.PersonGivenName"
         column: "JName"
