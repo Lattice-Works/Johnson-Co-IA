@@ -21,14 +21,21 @@ entityDefinitions:
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
         column: "MNI_No"
+      person.stateidnumber:
+        type: "person.stateidnumber"
+        column: "Index_ID"
+      person.stateidstate:
+        type: "person.stateidstate"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Iowa"
       nc.PersonGivenName:
         type: "nc.PersonGivenName"
         column: "JName"
         transforms:
         - !<transforms.SplitTransform> {'separator': ',', 'index': 1}
         - !<transforms.SplitTransform>
-          index: 0
-          separator: " "
+          index:       separator: " "
       nc.PersonMiddleName:
         type: "nc.PersonMiddleName"
         column: "JName"
