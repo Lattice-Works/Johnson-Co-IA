@@ -1,7 +1,6 @@
 # select * from dispatch_all;
 
 entityDefinitions:
-
   JohnsonCounty_IowaCity_CallsForService:
     fqn: "ol.callforservice"
     entitySetName: JohnsonCountyCallsForService
@@ -501,7 +500,6 @@ entityDefinitions:
         transforms:
         - !<transforms.ValueTransform>
           value: Operator
-
   JohnsonCounty_IowaCity_CFSContactInfo:
     fqn: ol.contactinformation
     entitySetName: JohnsonCounty_IowaCity_CFSContactInfo
@@ -517,7 +515,6 @@ entityDefinitions:
         - !<transforms.ReplaceRegexTransform>
           target: '()\\-'
           goal: ''
-
   JohnsonCounty_IowaCity_JC911CallNumbers:
     fqn: "ol.contactinformation"
     entitySetName: "JohnsonCounty_IowaCity_JC911CallNumbers"
@@ -645,6 +642,7 @@ associationDefinitions:
     src: OperatorPerson
     dst: OperatorPersonnel
 
+
   AssignedTo:
     name: AssignedTo
     fqn: ol.assignedto
@@ -708,4 +706,3 @@ associationDefinitions:
           timezone: "America/Chicago"
     src: JohnsonCounty_IowaCity_CallsForService
     dst: OperatorPersonnel
-
