@@ -1,0 +1,1644 @@
+// Flight
+digraph {
+	graph [splines=ortho]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.callforservice" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.callforservice</b></u></font>    </td></tr>        </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.agency" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.agency</b></u></font>    </td></tr>        </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.disposition" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.disposition</b></u></font>    </td></tr>        </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.location" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.location</b></u></font>    </td></tr>        </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.zone" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.zone</b></u></font>    </td></tr>        </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"general.person" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>general.person</b></u></font>    </td></tr>        </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.employee" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.employee</b></u></font>    </td></tr>        </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.contactinformation" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.contactinformation</b></u></font>    </td></tr>        </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.emsunit" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.emsunit</b></u></font>    </td></tr>        </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.fireunit" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.fireunit</b></u></font>    </td></tr>        </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.unit" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.unit</b></u></font>    </td></tr>        </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.organization" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.organization</b></u></font>    </td></tr>        </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.identification" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.identification</b></u></font>    </td></tr>        </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.persondetails" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.persondetails</b></u></font>    </td></tr>        </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.vehicle" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.vehicle</b></u></font>    </td></tr>        </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.callforservice" -> "ol.zone" [label="ol.locatedat" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.callforservice" -> "ol.location" [label="ol.locatedat" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.contactinformation" -> "ol.callforservice" [label="ol.contactinfogiven" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.callforservice" -> "ol.contactinformation" [label="ol.sentfrom" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"general.person" -> "ol.employee" [label="o.is" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.callforservice" -> "ol.agency" [label="ol.assignedto" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.callforservice" -> "ol.disposition" [label="ol.clearedby" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.employee" -> "ol.callforservice" [label="ol.involvedin" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.emsunit" -> "ol.callforservice" [label="ol.involvedin" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.unit" -> "ol.callforservice" [label="ol.involvedin" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.fireunit" -> "ol.callforservice" [label="ol.involvedin" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.vehicle" -> "ol.callforservice" [label="ol.involvedin" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"general.person" -> "ol.callforservice" [label="ol.involvedin" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.organization" -> "ol.callforservice" [label="ol.involvedin" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.location" -> "ol.callforservice" [label="ol.involvedin" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.callforservice" -> "ol.employee" [label="ol.receivedby" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.employee" -> "ol.contactinformation" [label="ol.contactedat" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"general.person" -> "ol.contactinformation" [label="ol.contactedat" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"general.person" -> "ol.identification" [label="ol.has" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"general.person" -> "ol.persondetails" [label="ol.has" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.callforservice" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.callforservice</b></u></font>    </td></tr>    
+<tr>
+<td>
+<font color="black">
+
+ol.id (Dis_ID)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+criminaljustice.casenumber (Case_Number)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.caseid (Case_ID)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.stringnumber (Dis_No)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.howreported (HowReported)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.receiveddatetime (CFS_DateTimeJanet)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.priority (Priority)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.typeclass (TYPE_CLASS)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.type (TYPE_ID)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.callid911 (CallNumber_911)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+criminaljustice.ncic (NCIC_Code)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.level (CFS_EMS)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="black">
+
+ol.id (Dis_ID)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.type (Dispatch_Type_ID)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.priority (Type_Priority)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+datetime.alerted (TimeDisp)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+datetime.enroute (TimeEnroute)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+datetime.arrived (TimeArr)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+date.completeddatetime (TimeComp)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.notes (Case_Num)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="black">
+
+ol.id (Dis_ID)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.notes (OSQ)
+
+</font>
+</td>
+</tr>
+    </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.agency" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.agency</b></u></font>    </td></tr>    
+<tr>
+<td>
+<font color="black">
+
+ol.id (Dis_ORI)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.name (Dis_ORI)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.type (CFS_EMS)
+
+</font>
+</td>
+</tr>
+    </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.disposition" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.disposition</b></u></font>    </td></tr>    
+<tr>
+<td>
+<font color="black">
+
+ol.id (ClearedBy)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+criminaljustice.disposition (ClearedBy2)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="black">
+
+ol.id (Disposition)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+criminaljustice.disposition (Disposition)
+
+</font>
+</td>
+</tr>
+    </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.location" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.location</b></u></font>    </td></tr>    
+<tr>
+<td>
+<font color="black">
+
+general.id (LZip, LCity, LAddress, LState)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+location.street (LAddress)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+location.intersection (LAddress)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+location.apartment (LAddress_Apt)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+location.zip (LZip)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+location.city (LCity)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+location.state (LState)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+location.name (Location)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+location.latitude (Latitude)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+location.longitude (Longitude)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.locationcoordinates ()
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="black">
+
+general.id (OCity, OState, OAddress, OZip)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+location.street (OAddress)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+location.intersection (OAddress)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+location.apartment (OAddress_Apt)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+location.zip (OZip)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+location.city (OCity)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+location.state (OState)
+
+</font>
+</td>
+</tr>
+    </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.zone" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.zone</b></u></font>    </td></tr>    
+<tr>
+<td>
+<font color="black">
+
+general.id (ZONE_ID, SubZone)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.name (Dis_Zone)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.code (ZONE_ID)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.subzone (SubZone)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.type ()
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="black">
+
+general.id (Medical_Zone)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.code (Medical_Zone)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.type ()
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="black">
+
+general.id (FireDistrict, ESN)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.code (FireDistrict)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.subzone (ESN)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.type ()
+
+</font>
+</td>
+</tr>
+    </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"general.person" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>general.person</b></u></font>    </td></tr>    
+<tr>
+<td>
+<font color="black">
+
+nc.SubjectIdentification (AssignedOfficerID,ASSIGNED_OFFICER)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.PersonGivenName (ASSIGNED_OFFICER)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.PersonSurName (ASSIGNED_OFFICER)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.datasource ()
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="black">
+
+nc.SubjectIdentification (Operator)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.PersonGivenName (Operator)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.PersonSurName (Operator)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.datasource ()
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="black">
+
+nc.SubjectIdentification (OfficerID, Unit)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.PersonGivenName (Unit)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.PersonSurName (Unit)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.PersonMiddleName (Unit)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.datasource ()
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="black">
+
+nc.SubjectIdentification (MNI_No)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.PersonGivenName (OName)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.PersonSurName (OName)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.PersonMiddleName (OName)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.PersonBirthDate (DOB)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.SSN (SSN)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.PersonSex (OSex)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.PersonRace (ORace)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.PersonEthnicity (Ethnicity)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+person.stateidnumber (MNI_No)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+person.stateidstate ()
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.datasource ()
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="black">
+
+nc.SubjectIdentification (MNI_No)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.PersonGivenName (OName)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.PersonSurName (OName)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.PersonMiddleName (OName)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.PersonBirthDate (DOB)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.SSN (SSN)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.PersonSex (OSex)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.PersonRace (ORace)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+nc.PersonEthnicity (Ethnicity)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.datasource ()
+
+</font>
+</td>
+</tr>
+    </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.employee" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.employee</b></u></font>    </td></tr>    
+<tr>
+<td>
+<font color="black">
+
+ol.id (AssignedOfficerID, ASSIGNED_OFFICER)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+publicsafety.employeeid (ASSIGNED_OFFICER)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+person.title ()
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="black">
+
+ol.id (Operator)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+person.title ()
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="black">
+
+ol.id (OfficerID, Unit)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+publicsafety.employeeid (OfficerID)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="black">
+
+ol.id (OfficerID)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+publicsafety.employeeid (BadgeNumber)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+person.title ()
+
+</font>
+</td>
+</tr>
+    </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.contactinformation" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.contactinformation</b></u></font>    </td></tr>    
+<tr>
+<td>
+<font color="black">
+
+general.id (LPhone)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+contact.phonenumber (LPhone)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="black">
+
+general.id (CallNumber_911)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+contact.phonenumber (CallNumber_911)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="black">
+
+general.id (OPhone)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+contact.phonenumber (OPhone)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="black">
+
+general.id (CellPhone)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+contact.phonenumber (CellPhone)
+
+</font>
+</td>
+</tr>
+    </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.emsunit" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.emsunit</b></u></font>    </td></tr>    
+<tr>
+<td>
+<font color="black">
+
+ol.id (Unit)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.name (Unit)
+
+</font>
+</td>
+</tr>
+    </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.fireunit" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.fireunit</b></u></font>    </td></tr>    
+<tr>
+<td>
+<font color="black">
+
+ol.id (Unit)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.name (Unit)
+
+</font>
+</td>
+</tr>
+    </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.unit" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.unit</b></u></font>    </td></tr>    
+<tr>
+<td>
+<font color="black">
+
+ol.id (Unit)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.name (Unit)
+
+</font>
+</td>
+</tr>
+    </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.organization" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.organization</b></u></font>    </td></tr>    
+<tr>
+<td>
+<font color="black">
+
+general.id (OName)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.name (OName)
+
+</font>
+</td>
+</tr>
+    </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.identification" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.identification</b></u></font>    </td></tr>    
+<tr>
+<td>
+<font color="black">
+
+ol.id (OfficerID)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.stringnumber (DL_No)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+location.state (DL_State)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="black">
+
+ol.id (MNI_No, OName)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.stringnumber (DL_No)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+location.state (DL_State)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.type ()
+
+</font>
+</td>
+</tr>
+    </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.persondetails" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.persondetails</b></u></font>    </td></tr>    
+<tr>
+<td>
+<font color="black">
+
+general.id (OfficerID)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.eyecolor (Eyes)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.haircolor (Hair)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.height (Height)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.weight (Weight)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="black">
+
+general.id (MNI_No, OName)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+person.juvenile (Juv)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.eyecolor (Eyes)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.haircolor (Hair)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.height (Height)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.weight (Weight)
+
+</font>
+</td>
+</tr>
+    </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color=black fontcolor=black fontname=Helvetica fontsize=9 len=5 propertyfontcolor=gray shape=box style=square tableborder=0.5 tablebordercolor=white titlefontcolor=black]
+	"ol.vehicle" [label=<<table border="0.5" bgcolor="None" bordercolor="white" cellborder="0.5" cellspacing="1" cellpadding="0.5">    <tr><td>    <font color="black"><u><b>ol.vehicle</b></u></font>    </td></tr>    
+<tr>
+<td>
+<font color="black">
+
+ol.id (LIC, LIS, MAKE, MODEL)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+vehicle.make (MAKE)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+vehicle.model (MODEL)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+vehicle.vin (VIN)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+vehicle.year (VehYear)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+vehicle.color (ColorSecondary)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+vehicle.style (Style)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+vehicle.licensenumber (LIC)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+vehicle.licensestate (LIS)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+vehicle.licenseplatetype (LIT)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+vehicle.licenseyear (VehYear)
+
+</font>
+</td>
+</tr>
+
+<tr>
+<td>
+<font color="gray">
+
+ol.dispatchtransfer (TransferVehicle)
+
+</font>
+</td>
+</tr>
+    </table>>]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.callforservice" -> "ol.zone" [label="ol.locatedat" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.callforservice" -> "ol.location" [label="ol.locatedat" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.contactinformation" -> "ol.callforservice" [label="ol.contactinfogiven" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.callforservice" -> "ol.contactinformation" [label="ol.sentfrom" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"general.person" -> "ol.employee" [label="o.is" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.callforservice" -> "ol.agency" [label="ol.assignedto" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.callforservice" -> "ol.disposition" [label="ol.clearedby" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.employee" -> "ol.callforservice" [label="ol.involvedin" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.emsunit" -> "ol.callforservice" [label="ol.involvedin" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.unit" -> "ol.callforservice" [label="ol.involvedin" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.fireunit" -> "ol.callforservice" [label="ol.involvedin" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.vehicle" -> "ol.callforservice" [label="ol.involvedin" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"general.person" -> "ol.callforservice" [label="ol.involvedin" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.organization" -> "ol.callforservice" [label="ol.involvedin" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.location" -> "ol.callforservice" [label="ol.involvedin" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.callforservice" -> "ol.employee" [label="ol.receivedby" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"ol.employee" -> "ol.contactinformation" [label="ol.contactedat" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"general.person" -> "ol.contactinformation" [label="ol.contactedat" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"general.person" -> "ol.identification" [label="ol.has" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	node [cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+	"general.person" -> "ol.persondetails" [label="ol.has" cellborder=0.5 cellpadding=0.5 cellspacing=1 color="#b6bbc7" concentrate=true dir=forward fontcolor="#b6bbc7" fontname=Helvetica fontsize=7 fqncolor="595F72" labeldistance=0 len=5 propertyfontcolor=gray shape=box style=square tablebgcolor=white tableborder=0.5 titlefontcolor=black]
+}

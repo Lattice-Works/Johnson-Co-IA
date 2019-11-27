@@ -9,25 +9,19 @@ entityDefinitions:
       nc.SubjectIdentification:
         type: 'nc.SubjectIdentification'
         transforms:
-        - !<transforms.BooleanRegexTransform>
-          column: 'OName'
-          pattern: "^[0-9]"
+        - !<transforms.BooleanIsNullTransform>
+          column: "MNI_No"
           transformsIfFalse:
-          - !<transforms.ConcatCombineTransform>
-            transforms:
-            - !<transforms.GetPrefixDigitsTransform>
-              separator: ' '
-              column: "OName"
-            - !<transforms.ColumnTransform>
-              column: "OfficerID"
+          - !<transforms.ColumnTransform>
+            column: "MNI_No"
+          - !<transforms.ReplaceRegexTransform>
+            target: "\\{|\\}"
+            goal: ""
           - !<transforms.CaseTransform>
             type: "lower"
           transformsIfTrue:
-          - !<transforms.ConcatTransform>
-            columns: ["MNI_No", "OName"]
-            separator: "_"
-          - !<transforms.CaseTransform>
-            type: "name"
+          - !<transforms.ColumnTransform>
+            column: "OName"
       nc.PersonGivenName:
         type: 'nc.PersonGivenName'
         transforms:
@@ -147,20 +141,31 @@ entityDefinitions:
         column: "ORace"
         transforms:
         - !<transforms.ReplaceTransform>
-          target: ['Asian', 'A', 'W', "White", "Black", "B", "American Indian", "I", "Indian"]
-          goal: ['asian', 'asian', 'white', 'white', 'black', 'black', 'amindian', 'amindian', 'amindian']
+          target: ['Black', 'W', 'O', 'American Indian', 'w', 'Asian', 'B', 'White', 'Unknown', 'U', 'A', 'I', 'Indian']
+          goal: ['Black', 'White', 'Other', 'American Indian', 'White', 'Asian', 'Black', 'White', 'Unknown', 'Unknown', 'Asian', 'Indian', 'Indian']
           ignoreCase: true
       nc.PersonEthnicity:
         type: "nc.PersonEthnicity"
         column: "Ethnicity"
         transforms:
         - !<transforms.ReplaceTransform>
-          target: ['H', "N"]
-          goal: ['hispanic', 'nonhispanic']
+          target: ['H', 'N', 'U']
+          goal: ['Hispanic', 'Non-Hispanic', Unknown]
           ignoreCase: true
       person.stateidnumber:
         type: "person.stateidnumber"
         column: "MNI_No"
+        transforms:
+        - !<transforms.ReplaceRegexTransform>
+          target: "\\{|\\}"
+          goal: ""
+        - !<transforms.CaseTransform>
+          type: "lower"
+      person.stateidstate:
+        type: "person.stateidstate"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Iowa"
       ol.datasource:
         type: "ol.datasource"
         transforms:
@@ -181,7 +186,7 @@ entityDefinitions:
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
       pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|PD|criticom|IC,PD|criticom|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
-  #     reverse: true
+      reverse: true
   Others:
     name: "Others"
     fqn: 'general.person'
@@ -190,11 +195,19 @@ entityDefinitions:
       nc.SubjectIdentification:
         type: 'nc.SubjectIdentification'
         transforms:
-        - !<transforms.ConcatTransform>
-          columns: ["MNI_No", "OName"]
-          separator: "_"
-        - !<transforms.CaseTransform>
-          type: "name"
+        - !<transforms.BooleanIsNullTransform>
+          column: "MNI_No"
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: "MNI_No"
+          - !<transforms.ReplaceRegexTransform>
+            target: "\\{|\\}"
+            goal: ""
+          - !<transforms.CaseTransform>
+            type: "lower"
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: "OName"
       nc.PersonGivenName:
         type: 'nc.PersonGivenName'
         transforms:
@@ -291,16 +304,16 @@ entityDefinitions:
         column: "ORace"
         transforms:
         - !<transforms.ReplaceTransform>
-          target: ['Asian', 'A', 'W', "White", "Black", "B", "American Indian", "I", "Indian"]
-          goal: ['asian', 'asian', 'white', 'white', 'black', 'black', 'amindian', 'amindian', 'amindian']
+          target: ['Black', 'W', 'O', 'American Indian', 'w', 'Asian', 'B', 'White', 'Unknown', 'U', 'A', 'I', 'Indian']
+          goal: ['Black', 'White', 'Other', 'American Indian', 'White', 'Asian', 'Black', 'White', 'Unknown', 'Unknown', 'Asian', 'Indian', 'Indian']
           ignoreCase: true
       nc.PersonEthnicity:
         type: "nc.PersonEthnicity"
         column: "Ethnicity"
         transforms:
         - !<transforms.ReplaceTransform>
-          target: ['H', "N"]
-          goal: ['hispanic', 'nonhispanic']
+          target: ['H', 'N', 'U']
+          goal: ['Hispanic', 'Non-Hispanic', Unknown]
           ignoreCase: true
       ol.datasource:
         type: "ol.datasource"
@@ -311,6 +324,7 @@ entityDefinitions:
     - !<conditions.ConditionalAnd> {}
     - !<conditions.BooleanIsNullCondition>
       column: 'OfficerID'
+      reverse: false
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
       pattern: "^[0-9]"
@@ -333,10 +347,12 @@ entityDefinitions:
       ol.name:
         type: ol.name
         column: OName
-    conditions:                                   # other person (i.e. same as officer but)
+    conditions:                       # non-person
     - !<conditions.BooleanRegexCondition>
       column: 'OName'
       pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|DP|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
+      reverse: false
+
   OfficersPersonnelID:
     name: "OfficersPersonnelID"
     fqn: 'ol.identification'
@@ -402,9 +418,22 @@ entityDefinitions:
       ol.eyecolor:
         type: "ol.eyecolor"
         column: "Eyes"
+        transforms:
+        - !<transforms.ReplaceRegexTransform>
+          target: " *PENDING| *HEARING"
+          goal: ""
+        - !<transforms.ReplaceTransform>
+          target: ['dichromaticlegal', 'brown', 'blu', 'maroon', 'haz', 'br0', 'bronw', 'hazel', 'grn', 'green', 'unknown', 'multicolored', 'black', 'blue', 'bro', 'gray', 'blk', 'pnk', 'pink', 'unk']
+          goal: ['MUL', 'BRO', 'BLU', 'MAR', 'HAZ', 'BRO', 'BRO', 'HAZ', 'GRN', 'GRN', 'XXX', 'MUL', 'BLK', 'BLU', 'BRO', 'GRY', 'BLK', 'PNK', 'PNK', 'XXX']
+          ignoreCase: True
       ol.haircolor:
         type: "ol.haircolor"
         column: "Hair"
+        transforms:
+        - !<transforms.ReplaceTransform>
+          target: ['pink', 'brown', 'red or auburn', 'blonde', 'br0', 'bald', 'purple', 'blk', 'green', 'white', 'blue', 'blond or strawberry', 'sandy', 'unknown or completely bald', 'orange', 'gry', 'black', 'gray or partially gray']
+          goal: ['PNK', 'BRO', 'RED', 'BLN', 'BRO', 'BLD', 'PLE', 'BLK', 'GRN', 'WHI', 'BLU', 'BLN', 'SDY', 'XXX', 'ONG', 'GRY', 'BLK', 'GRY']
+          ignoreCase: True
       ol.height:
         type: "ol.height"
         column: "Height"
@@ -448,9 +477,24 @@ entityDefinitions:
       ol.eyecolor:
         type: "ol.eyecolor"
         column: "Eyes"
+        transforms:
+        - !<transforms.ReplaceRegexTransform>
+          target: " *PENDING| *HEARING"
+          goal: ""
+        - !<transforms.ReplaceTransform>
+          target: ['dichromaticlegal', 'brown', 'blu', 'maroon', 'haz', 'br0', 'bronw', 'hazel', 'grn', 'green', 'unknown', 'multicolored', 'black', 'blue', 'bro', 'gray', 'blk', 'pnk', 'pink', 'unk']
+          goal: ['MUL', 'BRO', 'BLU', 'MAR', 'HAZ', 'BRO', 'BRO', 'HAZ', 'GRN', 'GRN', 'XXX', 'MUL', 'BLK', 'BLU', 'BRO', 'GRY', 'BLK', 'PNK', 'PNK', 'XXX']
+          ignoreCase: True
       ol.haircolor:
         type: "ol.haircolor"
         column: "Hair"
+        transforms:
+        - !<transforms.CaseTransform>
+          type: "lower"
+        - !<transforms.ReplaceTransform>
+          target: ['pink', 'brown', 'red or auburn', 'blonde', 'br0', 'bald', 'purple', 'blk', 'green', 'white', 'blue', 'blond or strawberry', 'sandy', 'unknown or completely bald', 'orange', 'gry', 'black', 'gray or partially gray']
+          goal: ['PNK', 'BRO', 'RED', 'BLN', 'BRO', 'BLD', 'PLE', 'BLK', 'GRN', 'WHI', 'BLU', 'BLN', 'SDY', 'XXX', 'ONG', 'GRY', 'BLK', 'GRY']
+          ignoreCase: True
       ol.height:
         type: "ol.height"
         column: "Height"
@@ -579,6 +623,7 @@ entityDefinitions:
         type: 'contact.phonenumber'
         column: 'CellPhone'
   JohnsonCounty_IowaCity_CallsForService:
+    name: JohnsonCounty_IowaCity_CallsForService
     fqn: 'ol.callforservice'
     entitySetName: 'JohnsonCounty_IowaCity_CallsForService'
     propertyDefinitions:
@@ -589,6 +634,7 @@ entityDefinitions:
         type: 'ol.notes'
         column: 'OSQ'
   JohnsonCounty_IowaCity_Vehicle:
+    name: JohnsonCounty_IowaCity_Vehicle
     fqn: 'ol.vehicle'
     entitySetName: 'JohnsonCounty_IowaCity_Vehicle'
     propertyDefinitions:
@@ -669,8 +715,10 @@ entityDefinitions:
         column: 'TransferVehicle'
         transforms:
         - !<transforms.ParseBoolTransform> {}
+
 associationDefinitions:
   InvolvedIn:
+    name: InvolvedIn
     fqn: 'ol.involvedin'
     entitySetName: 'JohnsonCounty_IowaCity_CFSInvolvedIn'
     src: "JohnsonCounty_IowaCity_Vehicle"
@@ -680,6 +728,7 @@ associationDefinitions:
         type: 'ol.id'
         column: 'Dis_ID'
   OfficerInvolvedIn:
+    name: OfficerInvolvedIn
     fqn: 'ol.involvedin'
     entitySetName: 'JohnsonCounty_IowaCity_CFSInvolvedIn'
     src: "OfficersPersonnel"
@@ -708,6 +757,7 @@ associationDefinitions:
         - !<transforms.ValueTransform>
           value: "Officer"
   OthersInvolvedIn:
+    name: OthersInvolvedIn
     fqn: 'ol.involvedin'
     entitySetName: 'JohnsonCounty_IowaCity_CFSInvolvedIn'
     src: "Others"
@@ -731,7 +781,9 @@ associationDefinitions:
         - !<transforms.ReplaceTransform>
           target: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
           goal: ['Victim','Witness','Suspect', "Reporter", 'Other', 'Passenger', 'Driver', 'Driver', 'Passenger', "Passenger"]
+          
   OrganizationsInvolvedIn:
+    name: OrganizationsInvolvedIn
     fqn: 'ol.involvedin'
     entitySetName: 'JohnsonCounty_IowaCity_CFSInvolvedIn'
     src: "Organizations"
@@ -740,7 +792,9 @@ associationDefinitions:
       ol.id:
         type: 'ol.id'
         column: 'Dis_ID'
+
   OfficersContactedAt1:
+    name: OfficersContactedAt1
     fqn: 'ol.contactedat'
     entitySetName: 'JohnsonCounty_IowaCity_CFSContactedAt'
     src: 'OfficersPersonnel'
@@ -753,6 +807,7 @@ associationDefinitions:
         - !<transforms.PrefixTransform>
           prefix: "1_"
   OfficersContactedAt2:
+    name: OfficersContactedAt2
     fqn: 'ol.contactedat'
     entitySetName: 'JohnsonCounty_IowaCity_CFSContactedAt'
     src: 'OfficersPersonnel'
@@ -765,6 +820,7 @@ associationDefinitions:
         - !<transforms.PrefixTransform>
           prefix: "2_"
   OthersContactedAt1:
+    name: OthersContactedAt1
     fqn: 'ol.contactedat'
     entitySetName: 'JohnsonCounty_IowaCity_CFSContactedAt'
     src: 'Others'
@@ -777,6 +833,7 @@ associationDefinitions:
         - !<transforms.PrefixTransform>
           prefix: "3_"
   OthersContactedAt2:
+    name: OthersContactedAt2
     fqn: 'ol.contactedat'
     entitySetName: 'JohnsonCounty_IowaCity_CFSContactedAt'
     src: 'Others'
@@ -789,6 +846,7 @@ associationDefinitions:
         - !<transforms.PrefixTransform>
           prefix: "4_"
   JohnsonCounty_IowaCity_CFSInvolvedIn:
+    name: JohnsonCounty_IowaCity_CFSInvolvedIn
     fqn: 'ol.involvedin'
     entitySetName: 'JohnsonCounty_IowaCity_CFSInvolvedIn'
     src: 'JohnsonCounty_IowaCity_Addresses'
@@ -798,6 +856,7 @@ associationDefinitions:
         type: 'ol.id'
         column: 'ID'
   OfficerIsPersonnel:
+    name: OfficerIsPersonnel
     fqn: 'o.is'
     entitySetName: 'JohnsonCounty_IowaCity_Is'
     src: 'Officers'
@@ -814,6 +873,7 @@ associationDefinitions:
           - !<transforms.ColumnTransform>
             column: "OfficerID"
   OfficerHas1:
+    name: OfficerHas1
     fqn: 'ol.has'
     entitySetName: 'JohnsonCounty_IowaCity_Has'
     src: 'Officers'
@@ -826,6 +886,7 @@ associationDefinitions:
         - !<transforms.PrefixTransform>
           prefix: "ID_"
   OfficerHas2:
+    name: OfficerHas2
     fqn: 'ol.has'
     entitySetName: 'JohnsonCounty_IowaCity_Has'
     src: 'Officers'
@@ -838,6 +899,7 @@ associationDefinitions:
         - !<transforms.PrefixTransform>
           prefix: "details_"
   OthersHas1:
+    name: OthersHas1
     fqn: 'ol.has'
     entitySetName: 'JohnsonCounty_IowaCity_Has'
     src: 'Others'
@@ -852,6 +914,7 @@ associationDefinitions:
         - !<transforms.PrefixTransform>
           prefix: "details_"
   OthersHas2:
+    name: OthersHas2
     fqn: 'ol.has'
     entitySetName: 'JohnsonCounty_IowaCity_Has'
     src: 'Others'

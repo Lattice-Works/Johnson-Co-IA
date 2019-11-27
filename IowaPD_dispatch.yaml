@@ -4,7 +4,7 @@ entityDefinitions:
 
   JohnsonCounty_IowaCity_CallsForService:
     fqn: "ol.callforservice"
-    entitySetName: JohnsonCounty_IowaCity_CallsForService
+    entitySetName: JohnsonCountyCallsForService
     propertyDefinitions:
       ol.id:
         type: ol.id
@@ -37,6 +37,9 @@ entityDefinitions:
       ol.type:
         type: ol.type
         column: TYPE_ID
+      ol.callid911:
+        type: ol.callid911
+        column: CallNumber_911
       criminaljustice.ncic:
         type: criminaljustice.ncic
         column: NCIC_Code
@@ -56,6 +59,7 @@ entityDefinitions:
               transformsIfTrue:
               - !<transforms.ColumnTransform>
                 column: FireDispatchLevel
+    name: "JohnsonCounty_IowaCity_CallsForService"
 
   JohnsonCounty_IowaCity_CallsForServiceAgency:
     fqn: ol.agency
@@ -137,8 +141,10 @@ entityDefinitions:
       criminaljustice.disposition2:
         type: criminaljustice.disposition
         column: ClearedBy2
+    name: JohnsonCounty_IowaCity_Disposition
 
   JohnsonCounty_IowaCity_Addresses:
+    name: JohnsonCounty_IowaCity_Addresses
     fqn: ol.location
     entitySetName: JohnsonCounty_IowaCity_Addresses
     propertyDefinitions:
@@ -246,6 +252,7 @@ entityDefinitions:
     - !<conditions.BooleanIsNullCondition>
       column: Dis_Zone
       reverse: true
+    name: "JohnsonCounty_IowaCity_CallsForServiceZone"
 
   JohnsonCounty_IowaCity_MedicalZone:
     fqn: ol.zone
@@ -266,6 +273,7 @@ entityDefinitions:
     - !<conditions.BooleanIsNullCondition>
       column: Medical_Zone
       reverse: true
+    name: JohnsonCounty_IowaCity_MedicalZone
 
   JohnsonCounty_IowaCity_FireDistrictZone:
     fqn: ol.zone
@@ -291,6 +299,7 @@ entityDefinitions:
     - !<conditions.BooleanIsNullCondition>
       column: FireDistrict
       reverse: true
+    name: JohnsonCounty_IowaCity_FireDistrictZone
 
   OfficerPerson:
     fqn: general.person
@@ -496,6 +505,7 @@ entityDefinitions:
   JohnsonCounty_IowaCity_CFSContactInfo:
     fqn: ol.contactinformation
     entitySetName: JohnsonCounty_IowaCity_CFSContactInfo
+    name: JohnsonCounty_IowaCity_CFSContactInfo
     propertyDefinitions:
       general.id:
         type: general.id
@@ -511,6 +521,7 @@ entityDefinitions:
   JohnsonCounty_IowaCity_JC911CallNumbers:
     fqn: "ol.contactinformation"
     entitySetName: "JohnsonCounty_IowaCity_JC911CallNumbers"
+    name: JohnsonCounty_IowaCity_JC911CallNumbers
     propertyDefinitions:
       general.id:
         type: general.id
@@ -573,6 +584,7 @@ associationDefinitions:
     dst: JohnsonCounty_IowaCity_FireDistrictZone
 
   LocatedAt:
+    name: LocatedAt
     fqn: ol.locatedat
     entitySetName: JohnsonCounty_IowaCity_LocatedAt
     propertyDefinitions:
@@ -589,6 +601,7 @@ associationDefinitions:
     dst: JohnsonCounty_IowaCity_Addresses
 
   CFSContactGiven:
+    name: CFSContactGiven
     fqn: ol.contactinfogiven
     entitySetName: JohnsonCounty_IowaCity_CFSContactGiven
     propertyDefinitions:
@@ -598,18 +611,20 @@ associationDefinitions:
     src: JohnsonCounty_IowaCity_CFSContactInfo
     dst: JohnsonCounty_IowaCity_CallsForService
 
-  # SentFrom:
-  #   fqn: "ol.sentfrom"
-  #   entitySetName: JohnsonCounty_IowaCity_CFSSentFrom
-  #   propertyDefinitions:
-  #     ol.id:
-  #       type: ol.id
-  #       column: Dis_ID
-  #   src: JohnsonCounty_IowaCity_CallsForService
-  #   dst: JohnsonCounty_IowaCity_JC911CallNumbers
+
+  SentFrom:
+    name: SentFrom
+    fqn: "ol.sentfrom"
+    entitySetName: JohnsonCounty_IowaCity_CFSSentFrom
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        column: Dis_ID
+    src: JohnsonCounty_IowaCity_CallsForService
+    dst: JohnsonCounty_IowaCity_JC911CallNumbers
 
   OfficerIsPersonnel:
-    name: OfficerIs
+    name: OfficerIsPersonnel
     fqn: o.is
     entitySetName: JohnsonCounty_IowaCity_Is
     propertyDefinitions:
@@ -620,7 +635,7 @@ associationDefinitions:
     dst: OfficerPersonnel
 
   OperatorIsPersonnel:
-    name: OperatorIs
+    name: OperatorIsPersonnel
     fqn: o.is
     entitySetName: JohnsonCounty_IowaCity_Is
     propertyDefinitions:
@@ -631,6 +646,7 @@ associationDefinitions:
     dst: OperatorPersonnel
 
   AssignedTo:
+    name: AssignedTo
     fqn: ol.assignedto
     entitySetName: JohnsonCounty_IowaCity_AssignedTo
     propertyDefinitions:
@@ -643,6 +659,7 @@ associationDefinitions:
     dst: JohnsonCounty_IowaCity_CallsForServiceAgency
 
   DispatchDisposition:
+    name: DispatchDisposition
     fqn: ol.clearedby
     entitySetName: JohnsonCounty_IowaCity_ClearedBy
     propertyDefinitions:
@@ -653,7 +670,7 @@ associationDefinitions:
     dst: JohnsonCounty_IowaCity_Disposition
 
   OfficerInvolvedinDispatch:
-    name: OfficerInvolved
+    name: OfficerInvolvedinDispatch
     fqn: ol.involvedin
     entitySetName: JohnsonCounty_IowaCity_CFSInvolvedIn
     propertyDefinitions:
@@ -679,6 +696,7 @@ associationDefinitions:
 
   ReceivedBy:
     fqn: ol.receivedby
+    name: ReceivedBy
     entitySetName: JohnsonCounty_IowaCity_ReceivedBy
     propertyDefinitions:
       ol.id:

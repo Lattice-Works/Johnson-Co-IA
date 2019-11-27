@@ -70,6 +70,7 @@ entityDefinitions:
 
   JohnsonCounty_IowaCity_Disposition:
     fqn: 'ol.disposition'
+    name: "JohnsonCounty_IowaCity_Disposition"
     entitySetName: 'JohnsonCounty_IowaCity_Disposition'
     propertyDefinitions:
       ol.id:
@@ -78,6 +79,7 @@ entityDefinitions:
       criminaljustice.disposition:
         type: 'criminaljustice.disposition'
         column: 'Disposition'
+
   Personnel:
     fqn: 'ol.employee'
     entitySetName: 'JohnsonCounty_IowaCity_JCJIPersonnel'
@@ -225,6 +227,7 @@ entityDefinitions:
     - !<conditions.BooleanRegexCondition>
       column: 'Unit'
       pattern: "\\b(?i)(EMS)\\b"
+
   JohnsonCounty_IowaCity_Fire_Unit:
     fqn: 'ol.fireunit'
     name: 'JohnsonCounty_IowaCity_Fire_Unit'
@@ -240,7 +243,9 @@ entityDefinitions:
     - !<conditions.BooleanRegexCondition>
       column: 'Unit'
       pattern: "\\b(?i)(FIRE)\\b"
+
   JohnsonCounty_IowaCity_Unit:
+    name: JohnsonCounty_IowaCity_Unit
     fqn: 'ol.unit'
     entitySetName: 'JohnsonCounty_IowaCity_Unit'
     propertyDefinitions:
@@ -254,6 +259,7 @@ entityDefinitions:
     - !<conditions.BooleanRegexCondition>
       column: 'Unit'
       pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|PD|criticom|IC,PD|criticom|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
+
 associationDefinitions:
   PersonIsPersonnel:
     fqn: 'o.is'
@@ -264,6 +270,8 @@ associationDefinitions:
         column: "Unit"
     src: "People"
     dst: "Personnel"
+    name: PersonIsPersonnel
+
   PeopleInvolvedInDispatch:
     fqn: "ol.involvedin"
     entitySetName: "JohnsonCounty_IowaCity_CFSInvolvedIn"
@@ -301,6 +309,8 @@ associationDefinitions:
           value: "Officer"
     src: "Personnel"
     dst: "JohnsonCounty_IowaCity_CallsForService"
+    name: PeopleInvolvedInDispatch
+
   EMSUnitAppearsinDispatch:
     fqn: "ol.involvedin"
     entitySetName: "JohnsonCounty_IowaCity_CFSInvolvedIn"
@@ -324,6 +334,8 @@ associationDefinitions:
           timezone: "America/Chicago"
     src: "JohnsonCounty_IowaCity_EMS_Unit"
     dst: "JohnsonCounty_IowaCity_CallsForService"
+    name: EMSUnitAppearsinDispatch
+
   UnitAppearsinDispatch:
     fqn: "ol.involvedin"
     entitySetName: "JohnsonCounty_IowaCity_CFSInvolvedIn"
@@ -347,6 +359,8 @@ associationDefinitions:
           timezone: "America/Chicago"
     src: "JohnsonCounty_IowaCity_Unit"
     dst: "JohnsonCounty_IowaCity_CallsForService"
+    name: UnitAppearsinDispatch
+
   FireUnitAppearsinDispatch:
     fqn: "ol.involvedin"
     entitySetName: "JohnsonCounty_IowaCity_CFSInvolvedIn"
@@ -356,6 +370,8 @@ associationDefinitions:
         column: Dispatch_Type_ID
     src: "JohnsonCounty_IowaCity_Fire_Unit"
     dst: "JohnsonCounty_IowaCity_CallsForService"
+    name: FireUnitAppearsinDispatch
+
   DispatchResultsInDisposition:
     fqn: 'ol.clearedby'
     entitySetName: 'JohnsonCounty_IowaCity_ClearedBy'
@@ -365,3 +381,4 @@ associationDefinitions:
         column: Dis_ID
     src: 'JohnsonCounty_IowaCity_CallsForService'
     dst: 'JohnsonCounty_IowaCity_Disposition'
+    name: DispatchResultsInDisposition
