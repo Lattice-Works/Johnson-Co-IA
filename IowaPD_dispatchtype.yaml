@@ -3,7 +3,7 @@
 entityDefinitions:
   JohnsonCounty_IowaCity_CallsForService:
     fqn: 'ol.callforservice'
-    entitySetName: 'JohnsonCounty_IowaCity_CallsForService'
+    entitySetName: 'JohnsonCountyCallsForService'
     propertyDefinitions:
       ol.id:
         type: 'ol.id'
@@ -14,13 +14,6 @@ entityDefinitions:
       ol.priority:
         type: "ol.priority"
         column: "Type_Priority"
-      datetime.alerted:
-        type: 'datetime.alerted'
-        column: "TimeDisp"
-        transforms:
-        - !<transforms.DateTimeTransform>
-          pattern: ['yyyy-MM-dd HH:mm:ss.S']
-          timezone: "America/Chicago"
       datetime.enroute:
         type: 'datetime.enroute'
         column: "TimeEnroute"
@@ -54,24 +47,24 @@ entityDefinitions:
         transforms:
         - !<transforms.PrefixTransform>
           prefix: ' dispatch trip number: '
-      ol.notes3:
-        type: ol.notes
+      ol.caseid:
+        type: ol.caseid
         column: Case_ID
         transforms:
         - !<transforms.PrefixTransform>
           prefix: '| Case_ID: '
-      ol.notes4:
-        type: ol.notes
+      criminaljustice.casenumber:
+        type: criminaljustice.casenumber
         column: Case_Num
         transforms:
         - !<transforms.PrefixTransform>
           prefix: '| Case_Num: '
     name: "JohnsonCounty_IowaCity_CallsForService"
 
-  JohnsonCounty_IowaCity_Disposition:
+  JohnsonCounty_CFSDisposition:
     fqn: 'ol.disposition'
-    name: "JohnsonCounty_IowaCity_Disposition"
-    entitySetName: 'JohnsonCounty_IowaCity_Disposition'
+    name: "JohnsonCounty_CFSDisposition"
+    entitySetName: 'JohnsonCounty_CFSDisposition'
     propertyDefinitions:
       ol.id:
         type: ol.id
@@ -317,7 +310,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: ol.id
-        column: Dispatch_Type_ID
+        column: Dis_ID
       ol.datetimestart:
         type: ol.datetimestart
         column: 'TimeArr'
@@ -342,7 +335,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: ol.id
-        column: Dispatch_Type_ID
+        column: Dis_ID
       ol.datetimestart:
         type: ol.datetimestart
         column: 'TimeArr'
@@ -367,7 +360,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: ol.id
-        column: Dispatch_Type_ID
+        column: Dis_ID
     src: "JohnsonCounty_IowaCity_Fire_Unit"
     dst: "JohnsonCounty_IowaCity_CallsForService"
     name: FireUnitAppearsinDispatch
@@ -380,5 +373,5 @@ associationDefinitions:
         type: ol.id
         column: Dis_ID
     src: 'JohnsonCounty_IowaCity_CallsForService'
-    dst: 'JohnsonCounty_IowaCity_Disposition'
+    dst: 'JohnsonCounty_CFSDisposition'
     name: DispatchResultsInDisposition

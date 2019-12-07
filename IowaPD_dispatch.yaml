@@ -36,9 +36,6 @@ entityDefinitions:
       ol.type:
         type: ol.type
         column: TYPE_ID
-      ol.callid911:
-        type: ol.callid911
-        column: CallNumber_911
       criminaljustice.ncic:
         type: criminaljustice.ncic
         column: NCIC_Code
@@ -62,7 +59,7 @@ entityDefinitions:
 
   JohnsonCounty_IowaCity_CallsForServiceAgency:
     fqn: ol.agency
-    entitySetName: JohnsonCounty_IowaCity_JCAgencies
+    entitySetName: JohnsonCounty_Agencies
     propertyDefinitions:
       ol.id:
         type: ol.id
@@ -127,9 +124,9 @@ entityDefinitions:
                   value: Unknown
     name: "JohnsonCounty_IowaCity_CallsForServiceAgency"
 
-  JohnsonCounty_IowaCity_Disposition:
+  JohnsonCounty_CFSDisposition:
     fqn: ol.disposition
-    entitySetName: JohnsonCounty_IowaCity_Disposition
+    entitySetName: JohnsonCounty_CFSDisposition
     propertyDefinitions:
       ol.id:
         type: ol.id
@@ -140,12 +137,12 @@ entityDefinitions:
       criminaljustice.disposition2:
         type: criminaljustice.disposition
         column: ClearedBy2
-    name: JohnsonCounty_IowaCity_Disposition
+    name: JohnsonCounty_CFSDisposition
 
-  JohnsonCounty_IowaCity_Addresses:
-    name: JohnsonCounty_IowaCity_Addresses
+  JohnsonCounty_CFSAddresses:
+    name: JohnsonCounty_CFSAddresses
     fqn: ol.location
-    entitySetName: JohnsonCounty_IowaCity_Addresses
+    entitySetName: JohnsonCounty_CFSAddresses
     propertyDefinitions:
       general.id:
         type: general.id
@@ -515,18 +512,6 @@ entityDefinitions:
         - !<transforms.ReplaceRegexTransform>
           target: '()\\-'
           goal: ''
-  JohnsonCounty_IowaCity_JC911CallNumbers:
-    fqn: "ol.contactinformation"
-    entitySetName: "JohnsonCounty_IowaCity_JC911CallNumbers"
-    name: JohnsonCounty_IowaCity_JC911CallNumbers
-    propertyDefinitions:
-      general.id:
-        type: general.id
-        column: CallNumber_911
-      contact.phonenumber:
-        type: contact.phonenumber
-        column: CallNumber_911
-    name: "JohnsonCounty_IowaCity_JC911CallNumbers"
 
 associationDefinitions:
   LocatedAtDispatchZone:
@@ -595,7 +580,7 @@ associationDefinitions:
           - !<transforms.ValueTransform>
             value: "ADDRESS"
     src: JohnsonCounty_IowaCity_CallsForService
-    dst: JohnsonCounty_IowaCity_Addresses
+    dst: JohnsonCounty_CFSAddresses
 
   CFSContactGiven:
     name: CFSContactGiven
@@ -608,17 +593,6 @@ associationDefinitions:
     src: JohnsonCounty_IowaCity_CFSContactInfo
     dst: JohnsonCounty_IowaCity_CallsForService
 
-
-  SentFrom:
-    name: SentFrom
-    fqn: "ol.sentfrom"
-    entitySetName: JohnsonCounty_IowaCity_CFSSentFrom
-    propertyDefinitions:
-      ol.id:
-        type: ol.id
-        column: Dis_ID
-    src: JohnsonCounty_IowaCity_CallsForService
-    dst: JohnsonCounty_IowaCity_JC911CallNumbers
 
   OfficerIsPersonnel:
     name: OfficerIsPersonnel
@@ -642,7 +616,6 @@ associationDefinitions:
     src: OperatorPerson
     dst: OperatorPersonnel
 
-
   AssignedTo:
     name: AssignedTo
     fqn: ol.assignedto
@@ -652,7 +625,7 @@ associationDefinitions:
         type: ol.id
         transforms:
         - !<transforms.ConcatTransform>
-          columns: [Dis_ID, Dis_ORI, CFS_EMS, CFS_Fire, CFS_LEA]
+          columns: [Dis_ID, Dis_ORI]
     src: JohnsonCounty_IowaCity_CallsForService
     dst: JohnsonCounty_IowaCity_CallsForServiceAgency
 
@@ -665,7 +638,7 @@ associationDefinitions:
         type: ol.id
         column: Dis_ID
     src: JohnsonCounty_IowaCity_CallsForService
-    dst: JohnsonCounty_IowaCity_Disposition
+    dst: JohnsonCounty_CFSDisposition
 
   OfficerInvolvedinDispatch:
     name: OfficerInvolvedinDispatch
@@ -692,17 +665,20 @@ associationDefinitions:
     src: OfficerPersonnel
     dst: JohnsonCounty_IowaCity_CallsForService
 
-  ReceivedBy:
+  OperatorInvolvedinDispatch:
     fqn: ol.receivedby
-    name: ReceivedBy
-    entitySetName: JohnsonCounty_IowaCity_ReceivedBy
+    name: OperatorInvolvedinDispatch
+    entitySetName: JohnsonCounty_IowaCity_CFSInvolvedIn
     propertyDefinitions:
       ol.id:
         type: ol.id
-        column: CFS_DateTimeJanet
         transforms:
-        - !<transforms.DateTimeTransform>
-          pattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
-          timezone: "America/Chicago"
-    src: JohnsonCounty_IowaCity_CallsForService
-    dst: OperatorPersonnel
+        - !<transforms.ConcatTransform>
+          columns: [CFS_DateTimeJanet, Dis_ID, Operator]
+      ol.role:
+        type: ol.role
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Operator"
+    src: OperatorPersonnel
+    dst: JohnsonCounty_IowaCity_CallsForService
