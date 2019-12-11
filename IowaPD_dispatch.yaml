@@ -666,7 +666,7 @@ associationDefinitions:
     dst: JohnsonCounty_IowaCity_CallsForService
 
   OperatorInvolvedinDispatch:
-    fqn: ol.receivedby
+    fqn: ol.involvedin
     name: OperatorInvolvedinDispatch
     entitySetName: JohnsonCounty_IowaCity_CFSInvolvedIn
     propertyDefinitions:

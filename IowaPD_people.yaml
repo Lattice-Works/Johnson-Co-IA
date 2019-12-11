@@ -1,5 +1,6 @@
 # select * from dispatch_person_all;
 
+
 entityDefinitions:
   Officers:
     name: "Officers"
@@ -424,7 +425,7 @@ entityDefinitions:
           goal: ""
         - !<transforms.ReplaceTransform>
           target: ['dichromaticlegal', 'brown', 'blu', 'maroon', 'haz', 'br0', 'bronw', 'hazel', 'grn', 'green', 'unknown', 'multicolored', 'black', 'blue', 'bro', 'gray', 'blk', 'pnk', 'pink', 'unk']
-          goal: ['MUL', 'BRO', 'BLU', 'MAR', 'HAZ', 'BRO', 'BRO', 'HAZ', 'GRN', 'GRN', 'XXX', 'MUL', 'BLK', 'BLU', 'BRO', 'GRY', 'BLK', 'PNK', 'PNK', 'XXX']
+          goal: ['Multicolored', 'Brown', 'Blue', 'Maroon', 'Hazel', 'Brown', 'Brown', 'Hazel', 'Green', 'Green', 'Unknown', 'Multicolored', 'Black', 'Blue', 'Brown', 'Gray', 'Black', 'Pink', 'Pink', 'Unknown']
           ignoreCase: True
       ol.haircolor:
         type: "ol.haircolor"
@@ -432,7 +433,7 @@ entityDefinitions:
         transforms:
         - !<transforms.ReplaceTransform>
           target: ['pink', 'brown', 'red or auburn', 'blonde', 'br0', 'bald', 'purple', 'blk', 'green', 'white', 'blue', 'blond or strawberry', 'sandy', 'unknown or completely bald', 'orange', 'gry', 'black', 'gray or partially gray']
-          goal: ['PNK', 'BRO', 'RED', 'BLN', 'BRO', 'BLD', 'PLE', 'BLK', 'GRN', 'WHI', 'BLU', 'BLN', 'SDY', 'XXX', 'ONG', 'GRY', 'BLK', 'GRY']
+          goal: ['Pink', 'Brown', 'Red or Auburn', 'Blond or Strawberry', 'Brown', 'Bald', 'Purple', 'Black', 'Green', 'White', 'Blue', 'Blond of Strawberry', 'Sandy', 'Unknown or Completely Bald', 'Orange', 'Gray', 'Black', 'Gray']
           ignoreCase: True
       ol.height:
         type: "ol.height"
@@ -507,7 +508,7 @@ entityDefinitions:
           goal: ""
         - !<transforms.ReplaceTransform>
           target: ['dichromaticlegal', 'brown', 'blu', 'maroon', 'haz', 'br0', 'bronw', 'hazel', 'grn', 'green', 'unknown', 'multicolored', 'black', 'blue', 'bro', 'gray', 'blk', 'pnk', 'pink', 'unk']
-          goal: ['MUL', 'BRO', 'BLU', 'MAR', 'HAZ', 'BRO', 'BRO', 'HAZ', 'GRN', 'GRN', 'XXX', 'MUL', 'BLK', 'BLU', 'BRO', 'GRY', 'BLK', 'PNK', 'PNK', 'XXX']
+          goal: ['Multicolored', 'Brown', 'Blue', 'Maroon', 'Hazel', 'Brown', 'Brown', 'Hazel', 'Green', 'Green', 'Unknown', 'Multicolored', 'Black', 'Blue', 'Brown', 'Gray', 'Black', 'Pink', 'Pink', 'Unknown']
           ignoreCase: True
       ol.haircolor:
         type: "ol.haircolor"
@@ -517,7 +518,7 @@ entityDefinitions:
           type: "lower"
         - !<transforms.ReplaceTransform>
           target: ['pink', 'brown', 'red or auburn', 'blonde', 'br0', 'bald', 'purple', 'blk', 'green', 'white', 'blue', 'blond or strawberry', 'sandy', 'unknown or completely bald', 'orange', 'gry', 'black', 'gray or partially gray']
-          goal: ['PNK', 'BRO', 'RED', 'BLN', 'BRO', 'BLD', 'PLE', 'BLK', 'GRN', 'WHI', 'BLU', 'BLN', 'SDY', 'XXX', 'ONG', 'GRY', 'BLK', 'GRY']
+          goal: ['Pink', 'Brown', 'Red or Auburn', 'Blond or Strawberry', 'Brown', 'Bald', 'Purple', 'Black', 'Green', 'White', 'Blue', 'Blond of Strawberry', 'Sandy', 'Unknown', 'Orange', 'Gray', 'Black', 'Gray']
           ignoreCase: True
       ol.height:
         type: "ol.height"
@@ -651,6 +652,10 @@ entityDefinitions:
         transforms:
         - !<transforms.ValueTransform>
           value: True
+    conditions:
+    - !<conditions.BooleanIsNullCondition>
+      column: CellPhone
+      reverse: True
   JohnsonCounty_IowaCity_CallsForService:
     name: JohnsonCounty_IowaCity_CallsForService
     fqn: 'ol.callforservice'

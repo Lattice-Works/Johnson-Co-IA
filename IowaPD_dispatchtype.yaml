@@ -1,4 +1,4 @@
-# select * from dispatch_type_all;
+# select dispatch_type_all.*, dispatch_all."CFS_DateTimeJanet" from dispatch_type_all left join dispatch_all on dispatch_type_all."Dis_ID" = dispatch_all."Dis_ID";
 
 entityDefinitions:
   JohnsonCounty_IowaCity_CallsForService:
@@ -16,24 +16,34 @@ entityDefinitions:
         column: "Type_Priority"
       datetime.enroute:
         type: 'datetime.enroute'
-        column: "TimeEnroute"
         transforms:
-        - !<transforms.DateTimeTransform>
-          pattern: ['yyyy-MM-dd HH:mm:ss.S']
+        - !<transforms.CombineDateTimeTransform>
+          dateColumn: CFS_DateTimeJanet
+          datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
+          timeColumn: 'TimeEnroute'
+          timePattern: ['yyyy-MM-dd HH:mm:ss.S']
           timezone: "America/Chicago"
+        
+        # - !<transforms.DateTimeTransform>
+        #   pattern: ['yyyy-MM-dd HH:mm:ss.S']
+        #   timezone: "America/Chicago"
       datetime.arrived:
         type: 'datetime.arrived'
-        column: "TimeArr"
         transforms:
-        - !<transforms.DateTimeTransform>
-          pattern: ['yyyy-MM-dd HH:mm:ss.S']
+        - !<transforms.CombineDateTimeTransform>
+          dateColumn: CFS_DateTimeJanet
+          datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
+          timeColumn: 'TimeArr'
+          timePattern: ['yyyy-MM-dd HH:mm:ss.S']
           timezone: "America/Chicago"
       date.completeddatetime:
         type: 'date.completeddatetime'
-        column: 'TimeComp'
         transforms:
-        - !<transforms.DateTimeTransform>
-          pattern: ['yyyy-MM-dd HH:mm:ss.S']
+        - !<transforms.CombineDateTimeTransform>
+          dateColumn: CFS_DateTimeJanet
+          datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
+          timeColumn: 'TimeComp'
+          timePattern: ['yyyy-MM-dd HH:mm:ss.S']
           timezone: "America/Chicago"
       ol.notes:
         type: ol.notes
@@ -283,17 +293,21 @@ associationDefinitions:
             column: "Dis_ID"
       ol.datetimestart:
         type: ol.datetimestart
-        column: 'TimeArr'
         transforms:
-        - !<transforms.DateTimeTransform>
-          pattern: ['yyyy-MM-dd HH:mm:ss.S']
+        - !<transforms.CombineDateTimeTransform>
+          dateColumn: CFS_DateTimeJanet
+          datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
+          timeColumn: 'TimeArr'
+          timePattern: ['yyyy-MM-dd HH:mm:ss.S']
           timezone: "America/Chicago"
       ol.datetimeend:
         type: ol.datetimeend
-        column: 'TimeComp'
         transforms:
-        - !<transforms.DateTimeTransform>
-          pattern: ['yyyy-MM-dd HH:mm:ss.S']
+        - !<transforms.CombineDateTimeTransform>
+          dateColumn: CFS_DateTimeJanet
+          datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
+          timeColumn: 'TimeComp'
+          timePattern: ['yyyy-MM-dd HH:mm:ss.S']
           timezone: "America/Chicago"
       ol.role:
         type: ol.role
@@ -310,26 +324,37 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: ol.id
-        column: Dis_ID
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.ColumnTransform>
+            column: Dis_ID
+          - !<transforms.ValueTransform>
+            value: "ems-cfs"
       ol.datetimestart:
         type: ol.datetimestart
-        column: 'TimeArr'
         transforms:
-        - !<transforms.DateTimeTransform>
-          pattern: ['yyyy-MM-dd HH:mm:ss.S']
+        - !<transforms.CombineDateTimeTransform>
+          dateColumn: CFS_DateTimeJanet
+          datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
+          timeColumn: 'TimeArr'
+          timePattern: ['yyyy-MM-dd HH:mm:ss.S']
           timezone: "America/Chicago"
       ol.datetimeend:
         type: ol.datetimeend
         column: 'TimeComp'
         transforms:
-        - !<transforms.DateTimeTransform>
-          pattern: ['yyyy-MM-dd HH:mm:ss.S']
+        - !<transforms.CombineDateTimeTransform>
+          dateColumn: CFS_DateTimeJanet
+          datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
+          timeColumn: 'TimeComp'
+          timePattern: ['yyyy-MM-dd HH:mm:ss.S']
           timezone: "America/Chicago"
     src: "JohnsonCounty_IowaCity_EMS_Unit"
     dst: "JohnsonCounty_IowaCity_CallsForService"
     name: EMSUnitAppearsinDispatch
 
-  UnitAppearsinDispatch:
+  UnitInvolvedinDispatch:
     fqn: "ol.involvedin"
     entitySetName: "JohnsonCounty_IowaCity_CFSInvolvedIn"
     propertyDefinitions:
@@ -338,21 +363,26 @@ associationDefinitions:
         column: Dis_ID
       ol.datetimestart:
         type: ol.datetimestart
-        column: 'TimeArr'
         transforms:
-        - !<transforms.DateTimeTransform>
-          pattern: ['yyyy-MM-dd HH:mm:ss.S']
+        - !<transforms.CombineDateTimeTransform>
+          dateColumn: CFS_DateTimeJanet
+          datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
+          timeColumn: 'TimeArr'
+          timePattern: ['yyyy-MM-dd HH:mm:ss.S']
           timezone: "America/Chicago"
       ol.datetimeend:
         type: ol.datetimeend
         column: 'TimeComp'
         transforms:
-        - !<transforms.DateTimeTransform>
-          pattern: ['yyyy-MM-dd HH:mm:ss.S']
+        - !<transforms.CombineDateTimeTransform>
+          dateColumn: CFS_DateTimeJanet
+          datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
+          timeColumn: 'TimeComp'
+          timePattern: ['yyyy-MM-dd HH:mm:ss.S']
           timezone: "America/Chicago"
     src: "JohnsonCounty_IowaCity_Unit"
     dst: "JohnsonCounty_IowaCity_CallsForService"
-    name: UnitAppearsinDispatch
+    name: UnitInvolvedinDispatch
 
   FireUnitAppearsinDispatch:
     fqn: "ol.involvedin"
@@ -360,7 +390,13 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: ol.id
-        column: Dis_ID
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.ColumnTransform>
+            column: Dis_ID
+          - !<transforms.ValueTransform>
+            value: "fire-cfs"
     src: "JohnsonCounty_IowaCity_Fire_Unit"
     dst: "JohnsonCounty_IowaCity_CallsForService"
     name: FireUnitAppearsinDispatch
