@@ -23,10 +23,6 @@ entityDefinitions:
           timeColumn: 'TimeEnroute'
           timePattern: ['yyyy-MM-dd HH:mm:ss.S']
           timezone: "America/Chicago"
-        
-        # - !<transforms.DateTimeTransform>
-        #   pattern: ['yyyy-MM-dd HH:mm:ss.S']
-        #   timezone: "America/Chicago"
       datetime.arrived:
         type: 'datetime.arrived'
         transforms:
@@ -34,6 +30,15 @@ entityDefinitions:
           dateColumn: CFS_DateTimeJanet
           datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
           timeColumn: 'TimeArr'
+          timePattern: ['yyyy-MM-dd HH:mm:ss.S']
+          timezone: "America/Chicago"
+      datetime.alerted:
+        type: 'datetime.alerted'
+        transforms:
+        - !<transforms.CombineDateTimeTransform>
+          dateColumn: CFS_DateTimeJanet
+          datePattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
+          timeColumn: 'Timercvd'
           timePattern: ['yyyy-MM-dd HH:mm:ss.S']
           timezone: "America/Chicago"
       date.completeddatetime:
@@ -60,15 +65,9 @@ entityDefinitions:
       ol.caseid:
         type: ol.caseid
         column: Case_ID
-        transforms:
-        - !<transforms.PrefixTransform>
-          prefix: '| Case_ID: '
       criminaljustice.casenumber:
         type: criminaljustice.casenumber
         column: Case_Num
-        transforms:
-        - !<transforms.PrefixTransform>
-          prefix: '| Case_Num: '
     name: "JohnsonCounty_IowaCity_CallsForService"
 
   JohnsonCounty_CFSDisposition:
@@ -342,7 +341,6 @@ associationDefinitions:
           timezone: "America/Chicago"
       ol.datetimeend:
         type: ol.datetimeend
-        column: 'TimeComp'
         transforms:
         - !<transforms.CombineDateTimeTransform>
           dateColumn: CFS_DateTimeJanet
@@ -372,7 +370,6 @@ associationDefinitions:
           timezone: "America/Chicago"
       ol.datetimeend:
         type: ol.datetimeend
-        column: 'TimeComp'
         transforms:
         - !<transforms.CombineDateTimeTransform>
           dateColumn: CFS_DateTimeJanet
