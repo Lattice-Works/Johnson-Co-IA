@@ -1,7 +1,9 @@
+# select * from dispatch_all;
+
 entityDefinitions:
-  JohnsonCounty_IowaCity_Dispatch:
-    fqn: ol.dispatch
-    entitySetName: JohnsonCounty_IowaCity_Dispatch
+  JohnsonCounty_IowaCity_CallsForService:
+    fqn: "ol.callforservice"
+    entitySetName: JohnsonCountyCallsForService
     propertyDefinitions:
       ol.id:
         type: ol.id
@@ -12,12 +14,6 @@ entityDefinitions:
       ol.caseid:
         type: ol.caseid
         column: Case_ID
-      ol.masterbusinessnumber:
-        type: ol.masterbusinessnumber
-        column: MBI_No
-      publicsafety.dispatch911callnumber:
-        type: publicsafety.dispatch911callnumber
-        column: CallNumber_911
       ol.stringnumber:
         type: ol.stringnumber
         column: Dis_No
@@ -59,9 +55,11 @@ entityDefinitions:
               transformsIfTrue:
               - !<transforms.ColumnTransform>
                 column: FireDispatchLevel
-  JohnsonCounty_IowaCity_DispatchAgency:
+    name: "JohnsonCounty_IowaCity_CallsForService"
+
+  JohnsonCounty_IowaCity_CallsForServiceAgency:
     fqn: ol.agency
-    entitySetName: JohnsonCounty_IowaCity_DispatchAgency
+    entitySetName: JohnsonCounty_Agencies
     propertyDefinitions:
       ol.id:
         type: ol.id
@@ -124,9 +122,11 @@ entityDefinitions:
                 transformsIfFalse:
                 - !<transforms.ValueTransform>
                   value: Unknown
-  JohnsonCounty_IowaCity_Disposition:
+    name: "JohnsonCounty_IowaCity_CallsForServiceAgency"
+
+  JohnsonCounty_CFSDisposition:
     fqn: ol.disposition
-    entitySetName: JohnsonCounty_IowaCity_Disposition
+    entitySetName: JohnsonCounty_CFSDisposition
     propertyDefinitions:
       ol.id:
         type: ol.id
@@ -137,9 +137,88 @@ entityDefinitions:
       criminaljustice.disposition2:
         type: criminaljustice.disposition
         column: ClearedBy2
-  JohnsonCounty_IowaCity_DispatchZone:
+    name: JohnsonCounty_CFSDisposition
+
+  JohnsonCounty_CFSAddresses:
+    name: JohnsonCounty_CFSAddresses
+    fqn: ol.location
+    entitySetName: JohnsonCounty_CFSAddresses
+    propertyDefinitions:
+      general.id:
+        type: general.id
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: [LAddress, LCity, LZip, LState]
+      location.street:
+        type: location.street
+        transforms:
+        - !<transforms.BooleanContainsTransform>
+          column: LAddress
+          string: '/'
+          transformsIfTrue:
+          - !<transforms.ValueTransform>
+            value:
+          transformsIfFalse:
+          - !<transforms.ColumnTransform>
+            column: LAddress
+      location.intersection:
+        type: location.intersection
+        transforms:
+        - !<transforms.BooleanContainsTransform>
+          string: '/'
+          column: LAddress
+          transformsIfFalse:
+          - !<transforms.ValueTransform>
+            value:
+          transformsIfTrue:
+          - !<transforms.ColumnTransform>
+            column: LAddress
+          - !<transforms.ReplaceTransform>
+            target: ['/']
+            goal: [' & ']
+      location.apartment:
+        type: location.apartment
+        column: LAddress_Apt
+      location.zip:
+        type: location.zip
+        column: LZip
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+      location.city:
+        type: location.city
+        column: LCity
+      location.state:
+        type: location.state
+        column: LState
+      location.name:
+        type: location.name
+        column: Location
+      location.latitude:
+        type: location.latitude
+        column: Latitude
+        transforms:
+        - !<transforms.ParseDoubleTransform> {}
+      location.longitude:
+        type: location.longitude
+        column: Longitude
+        transforms:
+        - !<transforms.ParseDoubleTransform> {}
+      ol.locationcoordinates:
+        type: ol.locationcoordinates
+        transforms:
+        - !<transforms.GeographyPointTransform>
+          latTransforms:
+          - !<transforms.ColumnTransform>
+            column: Latitude
+          - !<transforms.ParseDoubleTransform> {}
+          lonTransforms:
+          - !<transforms.ColumnTransform>
+            column: Longitude
+          - !<transforms.ParseDoubleTransform> {}
+
+  JohnsonCounty_IowaCity_CallsForServiceZone:
     fqn: ol.zone
-    entitySetName: JohnsonCounty_IowaCity_DispatchZone
+    entitySetName: JohnsonCounty_IowaCity_CallsForServiceZone
     propertyDefinitions:
       general.id:
         type: general.id
@@ -169,6 +248,8 @@ entityDefinitions:
     - !<conditions.BooleanIsNullCondition>
       column: Dis_Zone
       reverse: true
+    name: "JohnsonCounty_IowaCity_CallsForServiceZone"
+
   JohnsonCounty_IowaCity_MedicalZone:
     fqn: ol.zone
     entitySetName: JohnsonCounty_IowaCity_MedicalZone
@@ -188,6 +269,8 @@ entityDefinitions:
     - !<conditions.BooleanIsNullCondition>
       column: Medical_Zone
       reverse: true
+    name: JohnsonCounty_IowaCity_MedicalZone
+
   JohnsonCounty_IowaCity_FireDistrictZone:
     fqn: ol.zone
     entitySetName: JohnsonCounty_IowaCity_FireDistrictZone
@@ -212,6 +295,8 @@ entityDefinitions:
     - !<conditions.BooleanIsNullCondition>
       column: FireDistrict
       reverse: true
+    name: JohnsonCounty_IowaCity_FireDistrictZone
+
   OfficerPerson:
     fqn: general.person
     entitySetName: JohnsonCounty_IowaCity_People1
@@ -291,6 +376,7 @@ entityDefinitions:
     - !<conditions.BooleanIsNullCondition>
       column: ASSIGNED_OFFICER
       reverse: true
+
   OperatorPerson:
     fqn: general.person
     entitySetName: JohnsonCounty_IowaCity_People1
@@ -359,6 +445,7 @@ entityDefinitions:
     - !<conditions.BooleanIsNullCondition>
       column: "Operator"
       reverse: true
+
   OfficerPersonnel:
     fqn: ol.employee
     entitySetName: JohnsonCounty_IowaCity_JCJIPersonnel
@@ -396,6 +483,7 @@ entityDefinitions:
     - !<conditions.BooleanIsNullCondition>
       column: ASSIGNED_OFFICER
       reverse: true
+
   OperatorPersonnel:
     fqn: ol.employee
     entitySetName: JohnsonCounty_IowaCity_JCJIPersonnel
@@ -409,85 +497,10 @@ entityDefinitions:
         transforms:
         - !<transforms.ValueTransform>
           value: Operator
-  JohnsonCounty_IowaCity_Addresses:
-    fqn: ol.location
-    entitySetName: JohnsonCounty_IowaCity_Addresses
-    propertyDefinitions:
-      general.id:
-        type: general.id
-        transforms:
-        - !<transforms.ConcatTransform>
-          columns: [LAddress, LCity, LZip, LState]
-      location.street:
-        type: location.street
-        transforms:
-        - !<transforms.BooleanContainsTransform>
-          column: LAddress
-          string: '/'
-          transformsIfTrue:
-          - !<transforms.ValueTransform>
-            value:
-          transformsIfFalse:
-          - !<transforms.ColumnTransform>
-            column: LAddress
-      location.intersection:
-        type: location.intersection
-        transforms:
-        - !<transforms.BooleanContainsTransform>
-          string: '/'
-          column: LAddress
-          transformsIfFalse:
-          - !<transforms.ValueTransform>
-            value:
-          transformsIfTrue:
-          - !<transforms.ColumnTransform>
-            column: LAddress
-          - !<transforms.ReplaceTransform>
-            target: ['/']
-            goal: [' & ']
-      location.apartment:
-        type: location.apartment
-        column: lAddress_Apt
-      location.zip:
-        type: location.zip
-        column: LZip
-        transforms:
-        - !<transforms.ParseIntTransform> {}
-      location.city:
-        type: location.city
-        column: LCity
-      location.state:
-        type: location.state
-        column: LState
-      location.name:
-        type: location.name
-        column: Location
-      location.latitude:
-        type: location.latitude
-        column: Latitude
-        transforms:
-        - !<transforms.ParseDoubleTransform> {}
-      location.longitude:
-        type: location.longitude
-        column: Longitude
-        transforms:
-        - !<transforms.ParseDoubleTransform> {}
-      ol.locationcoordinates:
-        type: ol.locationcoordinates
-        transforms:
-        - !<transforms.GeographyPointTransform>
-          latTransforms:
-          - !<transforms.ColumnTransform>
-            column: Latitude
-          - !<transforms.ParseDoubleTransform> {}
-          lonTransforms:
-          - !<transforms.ColumnTransform>
-            column: Longitude
-          - !<transforms.ParseDoubleTransform> {}
-        - !<transforms.ParseGeographyPointTransform> {}
   JohnsonCounty_IowaCity_CFSContactInfo:
     fqn: ol.contactinformation
     entitySetName: JohnsonCounty_IowaCity_CFSContactInfo
+    name: JohnsonCounty_IowaCity_CFSContactInfo
     propertyDefinitions:
       general.id:
         type: general.id
@@ -499,7 +512,8 @@ entityDefinitions:
         - !<transforms.ReplaceRegexTransform>
           target: '()\\-'
           goal: ''
-associationDefinitions: 
+
+associationDefinitions:
   LocatedAtDispatchZone:
     name: LocatedAtDispatchZone
     fqn: ol.locatedat
@@ -507,9 +521,16 @@ associationDefinitions:
     propertyDefinitions:
       general.id:
         type: general.id
-        column: Dis_ID
-    src: JohnsonCounty_IowaCity_Dispatch
-    dst: JohnsonCounty_IowaCity_DispatchZone
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.ColumnTransform>
+            column: Dis_ID
+          - !<transforms.ValueTransform>
+            value: "CFS_ZONE"
+    src: JohnsonCounty_IowaCity_CallsForService
+    dst: JohnsonCounty_IowaCity_CallsForServiceZone
+
   LocatedAtMedicalZone:
     name: LocatedAtMedicalZone
     fqn: ol.locatedat
@@ -517,9 +538,16 @@ associationDefinitions:
     propertyDefinitions:
       general.id:
         type: general.id
-        column: Medical_Zone
-    src: JohnsonCounty_IowaCity_Dispatch
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.ColumnTransform>
+            column: Dis_ID
+          - !<transforms.ValueTransform>
+            value: "MEDICAL_ZONE"
+    src: JohnsonCounty_IowaCity_CallsForService
     dst: JohnsonCounty_IowaCity_MedicalZone
+
   LocatedAtFireDistrict:
     name: LocatedAtFireDistrict
     fqn: ol.locatedat
@@ -527,19 +555,35 @@ associationDefinitions:
     propertyDefinitions:
       general.id:
         type: general.id
-        column: Medical_Zone
-    src: JohnsonCounty_IowaCity_Dispatch
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.ColumnTransform>
+            column: Dis_ID
+          - !<transforms.ValueTransform>
+            value: "FIRE_DISTRICT_ZONE"
+    src: JohnsonCounty_IowaCity_CallsForService
     dst: JohnsonCounty_IowaCity_FireDistrictZone
+
   LocatedAt:
+    name: LocatedAt
     fqn: ol.locatedat
     entitySetName: JohnsonCounty_IowaCity_LocatedAt
     propertyDefinitions:
       general.id:
         type: general.id
-        column: Dis_ID
-    src: JohnsonCounty_IowaCity_Dispatch
-    dst: JohnsonCounty_IowaCity_Addresses
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.ColumnTransform>
+            column: Dis_ID
+          - !<transforms.ValueTransform>
+            value: "ADDRESS"
+    src: JohnsonCounty_IowaCity_CallsForService
+    dst: JohnsonCounty_CFSAddresses
+
   CFSContactGiven:
+    name: CFSContactGiven
     fqn: ol.contactinfogiven
     entitySetName: JohnsonCounty_IowaCity_CFSContactGiven
     propertyDefinitions:
@@ -547,41 +591,33 @@ associationDefinitions:
         type: ol.id
         column: Dis_ID
     src: JohnsonCounty_IowaCity_CFSContactInfo
-    dst: JohnsonCounty_IowaCity_Dispatch
+    dst: JohnsonCounty_IowaCity_CallsForService
+
+
   OfficerIsPersonnel:
-    name: OfficerIs
-    fqn: ol.is
+    name: OfficerIsPersonnel
+    fqn: o.is
     entitySetName: JohnsonCounty_IowaCity_Is
     propertyDefinitions:
-      general.stringid:
-        type: general.stringid
+      general.id:
+        type: general.id
         column: ASSIGNED_OFFICER
     src: OfficerPerson
     dst: OfficerPersonnel
+
   OperatorIsPersonnel:
-    name: OperatorIs
-    fqn: ol.is
+    name: OperatorIsPersonnel
+    fqn: o.is
     entitySetName: JohnsonCounty_IowaCity_Is
     propertyDefinitions:
-      general.stringid:
-        type: general.stringid
+      general.id:
+        type: general.id
         column: Operator
     src: OperatorPerson
     dst: OperatorPersonnel
-  ReceivedBy:
-    fqn: ol.receivedby
-    entitySetName: JohnsonCounty_IowaCity_ReceivedBy
-    propertyDefinitions:
-      ol.id:
-        type: ol.id
-        column: CFS_DateTimeJanet
-        transforms:
-        - !<transforms.DateTimeTransform>
-          pattern: ['yyyy-MM-dd HH:mm:ss','yyyy-MM-dd HH:mm:ss.S']
-          timezone: "America/Chicago"
-    src: JohnsonCounty_IowaCity_Dispatch
-    dst: OperatorPerson
+
   AssignedTo:
+    name: AssignedTo
     fqn: ol.assignedto
     entitySetName: JohnsonCounty_IowaCity_AssignedTo
     propertyDefinitions:
@@ -589,20 +625,23 @@ associationDefinitions:
         type: ol.id
         transforms:
         - !<transforms.ConcatTransform>
-          columns: [Dis_ID, Dis_ORI, CFS_EMS, CFS_Fire, CFS_LEA]
-    src: JohnsonCounty_IowaCity_Dispatch
-    dst: JohnsonCounty_IowaCity_DispatchAgency
+          columns: [Dis_ID, Dis_ORI]
+    src: JohnsonCounty_IowaCity_CallsForService
+    dst: JohnsonCounty_IowaCity_CallsForServiceAgency
+
   DispatchDisposition:
+    name: DispatchDisposition
     fqn: ol.clearedby
     entitySetName: JohnsonCounty_IowaCity_ClearedBy
     propertyDefinitions:
       ol.id:
         type: ol.id
         column: Dis_ID
-    src: JohnsonCounty_IowaCity_Dispatch
-    dst: JohnsonCounty_IowaCity_Disposition
+    src: JohnsonCounty_IowaCity_CallsForService
+    dst: JohnsonCounty_CFSDisposition
+
   OfficerInvolvedinDispatch:
-    name: OfficerInvolved
+    name: OfficerInvolvedinDispatch
     fqn: ol.involvedin
     entitySetName: JohnsonCounty_IowaCity_CFSInvolvedIn
     propertyDefinitions:
@@ -623,5 +662,23 @@ associationDefinitions:
         transforms:
         - !<transforms.ValueTransform>
           value: "Officer"
-    src: OfficerPerson
-    dst: JohnsonCounty_IowaCity_Dispatch
+    src: OfficerPersonnel
+    dst: JohnsonCounty_IowaCity_CallsForService
+
+  OperatorInvolvedinDispatch:
+    fqn: ol.involvedin
+    name: OperatorInvolvedinDispatch
+    entitySetName: JohnsonCounty_IowaCity_CFSInvolvedIn
+    propertyDefinitions:
+      ol.id:
+        type: ol.id
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: [CFS_DateTimeJanet, Dis_ID, Operator]
+      ol.role:
+        type: ol.role
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Operator"
+    src: OperatorPersonnel
+    dst: JohnsonCounty_IowaCity_CallsForService
