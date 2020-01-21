@@ -5,7 +5,7 @@ entityDefinitions:
   Officers:
     name: "Officers"
     fqn: 'general.person'
-    entitySetName: 'JohnsonCountyOfficers'
+    entitySetName: 'JohnsonCountyPersonnel'
     propertyDefinitions:
       nc.SubjectIdentification:
         type: 'nc.SubjectIdentification'
