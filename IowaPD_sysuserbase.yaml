@@ -46,7 +46,7 @@ entityDefinitions:
   Person:
     name: 'Person'
     fqn: "general.person"
-    entitySetName: "JohnsonCountyOfficers"
+    entitySetName: "JohnsonCountyPersonnel"
     propertyDefinitions:
       nc.PersonGivenName:
         type: "nc.PersonGivenName"

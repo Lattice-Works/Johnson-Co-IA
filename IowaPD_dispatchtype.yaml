@@ -111,7 +111,7 @@ entityDefinitions:
       reverse: true
   People:
     fqn: 'general.person'
-    entitySetName: "JohnsonCounty_IowaCity_People1"
+    entitySetName: "JohnsonCountyPersonnel"
     name: "People"
     propertyDefinitions:
       nc.PersonGivenName:
