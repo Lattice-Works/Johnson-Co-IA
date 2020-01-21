@@ -5,7 +5,7 @@ entityDefinitions:
   Officers:
     name: "Officers"
     fqn: 'general.person'
-    entitySetName: 'JohnsonCounty_IowaCity_People1'
+    entitySetName: 'JohnsonCountyOfficers'
     propertyDefinitions:
       nc.SubjectIdentification:
         type: 'nc.SubjectIdentification'
@@ -191,7 +191,7 @@ entityDefinitions:
   Others:
     name: "Others"
     fqn: 'general.person'
-    entitySetName: 'JohnsonCounty_IowaCity_People2'
+    entitySetName: 'JohnsonCountyPeople'
     propertyDefinitions:
       nc.SubjectIdentification:
         type: 'nc.SubjectIdentification'
