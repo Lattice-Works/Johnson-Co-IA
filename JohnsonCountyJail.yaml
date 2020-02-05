@@ -719,8 +719,8 @@ entityDefinitions:
       criminaljustice.cautioninformation:
         type: "criminaljustice.cautioninformation"
         column: "Caution"
-      ol.sexoffender:
-        type: "ol.sexoffender"
+      ol.sexoffenderflag:
+        type: "ol.sexoffenderflag"
         column: "SexOff"
         transforms:
         - !<transforms.ReplaceTransform>
