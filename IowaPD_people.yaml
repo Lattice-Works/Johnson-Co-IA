@@ -411,7 +411,7 @@ entityDefinitions:
   OfficersPhysicalAppearance:
     name: "OfficersPhysicalAppearance"
     fqn: 'ol.physicalappearance'
-    entitySetName: 'JohnsonCountyOfficersPhysicalAppearances'
+    entitySetName: 'JohnsonCountyPersonnelPhysicalAppearances'
     propertyDefinitions:
       general.id:
         type: general.id
@@ -628,7 +628,7 @@ entityDefinitions:
   Contact1:
     name: "Contact1"
     fqn: 'ol.contactinformation'
-    entitySetName: 'JohnsonCounty_IowaCity_CFSContactInfo'
+    entitySetName: 'JohnsonCountyCFSContactInfo'
     propertyDefinitions:
       general.id:
         type: 'general.id'
@@ -639,7 +639,7 @@ entityDefinitions:
   Contact2:
     name: "Contact2"
     fqn: 'ol.contactinformation'
-    entitySetName: 'JohnsonCounty_IowaCity_CFSContactInfo'
+    entitySetName: 'JohnsonCountyCFSContactInfo'
     propertyDefinitions:
       general.id:
         type: 'general.id'
@@ -887,7 +887,7 @@ associationDefinitions:
   OfficerIsPersonnel:
     name: OfficerIsPersonnel
     fqn: 'o.is'
-    entitySetName: 'JohnsonCounty_IowaCity_Is'
+    entitySetName: 'JohnsonCountyIs'
     src: 'Officers'
     dst: 'OfficersPersonnel'
     propertyDefinitions:
