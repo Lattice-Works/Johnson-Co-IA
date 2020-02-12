@@ -297,7 +297,7 @@ entityDefinitions:
 
   OfficerPerson:
     fqn: general.person
-    entitySetName: JohnsonCounty_IowaCity_People1
+    entitySetName: JohnsonCountyPersonnel
     name: OfficerPerson
     propertyDefinitions:
       nc.SubjectIdentification:
@@ -377,7 +377,7 @@ entityDefinitions:
 
   OperatorPerson:
     fqn: general.person
-    entitySetName: JohnsonCounty_IowaCity_People1
+    entitySetName: JohnsonCountyPersonnel
     name: OperatorPerson
     propertyDefinitions:
       nc.SubjectIdentification:
