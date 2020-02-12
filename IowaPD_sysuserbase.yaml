@@ -1,3 +1,5 @@
+# select systemuserbase_partial.*, dispatch_type_all."Unit" from systemuserbase_partial left join dispatch_type_all on systemuserbase_partial."OfficerId"=dispatch_type_all."dispatch_type_all"
+
 entityDefinitions:
   Personnel:
     name: 'Personnel'
@@ -57,15 +59,9 @@ entityDefinitions:
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
         transforms:
-        - !<transforms.ConcatCombineTransform>
-          transforms:
-          - !<transforms.GetPrefixDigitsTransform>
-            separator: ' '
-            column: "Unit"
-          - !<transforms.ColumnTransform>
-            column: "OfficerId"
-        - !<transforms.CaseTransform>
-          type: "name"
+        - !<transforms.ConcatTransform>
+          columns: ["FirstName", "LastName"]
+          separator: " "
       ol.datasource:
         type: "ol.datasource"
         transforms:
@@ -89,33 +85,27 @@ entityDefinitions:
       pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|PD|criticom|IC,PD|criticom|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
       reverse: true
   JohnsonCounty_IowaCity_DispatchAgency:
+    name: JohnsonCounty_IowaCity_DispatchAgency
     fqn: 'ol.agency'
-    entitySetName: 'JohnsonCounty_IowaCity_DispatchAgency'
+    entitySetName: 'JohnsonCounty_Agencies'
     propertyDefinitions:
       ol.id:
         type: 'ol.id'
         column: 'ORI'
 associationDefinitions:
   CityIs:
-    fqn: "ol.is"
-    entitySetName: "JohnsonCounty_IowaCity_Is"
+    name: CityIs
+    fqn: "o.is"
+    entitySetName: "JohnsonCountyIs"
     propertyDefinitions:
-      general.stringid:
-        type: "general.stringid"
+      general.id:
+        type: "general.id"
         column: "OfficerId"
     src: 'Person'
     dst: 'Personnel'
-    conditions:
-    - !<conditions.ConditionalAnd> {}
-    - !<conditions.BooleanRegexCondition>
-      column: 'FirstName'
-      pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|PD|criticom|IC,PD|criticom|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
-      reverse: true
-    - !<conditions.BooleanRegexCondition>
-      column: 'LastName'
-      pattern: "(?i)(^| |[^a-zA-Z0-9])(UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistry|PD|criticom|IC,PD|criticom|MALE|FEMALE|call|anon|refused|simplex|USA central|JECC|EMS|HCIS|HILLCREST HALL|ENGINE|FIRE|RESCUE|JCAS|AMB|Correctional|county|medical|chief|password|cedar rapids|mobile|judge|conesville|administrator|shelter|johnsoncounty|administrator|UNIVERSITY|government|science|retirement|cedar|capitol|no, name|available|REF|health|station|CRPD|healthwatch|field house|government|science|retirement|cedar co|capitol|PER MAR|PERMAR|Staff|JC,SO|HOSP|Transit|all secure|yellow cab|wireless|Parking|library|ICPD|hospital|atech|united states|bowen building|parking|mecca, services|facility|aircare|windmill manor|anonymous|BC|cingular,blue|critacom|burge hall|security|life line|washington co|employee|windmill, manor|Old cab|Dental|chemistryheights|NLFDTEST|Quick levy builder|JohnsonCounty_IowaCity_IA|west liberty|north liberty|conservation|northliberty|ambulance|FD|JCSO|UNITS|UI|DPS|HONDA|LP|REHABILITATION|INC|IOWA|ADT|VERIZON|SPRINT|SANDWICHES|AT&T|BLDG|NIPD|criticom|IC,PD|criticom|PATROL|CENTER|CELLULAR|INTERNATIONAL|SCIENCES|Department|Jsco|Coralville|Jail|truck|unknown|alarm|lifeline)($| |[^a-zA-Z0-9])"
-      reverse: true
+
   JohnsonCounty_IowaCity_JCWorksAt:
+    name: JohnsonCounty_IowaCity_JCWorksAt
     fqn: "ol.worksat"
     dst: "JohnsonCounty_IowaCity_DispatchAgency"
     src: "Personnel"
