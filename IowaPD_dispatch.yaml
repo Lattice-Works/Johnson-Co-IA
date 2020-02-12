@@ -1,4 +1,4 @@
-# select * from dispatch_all;
+# select *, replace(\"Latitude\",'NaN','') as latitude_clean, replace(\"Longitude\", 'NaN', '') as longitude_clean from dispatch_all;
 
 entityDefinitions:
   JohnsonCounty_IowaCity_CallsForService:
@@ -148,7 +148,7 @@ entityDefinitions:
         type: general.id
         transforms:
         - !<transforms.ConcatTransform>
-          columns: [LAddress, LCity, LZip, LState]
+          columns: ['LAddress', 'LCity', 'LZip', 'LState']
       location.street:
         type: location.street
         transforms:
@@ -195,12 +195,12 @@ entityDefinitions:
         column: Location
       location.latitude:
         type: location.latitude
-        column: Latitude
+        column: latitude_clean
         transforms:
         - !<transforms.ParseDoubleTransform> {}
       location.longitude:
         type: location.longitude
-        column: Longitude
+        column: longitude_clean
         transforms:
         - !<transforms.ParseDoubleTransform> {}
       ol.locationcoordinates:
@@ -209,16 +209,14 @@ entityDefinitions:
         - !<transforms.GeographyPointTransform>
           latTransforms:
           - !<transforms.ColumnTransform>
-            column: Latitude
-          - !<transforms.ParseDoubleTransform> {}
+            column: latitude_clean
           lonTransforms:
           - !<transforms.ColumnTransform>
-            column: Longitude
-          - !<transforms.ParseDoubleTransform> {}
+            column: longitude_clean
 
   JohnsonCounty_IowaCity_CallsForServiceZone:
     fqn: ol.zone
-    entitySetName: JohnsonCounty_IowaCity_CallsForServiceZone
+    entitySetName: JohnsonCountyCFSZone
     propertyDefinitions:
       general.id:
         type: general.id
@@ -299,7 +297,7 @@ entityDefinitions:
 
   OfficerPerson:
     fqn: general.person
-    entitySetName: JohnsonCountyPersonnel
+    entitySetName: JohnsonCounty_IowaCity_People1
     name: OfficerPerson
     propertyDefinitions:
       nc.SubjectIdentification:
@@ -379,7 +377,7 @@ entityDefinitions:
 
   OperatorPerson:
     fqn: general.person
-    entitySetName: JohnsonCountyPersonnel
+    entitySetName: JohnsonCounty_IowaCity_People1
     name: OperatorPerson
     propertyDefinitions:
       nc.SubjectIdentification:
@@ -499,7 +497,7 @@ entityDefinitions:
           value: Operator
   JohnsonCounty_IowaCity_CFSContactInfo:
     fqn: ol.contactinformation
-    entitySetName: JohnsonCounty_IowaCity_CFSContactInfo
+    entitySetName: JohnsonCountyCFSContactInfo
     name: JohnsonCounty_IowaCity_CFSContactInfo
     propertyDefinitions:
       general.id:
@@ -597,7 +595,7 @@ associationDefinitions:
   OfficerIsPersonnel:
     name: OfficerIsPersonnel
     fqn: o.is
-    entitySetName: JohnsonCounty_IowaCity_Is
+    entitySetName: JohnsonCountyIs
     propertyDefinitions:
       general.id:
         type: general.id
@@ -608,7 +606,7 @@ associationDefinitions:
   OperatorIsPersonnel:
     name: OperatorIsPersonnel
     fqn: o.is
-    entitySetName: JohnsonCounty_IowaCity_Is
+    entitySetName: JohnsonCountyIs
     propertyDefinitions:
       general.id:
         type: general.id
@@ -619,7 +617,7 @@ associationDefinitions:
   AssignedTo:
     name: AssignedTo
     fqn: ol.assignedto
-    entitySetName: JohnsonCounty_IowaCity_AssignedTo
+    entitySetName: JohnsonCountyAssignedTo
     propertyDefinitions:
       ol.id:
         type: ol.id
@@ -632,7 +630,7 @@ associationDefinitions:
   DispatchDisposition:
     name: DispatchDisposition
     fqn: ol.clearedby
-    entitySetName: JohnsonCounty_IowaCity_ClearedBy
+    entitySetName: JohnsonCountyClearedBy
     propertyDefinitions:
       ol.id:
         type: ol.id
