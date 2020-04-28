@@ -1,5 +1,4 @@
-
-
+# select * from uiowa_ed_demo
 
 entityDefinitions:
 
@@ -9,7 +8,7 @@ entityDefinitions:
     propertyDefinitions:
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
-        column: "MRN"
+        column: "MRN.OL.Demo"
       nc.PersonSex:
         type: "nc.PersonSex"
         column: "Sex"
@@ -17,7 +16,7 @@ entityDefinitions:
         type: "nc.PersonRace"
         transforms:
         - !<transforms.BooleanRegexTransform>
-          column: "Race"
+          column: "Race.OL.Demo"
           pattern: "African American/Black"
           transformsIfTrue:
           - !<transforms.ValueTransform>
@@ -29,7 +28,7 @@ entityDefinitions:
         type: "nc.PersonRace"
         transforms:
         - !<transforms.BooleanRegexTransform>
-          column: "Race"
+          column: "Race.OL.Demo"
           pattern: "American Indian/Alaska Native"
           transformsIfTrue:
           - !<transforms.ValueTransform>
@@ -41,7 +40,7 @@ entityDefinitions:
         type: "nc.PersonRace"
         transforms:
         - !<transforms.BooleanRegexTransform>
-          column: "Race"
+          column: "Race.OL.Demo"
           pattern: "Asian"
           transformsIfTrue:
           - !<transforms.ValueTransform>
@@ -53,7 +52,7 @@ entityDefinitions:
         type: "nc.PersonRace"
         transforms:
         - !<transforms.BooleanRegexTransform>
-          column: "Race"
+          column: "Race.OL.Demo"
           pattern: "Declined"
           transformsIfTrue:
           - !<transforms.ValueTransform>
@@ -65,7 +64,7 @@ entityDefinitions:
         type: "nc.PersonRace"
         transforms:
         - !<transforms.BooleanRegexTransform>
-          column: "Race"
+          column: "Race.OL.Demo"
           pattern: "Multiracial/Two or More Races"
           transformsIfTrue:
           - !<transforms.ValueTransform>
@@ -77,7 +76,7 @@ entityDefinitions:
         type: "nc.PersonRace"
         transforms:
         - !<transforms.BooleanRegexTransform>
-          column: "Race"
+          column: "Race.OL.Demo"
           pattern: "Native Hawaiian/Pacific Islander"
           transformsIfTrue:
           - !<transforms.ValueTransform>
@@ -89,7 +88,7 @@ entityDefinitions:
         type: "nc.PersonRace"
         transforms:
         - !<transforms.BooleanRegexTransform>
-          column: "Race"
+          column: "Race.OL.Demo"
           pattern: "White"
           transformsIfTrue:
           - !<transforms.ValueTransform>
@@ -99,7 +98,7 @@ entityDefinitions:
             value: ""
       nc.PersonEthnicity:
         type: "nc.PersonEthnicity"
-        column: "Race"
+        column: "Race.OL.Demo"
         transforms:
         - !<transforms.ReplaceTransform>
           target: ["Hispanic/Latino of any race"]
@@ -113,7 +112,7 @@ entityDefinitions:
     conditions:
     - !<conditions.ConditionalOr> {}
     - !<conditions.BooleanRegexCondition>
-      column: "MRN"
+      column: "MRN.OL.Demo"
       pattern: "(^ *$)|(\\bNA\\b)"
       reverse: True
     - !<conditions.BooleanRegexCondition>
@@ -422,7 +421,7 @@ associationDefinitions:
         type: "ol.id"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ["MRN", "CSN"]
+          columns: ["MRN.OL.Demo", "CSN"]
     name: "presentsfor1"
 
   presentsfor2:
@@ -437,7 +436,7 @@ associationDefinitions:
         - !<transforms.ConcatCombineTransform>
           transforms:
           - !<transforms.ConcatTransform>
-            columns: ["MRN", "CSN"]
+            columns: ["MRN.OL.Demo", "CSN"]
           - !<transforms.ValueTransform>
             value: "2"
     name: "presentsfor2"
@@ -465,7 +464,7 @@ associationDefinitions:
         type: "general.id"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ["MRN", "Pt.County"]
+          columns: ["MRN.OL.Demo", "Pt.County"]
     name: "locatedat"
 
   transportedby1:
@@ -478,7 +477,7 @@ associationDefinitions:
         type: "ol.id"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ["MRN", "Helicopter.Service"]
+          columns: ["MRN.OL.Demo", "Helicopter.Service"]
     name: "transportedby1"
 
   transportedby2:
@@ -493,7 +492,7 @@ associationDefinitions:
         - !<transforms.ConcatCombineTransform>
           transforms:
           - !<transforms.ConcatTransform>
-            columns: ["Arrival.Method", "Mode.of.Arrival", "MRN"]
+            columns: ["Arrival.Method", "Mode.of.Arrival", "MRN.OL.Demo"]
           - !<transforms.ValueTransform>
             value: "2"
     name: "transportedby2"
@@ -506,7 +505,7 @@ associationDefinitions:
     generator: !<generators.TransformSeriesGenerator>
       transforms:
       - !<transforms.ConcatTransform>
-        columns: ["MRN", "Fin.Class"]
+        columns: ["MRN.OL.Demo", "Fin.Class"]
     propertyDefinitions: {}
     name: "insuredby"
 
@@ -520,7 +519,7 @@ associationDefinitions:
         type: "ol.id"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ["MRN", "Age.(Years)"]
+          columns: ["MRN.OL.Demo", "Age.(Years)"]
     name: "has"
 
   observedin:
@@ -533,7 +532,7 @@ associationDefinitions:
         type: "ol.id"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ["MRN", "Primary.Dx", "CC.Comments", "Chief.Complaint"]
+          columns: ["MRN.OL.Demo", "Primary.Dx", "CC.Comments", "Chief.Complaint"]
     name: "observedin"
 
 
